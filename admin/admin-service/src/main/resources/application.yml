@@ -1,0 +1,37 @@
+#加载mybatis配置文件
+mybatis:
+  #  扫描class path下mapper目录下所有.xml文件
+  mapper-locations: classpath:mapper/*.xml
+  # 实体类的包路径
+  type-aliases-package: com.sch.adminservice.entity
+  configuration:
+    map-underscore-to-camel-case: true
+server:
+  port: 8091
+dubbo:
+  application:
+    name: admin-service
+  protocol:
+    name: dubbo
+    port: 20881
+  registry:
+    address: zookeeper://127.0.0.1:2181
+spring:
+  thymeleaf:
+    cache: false
+  messages:
+    encoding: UTF-8
+  devtools:
+    restart:
+      enabled: true
+  servlet:
+    multipart:
+      #上传单个文件的最大值
+      max-file-size: 4MB
+      #上传总文件的最大值
+      max-request-size: 10MB
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://47.101.37.181:3306/admin?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: sch1324!/
