@@ -9,7 +9,7 @@ import com.sch.commonbasic.enums.AdminEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
- * @Description: TODO
+ * @Description: 供外部调用的Admin服务RPC接口
  * @Author: chenghao.su
  * @Date: 2020/1/20 20:28
  */
