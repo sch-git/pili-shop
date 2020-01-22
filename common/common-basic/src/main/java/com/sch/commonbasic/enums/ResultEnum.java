@@ -10,8 +10,15 @@ public enum ResultEnum {
      * 成功状态码
      */
     SUCCESS(200, "成功"),
-    FAILURE(404,"失败"),
-    LoginFailure(100, "用户登录失败");
+    FAILURE(404, "失败"),
+    /**
+     * 用户失败信息
+     */
+    LoginFailure(100, "用户登录失败"),
+    /**
+     * 权限失败信息
+     */
+    NOT_PERMISSION_FAILURE(500, "权限不足，请联系管理员");
 
     /**
      * 变量

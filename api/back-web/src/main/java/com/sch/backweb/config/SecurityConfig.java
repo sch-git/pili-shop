@@ -1,6 +1,7 @@
 package com.sch.backweb.config;
 
 import com.sch.backweb.filter.JsonAuthenticationFilter;
+import com.sch.backweb.handler.SecurityAuthEntryPointHandler;
 import com.sch.backweb.handler.SecurityFailureHandler;
 import com.sch.backweb.handler.SecuritySuccessHandler;
 import com.sch.backweb.security.SecurityServiceImpl;
@@ -29,6 +30,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private SecuritySuccessHandler successHandler;
     @Autowired
     private SecurityFailureHandler failureHandler;
+    @Autowired
+    private SecurityAuthEntryPointHandler authEntryPointHandler;
 
     /**
      * 密码加密
@@ -77,7 +80,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .cors()
                 .and()
-                .csrf().disable();
+                .csrf().disable()
+                .exceptionHandling().authenticationEntryPoint(authEntryPointHandler);
         http.addFilterAt(jsonAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
     }
 
