@@ -28,6 +28,7 @@
 </template>
 
 <script>
+import axios from '@/lib/axios'
 export default {
   data: function () {
     return {
@@ -45,9 +46,17 @@ export default {
     submitForm () {
       this.$refs.login.validate(valid => {
         if (valid) {
-          this.$message.success('登录成功')
-          localStorage.setItem('ms_username', this.param.username)
-          this.$router.push('/')
+          // this.$message.success('登录成功')
+          // localStorage.setItem('ms_username', this.param.username)
+          // this.$router.push('/')
+          let loginAO = {
+            username: this.param.username,
+            password: this.param.password
+          }
+          console.log(loginAO)
+          axios.post('http://localhost:8090/login', loginAO).then(res => {
+            console.log(res.data)
+          })
         } else {
           this.$message.error('请输入账号和密码')
           console.log('error submit!!')

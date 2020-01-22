@@ -1,10 +1,12 @@
 const path = require('path')
-
 const resolve = dir => {
   return path.join(__dirname, dir)
 }
 const BASE_URL = process.env.NODE_ENV === 'production' ? '/pili-shop/admin' : '/'
 module.exports = {
+  devServer: {
+    port: 10080
+  },
   lintOnSave: false,
   publicPath: BASE_URL,
   chainWebpack: (config) => {
