@@ -5,6 +5,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Collection;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -15,6 +16,10 @@ import java.util.List;
 @Data
 public class User implements UserDetails {
     /**
+     * id
+     */
+    private Long id;
+    /**
      * 用户名
      */
     private String username;
@@ -22,6 +27,30 @@ public class User implements UserDetails {
      * 密码
      */
     private String password;
+
+    /**
+     * 昵称
+     */
+    private String nickname;
+
+    /**
+     * 手机号
+     */
+    private String phone;
+
+    /**
+     * 状态
+     */
+    private Byte status;
+    /**
+     * 创建时间
+     */
+    private Date createTime;
+
+    /**
+     * 修改时间
+     */
+    private Date updateTime;
     /**
      * 用户权限集合
      */
@@ -29,7 +58,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return null;
+        return authorities;
     }
 
     @Override

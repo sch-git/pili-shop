@@ -9,7 +9,8 @@ public enum AdminEnum implements CommonEnum {
     /**
      * 异常信息提示
      */
-    EXCEPTION_NOT_NAME("用户名不存在");
+    EXCEPTION_NOT_NAME("用户名不存在"),
+    EXCEPTION_NOT_PARAM("请求信息错误");
     /**
      * 变量
      */

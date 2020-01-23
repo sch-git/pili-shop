@@ -21,6 +21,12 @@ public class AdminBaseServiceImpl implements AdminBaseService {
     @Autowired
     AdminService adminService;
 
+    /**
+     * 查询管理员
+     *
+     * @param name 管理员账号
+     * @return Admin
+     */
     @Override
     public AdminVO find(String name) {
         if (name == null) {
