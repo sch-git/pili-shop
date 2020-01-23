@@ -1,7 +1,7 @@
 package com.sch.commonbasic.log;
 
+import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
-import org.aspectj.lang.annotation.Before;
 
 /**
  * @Description: TODO
@@ -10,7 +10,7 @@ import org.aspectj.lang.annotation.Before;
  */
 @Aspect
 public class log {
-    @Before("execution(public * com.sch.*.*..*.*(..))")
+    @Around("execution(public * com.sch.*.*(..))")
     public void before() {
         System.out.println("before");
     }
