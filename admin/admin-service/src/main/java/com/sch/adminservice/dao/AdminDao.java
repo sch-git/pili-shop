@@ -18,5 +18,5 @@ public interface AdminDao {
      * @param username 管理员账号
      * @return Admin
      */
-    Admin find(String username);
+    Admin findByName(String username);
 }

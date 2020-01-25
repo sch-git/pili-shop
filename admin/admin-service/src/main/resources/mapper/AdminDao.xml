@@ -11,7 +11,8 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
-    <select id="find" parameterType="java.lang.String" resultMap="BaseResultMap">
+    <!--根据用户名查询-->
+    <select id="findByName" parameterType="java.lang.String" resultMap="BaseResultMap">
     select *
     from t_admin
     where username=#{username}

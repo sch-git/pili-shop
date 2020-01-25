@@ -14,5 +14,5 @@ public interface AdminBaseService {
      * @param name 管理员账号
      * @return Admin
      */
-    AdminVO find(String name);
+    AdminVO findByName(String name);
 }

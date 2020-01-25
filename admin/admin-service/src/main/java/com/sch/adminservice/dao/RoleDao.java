@@ -20,4 +20,12 @@ public interface RoleDao {
      * @return 角色集合
      */
     List<Role> findRolesByAdminId(Long id);
+
+    /**
+     * 查询角色
+     *
+     * @param url 请求路径
+     * @return 角色集合
+     */
+    List<Role> findRolesByUrl(String url);
 }

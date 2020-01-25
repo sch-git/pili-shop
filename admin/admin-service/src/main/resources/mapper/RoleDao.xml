@@ -9,10 +9,21 @@
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
     <!--根据管理员id查询角色-->
-    <!--TODO-->
     <select id="findRolesByAdminId" parameterType="java.lang.Long" resultMap="BaseResultMap">
-    select *
-    from t_role
-    where id=#{id}
-  </select>
+        select r.*
+        from t_role r
+        left join t_admin_role ar
+        on ar.role_id=r.id
+        where ar.admin_id=#{id}
+    </select>
+    <!--根据请求路径url查询角色-->
+    <select id="findRolesByUrl" parameterType="java.lang.String" resultMap="BaseResultMap">
+        select r.*
+        from t_role r
+        left join t_role_resource rr
+        on r.id=rr.role_id
+        left join t_resource re
+        on re.id=rr.resource_id
+        and re.url=#{url}
+    </select>
 </mapper>

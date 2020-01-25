@@ -28,11 +28,11 @@ public class AdminBaseServiceImpl implements AdminBaseService {
      * @return Admin
      */
     @Override
-    public AdminVO find(String name) {
+    public AdminVO findByName(String name) {
         if (name == null) {
             throw new AdminException(AdminEnum.EXCEPTION_NOT_NAME);
         }
-        AdminVO adminVO = adminService.find(name);
+        AdminVO adminVO = adminService.findByName(name);
         if (adminVO == null) {
             throw new AdminException(AdminEnum.EXCEPTION_NOT_NAME);
         }

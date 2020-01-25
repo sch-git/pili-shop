@@ -41,4 +41,25 @@ public class RoleServiceImpl implements RoleService {
         }
         return null;
     }
+
+    /**
+     * 查询角色
+     *
+     * @param url 请求地址
+     * @return List<RoleVO>
+     */
+    @Override
+    public List<RoleVO> findRolesByUrl(String url) {
+        List<Role> roles = roleDao.findRolesByUrl(url);
+        if (roles != null) {
+            List<RoleVO> roleVOS = new ArrayList<>();
+            for (Role role : roles) {
+                RoleVO roleVO = new RoleVO();
+                BeanUtils.copyProperties(role, roleVO);
+                roleVOS.add(roleVO);
+            }
+            return roleVOS;
+        }
+        return null;
+    }
 }

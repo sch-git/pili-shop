@@ -22,8 +22,8 @@ public class AdminServiceTest {
      * 查询管理员
      */
     @Test
-    public void find() {
-        System.out.println(adminService.find("root"));
+    public void findByName() {
+        System.out.println(adminService.findByName("root"));
     }
 
     /**

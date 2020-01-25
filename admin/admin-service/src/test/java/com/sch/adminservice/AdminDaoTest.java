@@ -20,7 +20,7 @@ public class AdminDaoTest {
      * 查询管理员
      */
     @Test
-    public void find() {
-        System.out.println(adminDao.find("root"));
+    public void findByName() {
+        System.out.println(adminDao.findByName("root"));
     }
 }

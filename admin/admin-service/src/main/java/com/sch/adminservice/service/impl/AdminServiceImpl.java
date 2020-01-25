@@ -19,8 +19,8 @@ public class AdminServiceImpl implements AdminService {
     private AdminDao adminDao;
 
     @Override
-    public AdminVO find(String name) {
-        Admin admin = adminDao.find(name);
+    public AdminVO findByName(String name) {
+        Admin admin = adminDao.findByName(name);
         if (admin == null) {
             return null;
         }

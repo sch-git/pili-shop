@@ -39,4 +39,19 @@ public class RoleBaseServiceImpl implements RoleBaseService {
 
         return roleVOS;
     }
+
+    /**
+     * 查询角色
+     *
+     * @param url 请求地址
+     * @return List<RoleVO>
+     */
+    @Override
+    public List<RoleVO> findRolesByUrl(String url) {
+        if (url == null) {
+            throw new AdminException(AdminEnum.EXCEPTION_NOT_PARAM);
+        }
+        List<RoleVO> roleVOS = roleService.findRolesByUrl(url);
+        return roleVOS;
+    }
 }

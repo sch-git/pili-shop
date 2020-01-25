@@ -17,4 +17,12 @@ public interface RoleBaseService {
      * @return List<RoleVO>
      */
     List<RoleVO> findRolesByAdminId(Long id);
+
+    /**
+     * 查询角色
+     *
+     * @param url 请求地址
+     * @return List<RoleVO>
+     */
+    List<RoleVO> findRolesByUrl(String url);
 }

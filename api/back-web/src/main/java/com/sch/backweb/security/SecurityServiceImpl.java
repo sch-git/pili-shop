@@ -37,7 +37,7 @@ public class SecurityServiceImpl implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
-        AdminVO adminVO = adminBaseService.find(name);
+        AdminVO adminVO = adminBaseService.findByName(name);
         if (adminVO == null) {
             throw new UsernameNotFoundException("用户名不存在");
         }

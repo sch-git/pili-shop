@@ -22,4 +22,12 @@ public class RoleServiceTest {
     public void findRoleBYAdminId() {
         System.out.println(roleService.findRolesByAdminId(1L));
     }
+
+    /**
+     * 查询角色
+     */
+    @Test
+    public void findRolesByUrl() {
+        System.out.println(roleService.findRolesByUrl("/admin"));
+    }
 }

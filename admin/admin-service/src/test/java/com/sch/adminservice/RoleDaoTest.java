@@ -22,4 +22,12 @@ public class RoleDaoTest {
     public void findRoleBYAdminId() {
         System.out.println(roleDao.findRolesByAdminId(1L));
     }
+
+    /**
+     * 查询角色
+     */
+    @Test
+    public void findRolesByUrl() {
+        System.out.println(roleDao.findRolesByUrl("/admin"));
+    }
 }
