@@ -1,5 +1,5 @@
 import axios from '@/lib/axios'
-import {Message} from 'element-ui'
+import { Message } from 'element-ui'
 
 axios.interceptors.response.use(res => {
   if (res.data && res.status === 200 && res.data.code !== 200) {

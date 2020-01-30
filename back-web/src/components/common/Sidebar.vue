@@ -60,22 +60,22 @@ export default {
       collapse: false,
       items: [
         {
-          icon: 'el-icon-lx-home',
+          icon: 'el-icon-s-home',
           index: 'dashboard',
           title: '系统首页'
         },
         {
-          icon: 'el-icon-lx-cascades',
+          icon: 'el-icon-s-goods',
           index: 'table',
           title: '商品管理'
         },
         {
-          icon: 'el-icon-lx-copy',
+          icon: 'el-icon-video-camera-solid',
           index: 'tabs',
           title: '视频管理'
         },
         {
-          icon: 'el-icon-lx-calendar',
+          icon: 'el-icon-notebook-2',
           index: '3',
           title: '霹雳资料库',
           subs: [
@@ -104,13 +104,13 @@ export default {
           ]
         },
         {
-          icon: 'el-icon-lx-emoji',
+          icon: 'el-icon-lock',
           index: 'icon',
           title: '权限管理'
         },
         {
-          icon: 'el-icon-pie-chart',
-          index: 'charts',
+          icon: 'el-icon-user',
+          index: 'user',
           title: '用户管理'
         },
         {
