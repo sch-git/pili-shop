@@ -1,5 +1,6 @@
 package com.sch.backweb.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -26,6 +27,7 @@ public class User implements UserDetails {
     /**
      * 密码
      */
+    @JsonIgnore
     private String password;
 
     /**

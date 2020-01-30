@@ -26,9 +26,9 @@ public class SecurityAuthEntryPointHandler implements AuthenticationEntryPoint {
                          AuthenticationException authException) throws IOException, ServletException {
         resp.setContentType("application/json;charset=utf-8");
         PrintWriter out = resp.getWriter();
-        Result result = new Result(ResultEnum.NOT_PERMISSION_FAILURE);
+        Result result = new Result(ResultEnum.NOT_LOGIN_FAILURE);
         if (authException instanceof InsufficientAuthenticationException) {
-            result = new Result(ResultEnum.NOT_PERMISSION_FAILURE);
+            result = new Result(ResultEnum.NOT_LOGIN_FAILURE);
         }
         out.write(new ObjectMapper().writeValueAsString(result));
         out.flush();

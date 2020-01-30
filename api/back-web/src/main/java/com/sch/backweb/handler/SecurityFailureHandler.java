@@ -2,6 +2,7 @@ package com.sch.backweb.handler;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sch.commonbasic.VO.Result;
+import com.sch.commonbasic.enums.ResultEnum;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
@@ -23,7 +24,7 @@ public class SecurityFailureHandler implements AuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse resp, AuthenticationException e) throws IOException, ServletException {
         resp.setContentType("application/json;charset=utf-8");
         PrintWriter out = resp.getWriter();
-        String str = new ObjectMapper().writeValueAsString(Result.failure());
+        String str = new ObjectMapper().writeValueAsString(new Result(ResultEnum.LOGIN_FAILURE));
         out.write(str);
         out.flush();
         out.close();
