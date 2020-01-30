@@ -5,7 +5,8 @@ const resolve = dir => {
 const BASE_URL = process.env.NODE_ENV === 'production' ? '/pili-shop/admin' : '/'
 module.exports = {
   devServer: {
-    port: 10080
+    port: 10080,
+    proxy: 'http://localhost:8090'
   },
   lintOnSave: false,
   publicPath: BASE_URL,
@@ -16,8 +17,4 @@ module.exports = {
   },
   // 打包时不生成.map文件
   productionSourceMap: false
-  /* 跨域代理
-    devServer: {
-      proxy: 'http://localhost:8080'
-    } */
 }

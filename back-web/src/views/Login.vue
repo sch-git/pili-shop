@@ -1,7 +1,7 @@
 <template>
   <div class="login-wrap">
     <div class="ms-login">
-      <div class="ms-title">后台管理系统</div>
+      <div class="ms-title">pili-shop后台管理系统</div>
       <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
         <el-form-item prop="username">
           <el-input v-model="param.username" placeholder="username">
@@ -28,7 +28,7 @@
 </template>
 
 <script>
-import axios from '@/lib/axios'
+import { login } from '@/api/admin/admin'
 export default {
   data: function () {
     return {
@@ -46,16 +46,16 @@ export default {
     submitForm () {
       this.$refs.login.validate(valid => {
         if (valid) {
-          // this.$message.success('登录成功')
-          // localStorage.setItem('ms_username', this.param.username)
-          // this.$router.push('/')
           let loginAO = {
             username: this.param.username,
             password: this.param.password
           }
           console.log(loginAO)
-          axios.post('http://localhost:8090/login', loginAO).then(res => {
-            console.log(res.data)
+          login(loginAO).then(res => {
+            if (res) {
+              this.$message.success('登陆成功')
+              this.$router.push('/dashboard')
+            }
           })
         } else {
           this.$message.error('请输入账号和密码')
