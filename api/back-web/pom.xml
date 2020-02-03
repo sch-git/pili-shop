@@ -17,6 +17,11 @@
             <artifactId>admin-base</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.sch</groupId>
+            <artifactId>user-base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!--security-->
         <dependency>
             <groupId>org.springframework.boot</groupId>
