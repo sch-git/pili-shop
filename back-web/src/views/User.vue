@@ -10,15 +10,11 @@
     <div class="container">
       <div class="handle-box">
         <el-button
-          type="primary"
+          type="danger"
           icon="el-icon-delete"
           class="handle-del mr10"
           @click="delAllSelection"
         >批量删除</el-button>
-        <el-select v-model="query.address" placeholder="地址" class="handle-select mr10">
-          <el-option key="1" label="广东省" value="广东省"></el-option>
-          <el-option key="2" label="湖南省" value="湖南省"></el-option>
-        </el-select>
         <el-input v-model="query.name" placeholder="用户名" class="handle-input mr10"></el-input>
         <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
       </div>
@@ -102,6 +98,8 @@
 </template>
 
 <script>
+import { findUserList } from '@/api/user/user'
+
 export default {
   name: 'user',
   data () {
@@ -112,28 +110,59 @@ export default {
         pageIndex: 1,
         pageSize: 10
       },
-      tableData: [],
+
       multipleSelection: [],
       delList: [],
       editVisible: false,
       pageTotal: 0,
       form: {},
       idx: -1,
-      id: -1
+      id: -1,
+      //* ***********************************************************
+      // 查询条件
+      searchUserAO: {
+        sex: '',
+        status: '',
+        name: '',
+        nickName: '',
+        pageNum: 1,
+        pageSize: 10
+      },
+      // 列表数据
+      tableData: [
+        {
+          id: '',
+          name: '',
+          nickName: '',
+          sex: '',
+          avatar: '',
+          points: '',
+          status: '',
+          createTime: '',
+          updateTime: ''
+        }
+      ],
+      // 分页数据
+      pageInfo: {
+        pageNum: 1,
+        pageSize: 10,
+        total: ''
+      }
     }
   },
   created () {
     this.getData()
   },
   methods: {
-    // 获取 easy-mock 的模拟数据
+    // 初始化数据
     getData () {
-
+      this.handleSearch()
     },
     // 触发搜索按钮
     handleSearch () {
-      this.$set(this.query, 'pageIndex', 1)
-      this.getData()
+      findUserList(this.searchUserAO).then(res => {
+        console.log(res)
+      })
     },
     // 删除操作
     handleDelete (index, row) {
