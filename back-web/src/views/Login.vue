@@ -33,8 +33,8 @@ export default {
   data: function () {
     return {
       param: {
-        username: 'admin',
-        password: '123123'
+        username: 'root',
+        password: '123456'
       },
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -50,7 +50,6 @@ export default {
             username: this.param.username,
             password: this.param.password
           }
-          console.log(loginAO)
           login(loginAO).then(res => {
             if (res) {
               this.$message.success('登陆成功')

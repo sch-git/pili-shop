@@ -8,3 +8,11 @@ import axios from '@/api/index'
 export const findUserList = (searchUserAO) => {
   return axios.post('/user/list', searchUserAO)
 }
+/**
+ * @description 修改用户状态
+ * @param updateUserAO 修改条件
+ * @returns
+ */
+export const updateUserStatus = (updateUserAO) => {
+  return axios.post('/user/status', updateUserAO)
+}

@@ -6,7 +6,7 @@ axios.interceptors.response.use(res => {
     Message.error({ message: res.data.message })
     return null
   }
-  return res.data
+  return res.data.data
 }, error => {
   if (error.response.status === 504 || error.response.status === 404) {
     Message.error({ message: '服务器被吃了(ง •_•)ง' })
