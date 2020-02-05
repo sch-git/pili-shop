@@ -24,7 +24,7 @@ public class UserServiceTest {
     void findUserList() {
         SearchUserAO searchUserAO = new SearchUserAO();
         searchUserAO.setPageNum(1);
-        searchUserAO.setPageSize(10);
+        searchUserAO.setPageSize(4);
         System.out.println(userBaseService.findUserList(searchUserAO));
     }
 
@@ -35,7 +35,7 @@ public class UserServiceTest {
     void updateUserStatus() {
         UpdateUserStatusAO updateUserStatusAO = new UpdateUserStatusAO();
         updateUserStatusAO.setId(2L);
-        updateUserStatusAO.setStatus(true);
+        updateUserStatusAO.setStatus(false);
         userBaseService.updateUserStatus(updateUserStatusAO);
     }
 }

@@ -20,6 +20,11 @@ public class UpdateUserStatusDTO {
      */
     private Integer status;
 
+    /**
+     * 修改时间
+     */
+    private String updateTime;
+
     public void setAO(UpdateUserStatusAO ao) {
         this.id = ao.getId();
         if (ao.getStatus()) {

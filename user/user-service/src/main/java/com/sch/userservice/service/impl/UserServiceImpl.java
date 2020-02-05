@@ -1,5 +1,6 @@
 package com.sch.userservice.service.impl;
 
+import com.sch.commonbasic.util.DateUtil;
 import com.sch.userbase.AO.SearchUserAO;
 import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.VO.UserVO;
@@ -44,6 +45,8 @@ public class UserServiceImpl implements UserService {
         for (User user : users) {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(user, userVO);
+            userVO.setCreateTime(DateUtil.toString(user.getCreateTime()));
+            userVO.setUpdateTime(DateUtil.toString(user.getUpdateTime()));
             userVOS.add(userVO);
         }
         return userVOS;
@@ -59,6 +62,7 @@ public class UserServiceImpl implements UserService {
     public void updateUserStatus(UpdateUserStatusAO updateUserStatusAO) {
         UpdateUserStatusDTO updateUserStatusDTO = new UpdateUserStatusDTO();
         updateUserStatusDTO.setAO(updateUserStatusAO);
+        updateUserStatusDTO.setUpdateTime(DateUtil.createTime());
         userDao.updateUserStatus(updateUserStatusDTO);
     }
 }

@@ -35,7 +35,7 @@
     <!--修改用户状态-->
     <update id="updateUserStatus" parameterType="com.sch.userservice.dto.UpdateUserStatusDTO">
         update t_user
-        set status=#{status}
+        set status=#{status},update_time=#{updateTime}
         where id=#{id}
     </update>
 </mapper>
