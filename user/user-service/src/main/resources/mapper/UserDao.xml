@@ -32,4 +32,10 @@
             </if>
         </where>
     </select>
+    <!--修改用户状态-->
+    <update id="updateUserStatus" parameterType="com.sch.userservice.dto.UpdateUserStatusDTO">
+        update t_user
+        set status=#{status}
+        where id=#{id}
+    </update>
 </mapper>

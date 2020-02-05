@@ -1,6 +1,7 @@
 package com.sch.userservice;
 
 import com.sch.userbase.AO.SearchUserAO;
+import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.base.UserBaseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,5 +26,16 @@ public class UserServiceTest {
         searchUserAO.setPageNum(1);
         searchUserAO.setPageSize(10);
         System.out.println(userBaseService.findUserList(searchUserAO));
+    }
+
+    /**
+     * 修改用户状态
+     */
+    @Test
+    void updateUserStatus() {
+        UpdateUserStatusAO updateUserStatusAO = new UpdateUserStatusAO();
+        updateUserStatusAO.setId(2L);
+        updateUserStatusAO.setStatus(true);
+        userBaseService.updateUserStatus(updateUserStatusAO);
     }
 }

@@ -1,13 +1,16 @@
 package com.sch.userservice.service.impl;
 
 import com.sch.userbase.AO.SearchUserAO;
+import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.VO.UserVO;
 import com.sch.userservice.dao.UserDao;
+import com.sch.userservice.dto.UpdateUserStatusDTO;
 import com.sch.userservice.entity.User;
 import com.sch.userservice.service.UserService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -44,5 +47,18 @@ public class UserServiceImpl implements UserService {
             userVOS.add(userVO);
         }
         return userVOS;
+    }
+
+    /**
+     * 修改用户状态
+     *
+     * @param updateUserStatusAO 修改条件
+     */
+    @Override
+    @Transactional
+    public void updateUserStatus(UpdateUserStatusAO updateUserStatusAO) {
+        UpdateUserStatusDTO updateUserStatusDTO = new UpdateUserStatusDTO();
+        updateUserStatusDTO.setAO(updateUserStatusAO);
+        userDao.updateUserStatus(updateUserStatusDTO);
     }
 }

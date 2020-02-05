@@ -2,6 +2,7 @@ package com.sch.userservice;
 
 import com.sch.userbase.AO.SearchUserAO;
 import com.sch.userservice.dao.UserDao;
+import com.sch.userservice.dto.UpdateUserStatusDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,5 +29,16 @@ public class UserDaoTest {
         searchUserAO.setName("");
         searchUserAO.setNickName("");
         System.out.println(userDao.findAll(searchUserAO));
+    }
+
+    /**
+     * 修改用户状态
+     */
+    @Test
+    void updateUserStatus() {
+        UpdateUserStatusDTO updateUserStatusDTO = new UpdateUserStatusDTO();
+        updateUserStatusDTO.setId(2L);
+        updateUserStatusDTO.setStatus(0);
+        userDao.updateUserStatus(updateUserStatusDTO);
     }
 }

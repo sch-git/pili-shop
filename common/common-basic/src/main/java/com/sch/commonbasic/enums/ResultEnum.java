@@ -9,13 +9,17 @@ public enum ResultEnum {
     /**
      * 成功状态码
      */
-    SUCCESS(200, "成功"),
+    SUCCESS(200, ""),
     FAILURE(500, "失败"),
     /**
      * 用户失败信息
      */
     LOGIN_FAILURE(100, "用户名或密码错误!"),
     NOT_LOGIN_FAILURE(500, "用户尚未登录，请前往登录！"),
+    /**
+     * 用户成功信息
+     */
+    UPDATE_USER_STATUS(200, "修改用户状态成功"),
     /**
      * 权限失败信息
      */

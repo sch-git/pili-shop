@@ -4,9 +4,12 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sch.commonbasic.enums.UserEnum;
 import com.sch.userbase.AO.SearchUserAO;
+import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.VO.UserVO;
 import com.sch.userbase.base.UserBaseService;
+import com.sch.userbase.exception.UserException;
 import com.sch.userservice.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -36,5 +39,21 @@ public class UserBaseServiceImpl implements UserBaseService {
         pageInfo.setTotal(page.getTotal());
         pageInfo.setPages(page.getPages());
         return pageInfo;
+    }
+
+    /**
+     * 修改用户状态
+     *
+     * @param updateUserStatusAO 修改条件
+     */
+    @Override
+    public void updateUserStatus(UpdateUserStatusAO updateUserStatusAO) {
+        if (updateUserStatusAO.getStatus() == null) {
+            throw new UserException(UserEnum.EXCEPTION_NOT_PARAM);
+        }
+        if (updateUserStatusAO.getId() == null) {
+            throw new UserException(UserEnum.EXCEPTION_NOT_PARAM);
+        }
+        userService.updateUserStatus(updateUserStatusAO);
     }
 }

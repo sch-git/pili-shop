@@ -1,6 +1,7 @@
 package com.sch.userservice.service;
 
 import com.sch.userbase.AO.SearchUserAO;
+import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.VO.UserVO;
 
 import java.util.List;
@@ -18,4 +19,11 @@ public interface UserService {
      * @return 用户列表
      */
     List<UserVO> findAll(SearchUserAO searchUserAO);
+
+    /**
+     * 修改用户状态
+     *
+     * @param updateUserStatusAO 修改条件
+     */
+    void updateUserStatus(UpdateUserStatusAO updateUserStatusAO);
 }
