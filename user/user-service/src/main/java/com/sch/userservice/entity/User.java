@@ -28,7 +28,7 @@ public class User {
     /**
      * 昵称
      */
-    private String nickname;
+    private String nickName;
 
     /**
      * 性别

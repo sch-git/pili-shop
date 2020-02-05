@@ -25,7 +25,7 @@ public class UserVO implements Serializable {
     /**
      * 昵称
      */
-    private String nickname;
+    private String nickName;
 
     /**
      * 性别

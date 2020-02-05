@@ -13,9 +13,6 @@ import java.util.List;
  */
 @Repository
 public interface UserDao {
-    int insert(User record);
-
-    int insertSelective(User record);
 
     /**
      * 查询所有用户

@@ -33,7 +33,7 @@ public class User implements UserDetails {
     /**
      * 昵称
      */
-    private String nickname;
+    private String nickName;
 
     /**
      * 手机号

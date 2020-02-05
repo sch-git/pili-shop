@@ -1,6 +1,7 @@
 package com.sch.userservice.base;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sch.userbase.AO.SearchUserAO;
@@ -29,9 +30,11 @@ public class UserBaseServiceImpl implements UserBaseService {
      */
     @Override
     public PageInfo<UserVO> findUserList(SearchUserAO searchUserAO) {
-        PageHelper.startPage(searchUserAO.getPageNum(), searchUserAO.getPageSize());
+        Page page = PageHelper.startPage(searchUserAO.getPageNum(), searchUserAO.getPageSize());
         List<UserVO> userVOS = userService.findAll(searchUserAO);
         PageInfo<UserVO> pageInfo = new PageInfo<>(userVOS);
+        pageInfo.setTotal(page.getTotal());
+        pageInfo.setPages(page.getPages());
         return pageInfo;
     }
 }

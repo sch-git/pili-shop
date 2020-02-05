@@ -15,12 +15,12 @@ public class SearchUserAO implements Serializable {
     /**
      * 性别
      */
-    private Boolean sex;
+    private Integer sex;
 
     /**
      * 状态
      */
-    private Boolean status;
+    private Integer status;
 
     /**
      * 用户名
@@ -30,7 +30,7 @@ public class SearchUserAO implements Serializable {
     /**
      * 昵称
      */
-    private String nickname;
+    private String nickName;
 
     /**
      * 当前页
