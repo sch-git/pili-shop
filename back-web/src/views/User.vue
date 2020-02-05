@@ -55,9 +55,9 @@
         </el-table-column>
         <el-table-column label="状态" align="center">
           <template slot-scope="scope">
-            <el-tag @click="handleStatusChange(scope.row)"
+            <el-button @click="handleStatusChange(scope.row)" size="small"
               :type="scope.row.status===false?'primary':'danger'"
-            >{{scope.row.status===false?'正常':'禁用'}}</el-tag>
+            >{{scope.row.status===false?'正常':'禁用'}}</el-button>
           </template>
         </el-table-column>
         <el-table-column label="性别" align="center">
@@ -154,9 +154,7 @@ export default {
     },
     // 触发搜索按钮
     handleSearch () {
-      console.log(this.searchUserAO)
       findUserList(this.searchUserAO).then(res => {
-        console.log(res)
         this.tableData = res.list
         this.pageInfo.total = res.total
       })
@@ -164,7 +162,6 @@ export default {
     // 多选操作
     handleSelectionChange (val) {
       this.multipleSelection = val
-      console.log('val', val)
     },
     // 分页导航
     handlePageChange (val) {
@@ -174,14 +171,12 @@ export default {
     },
     // 状态改变
     handleStatusChange (row) {
-      let updateUserAO = {
+      let updateUserStatusAO = {
         id: row.id,
         status: !row.status
       }
-      updateUserStatus(updateUserAO).then(res => {
-        if (res) {
-          this.getData()
-        }
+      updateUserStatus(updateUserStatusAO).then(res => {
+        this.getData()
       })
     }
   }

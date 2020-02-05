@@ -10,9 +10,9 @@ export const findUserList = (searchUserAO) => {
 }
 /**
  * @description 修改用户状态
- * @param updateUserAO 修改条件
+ * @param updateUserStatusAO 修改条件
  * @returns
  */
-export const updateUserStatus = (updateUserAO) => {
-  return axios.post('/user/status', updateUserAO)
+export const updateUserStatus = (updateUserStatusAO) => {
+  return axios.put('/user/status', updateUserStatusAO)
 }

@@ -6,6 +6,9 @@ axios.interceptors.response.use(res => {
     Message.error({ message: res.data.message })
     return null
   }
+  if (res.data.message) {
+    Message.success(res.data.message)
+  }
   return res.data.data
 }, error => {
   if (error.response.status === 504 || error.response.status === 404) {
