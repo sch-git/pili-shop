@@ -4,17 +4,17 @@
     <modelVersion>4.0.0</modelVersion>
     <parent>
         <groupId>com.sch</groupId>
-        <artifactId>user</artifactId>
+        <artifactId>commodity</artifactId>
         <version>0.0.1-SNAPSHOT</version>
     </parent>
-    <artifactId>user-service</artifactId>
-    <description>user-service project for Spring Boot</description>
+    <artifactId>commodity-service</artifactId>
+    <description>commodity-service project for Spring Boot</description>
     <packaging>jar</packaging>
     <dependencies>
-        <!--user-base-->
+        <!--commodity-base-->
         <dependency>
             <groupId>com.sch</groupId>
-            <artifactId>user-base</artifactId>
+            <artifactId>commodity-base</artifactId>
             <version>0.0.1-SNAPSHOT</version>
             <scope>compile</scope>
         </dependency>
@@ -36,12 +36,6 @@
             <groupId>org.mybatis.generator</groupId>
             <artifactId>mybatis-generator-core</artifactId>
             <version>${mybatis-generator.version}</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sch</groupId>
-            <artifactId>user-base</artifactId>
-            <version>0.0.1-SNAPSHOT</version>
-            <scope>compile</scope>
         </dependency>
 
     </dependencies>
