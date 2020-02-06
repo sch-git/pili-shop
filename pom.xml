@@ -27,6 +27,7 @@
         <module>admin</module>
         <module>common</module>
         <module>user</module>
+        <module>commodity</module>
     </modules>
     <dependencies>
 
