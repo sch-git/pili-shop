@@ -11,6 +11,7 @@ public enum ResultEnum {
      */
     SUCCESS(200, ""),
     FAILURE(500, "失败"),
+    UPLOAD_IMAGE(200, "上传图片成功"),
     /**
      * 用户失败信息
      */

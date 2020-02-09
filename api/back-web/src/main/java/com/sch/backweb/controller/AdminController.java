@@ -1,8 +1,10 @@
 package com.sch.backweb.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import com.sch.commonbasic.VO.Result;
+import com.sch.commonbasic.enums.ResultEnum;
+import com.sch.commonbasic.util.QiNiuCloudUtil;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * @Description: 管理员接口
@@ -21,5 +23,17 @@ public class AdminController {
     @GetMapping("/user")
     public String user() {
         return "user";
+    }
+
+    /**
+     * 上传头像
+     *
+     * @param files 文件数据
+     * @return 头像地址
+     */
+    @PostMapping("/avatar")
+    public Result uploadAvatar(@RequestParam("test") MultipartFile files) {
+        String path = QiNiuCloudUtil.uploadImg(files);
+        return new Result(ResultEnum.UPLOAD_IMAGE, path);
     }
 }

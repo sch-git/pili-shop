@@ -33,6 +33,12 @@ public class Result {
         this.message = resultEnum.getMessage();
     }
 
+    public Result(ResultEnum resultEnum, Object data) {
+        this.code = resultEnum.getCode();
+        this.message = resultEnum.getMessage();
+        this.data = data;
+    }
+
     /**
      * 成功-无数据
      *
