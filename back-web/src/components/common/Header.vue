@@ -1,55 +1,59 @@
 <template>
-    <div class="header">
-        <!-- 折叠按钮 -->
-        <div class="collapse-btn" @click="collapseChage">
-            <i v-if="!collapse" class="el-icon-s-fold"/>
-            <i v-else class="el-icon-s-unfold"/>
+  <div class="header">
+    <!-- 折叠按钮 -->
+    <div class="collapse-btn" @click="collapseChage">
+      <i v-if="!collapse" class="el-icon-s-fold"/>
+      <i v-else class="el-icon-s-unfold"/>
+    </div>
+    <div class="logo">pili-shop后台管理系统</div>
+    <div class="header-right">
+      <div class="header-user-con">
+        <!-- 全屏显示 -->
+        <div class="btn-fullscreen" @click="handleFullScreen">
+          <el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">
+            <i class="el-icon-rank"/>
+          </el-tooltip>
         </div>
-        <div class="logo">pili-shop后台管理系统</div>
-        <div class="header-right">
-            <div class="header-user-con">
-                <!-- 全屏显示 -->
-                <div class="btn-fullscreen" @click="handleFullScreen">
-                    <el-tooltip effect="dark" :content="fullscreen?`取消全屏`:`全屏`" placement="bottom">
-                        <i class="el-icon-rank"/>
-                    </el-tooltip>
-                </div>
-                <!-- 消息中心 -->
-                <div class="btn-bell">
-                    <el-tooltip
-                        effect="dark"
-                        :content="message?`有${message}条未读消息`:`消息中心`"
-                        placement="bottom"
-                    >
-                        <router-link to="/tabs">
-                            <i class="el-icon-bell"/>
-                        </router-link>
-                    </el-tooltip>
-                    <span class="btn-bell-badge" v-if="message"/>
-                </div>
-                <!-- 用户头像 -->
-                <div class="user-avator">
-                    <img src="../../assets/logo.png"  alt=""/>
-                </div>
-                <!-- 用户名下拉菜单 -->
-                <el-dropdown class="user-name" trigger="click" @command="handleCommand">
+        <!-- 消息中心 -->
+        <div class="btn-bell">
+          <el-tooltip
+            effect="dark"
+            :content="message?`有${message}条未读消息`:`消息中心`"
+            placement="bottom"
+          >
+            <router-link to="/tabs">
+              <i class="el-icon-bell"/>
+            </router-link>
+          </el-tooltip>
+          <span class="btn-bell-badge" v-if="message"/>
+        </div>
+        <!-- 用户头像 -->
+        <div class="user-avator">
+          <img src="../../assets/logo.png" alt=""/>
+        </div>
+        <!-- 用户名下拉菜单 -->
+        <el-dropdown class="user-name" trigger="click" @command="handleCommand">
                     <span class="el-dropdown-link">
                         {{username}}
                         <i class="el-icon-caret-bottom"/>
                     </span>
-                    <el-dropdown-menu slot="dropdown">
-                        <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
-                            <el-dropdown-item>项目仓库</el-dropdown-item>
-                        </a>
-                        <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
-                    </el-dropdown-menu>
-                </el-dropdown>
-            </div>
-        </div>
+          <el-dropdown-menu slot="dropdown">
+            <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
+              <el-dropdown-item>项目仓库</el-dropdown-item>
+            </a>
+            <router-link to="/adminInfo">
+            <el-dropdown-item>个人中心</el-dropdown-item>
+            </router-link>
+            <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
+          </el-dropdown-menu>
+        </el-dropdown>
+      </div>
     </div>
+  </div>
 </template>
 <script>
 import bus from '@/lib/bus'
+
 export default {
   data () {
     return {
@@ -114,49 +118,56 @@ export default {
 }
 </script>
 <style scoped>
-.header {
+  .header {
     position: relative;
     box-sizing: border-box;
     width: 100%;
     height: 70px;
     font-size: 22px;
     color: #fff;
-}
-.collapse-btn {
+  }
+
+  .collapse-btn {
     float: left;
     padding: 0 21px;
     cursor: pointer;
     line-height: 70px;
-}
-.header .logo {
+  }
+
+  .header .logo {
     float: left;
     width: 250px;
     line-height: 70px;
-}
-.header-right {
+  }
+
+  .header-right {
     float: right;
     padding-right: 50px;
-}
-.header-user-con {
+  }
+
+  .header-user-con {
     display: flex;
     height: 70px;
     align-items: center;
-}
-.btn-fullscreen {
+  }
+
+  .btn-fullscreen {
     transform: rotate(45deg);
     margin-right: 5px;
     font-size: 24px;
-}
-.btn-bell,
-.btn-fullscreen {
+  }
+
+  .btn-bell,
+  .btn-fullscreen {
     position: relative;
     width: 30px;
     height: 30px;
     text-align: center;
     border-radius: 15px;
     cursor: pointer;
-}
-.btn-bell-badge {
+  }
+
+  .btn-bell-badge {
     position: absolute;
     right: 0;
     top: -2px;
@@ -165,27 +176,33 @@ export default {
     border-radius: 4px;
     background: #f56c6c;
     color: #fff;
-}
-.btn-bell .el-icon-bell {
+  }
+
+  .btn-bell .el-icon-bell {
     color: #fff;
-}
-.user-name {
+  }
+
+  .user-name {
     margin-left: 10px;
-}
-.user-avator {
+  }
+
+  .user-avator {
     margin-left: 20px;
-}
-.user-avator img {
+  }
+
+  .user-avator img {
     display: block;
     width: 40px;
     height: 40px;
     border-radius: 50%;
-}
-.el-dropdown-link {
+  }
+
+  .el-dropdown-link {
     color: #fff;
     cursor: pointer;
-}
-.el-dropdown-menu__item {
+  }
+
+  .el-dropdown-menu__item {
     text-align: center;
-}
+  }
 </style>

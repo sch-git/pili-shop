@@ -17,6 +17,21 @@ export default [
         path: '/user',
         component: () => import(/* webpackChunkName: "table" */ '@/views/User.vue'),
         meta: { title: '用户管理' }
+      },
+      {
+        path: '/admin',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/Admin.vue'),
+        meta: { title: '权限管理' }
+      },
+      {
+        path: '/commodity',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/Commodity.vue'),
+        meta: { title: '商品管理' }
+      },
+      {
+        path: '/adminInfo',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/AdminInfo.vue'),
+        meta: { title: '个人中心' }
       }
     ]
   },

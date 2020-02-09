@@ -66,7 +66,7 @@ export default {
         },
         {
           icon: 'el-icon-s-goods',
-          index: 'table',
+          index: 'commodity',
           title: '商品管理'
         },
         {
@@ -105,7 +105,7 @@ export default {
         },
         {
           icon: 'el-icon-lock',
-          index: 'icon',
+          index: 'admin',
           title: '权限管理'
         },
         {
