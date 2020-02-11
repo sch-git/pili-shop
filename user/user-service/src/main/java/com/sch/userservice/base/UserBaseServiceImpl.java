@@ -5,13 +5,18 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sch.commonbasic.enums.UserEnum;
+import com.sch.commonbasic.util.RedisUtil;
 import com.sch.userbase.AO.SearchUserAO;
 import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.VO.UserVO;
 import com.sch.userbase.base.UserBaseService;
 import com.sch.userbase.exception.UserException;
 import com.sch.userservice.service.UserService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.List;
 
@@ -24,6 +29,9 @@ import java.util.List;
 public class UserBaseServiceImpl implements UserBaseService {
     @Autowired
     UserService userService;
+    private static final Logger LOGGER = LoggerFactory.getLogger(UserBaseServiceImpl.class);
+    @Autowired
+    RedisTemplate redisTemplate;
 
     /**
      * 查询用户列表
@@ -34,7 +42,15 @@ public class UserBaseServiceImpl implements UserBaseService {
     @Override
     public PageInfo<UserVO> findUserList(SearchUserAO searchUserAO) {
         Page page = PageHelper.startPage(searchUserAO.getPageNum(), searchUserAO.getPageSize());
-        List<UserVO> userVOS = userService.findAll(searchUserAO);
+        ValueOperations ops = RedisUtil.getOpsForValue(redisTemplate);
+        // TODO 双重检测
+        List<UserVO> userVOS = (List<UserVO>) ops.get("userVOS");
+        if (userVOS == null) {
+            LOGGER.info("查询数据库:userService.findAll(searchUserAO);");
+            userVOS = userVOS = userService.findAll(searchUserAO);
+            ops.set("userVOS", userVOS);
+        }
+
         PageInfo<UserVO> pageInfo = new PageInfo<>(userVOS);
         pageInfo.setTotal(page.getTotal());
         pageInfo.setPages(page.getPages());

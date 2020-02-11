@@ -34,7 +34,7 @@ public class QiNiuCloudUtil {
     /**
      * 外链域名
      */
-    private static final String DOMAIN = "pili-shop.schblog.cn";
+    private static final String DOMAIN = "http://pili-shop.schblog.cn/";
     /**
      * 密钥
      */
@@ -55,7 +55,6 @@ public class QiNiuCloudUtil {
      */
     private static Configuration cfg = new Configuration(Region.region0());
     private static UploadManager uploadManager = new UploadManager(cfg);
-    private static String resultPath = "http://pili-shop.schblog.cn/";
 
     public static String uploadImg(MultipartFile file) {
         try {
@@ -65,7 +64,7 @@ public class QiNiuCloudUtil {
                 Response response = uploadManager.put(uploadBytes, null, upToken);
                 //解析上传成功的结果
                 DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-                return resultPath + putRet.hash;
+                return DOMAIN + putRet.hash;
             } catch (QiniuException ex) {
                 Response r = ex.response;
                 try {

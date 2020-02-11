@@ -32,7 +32,7 @@ public class AdminController {
      * @return 头像地址
      */
     @PostMapping("/avatar")
-    public Result uploadAvatar(@RequestParam("test") MultipartFile files) {
+    public Result uploadAvatar(@RequestParam("avatar") MultipartFile files) {
         String path = QiNiuCloudUtil.uploadImg(files);
         return new Result(ResultEnum.UPLOAD_IMAGE, path);
     }

@@ -26,6 +26,8 @@ public class UserServiceTest {
         searchUserAO.setPageNum(1);
         searchUserAO.setPageSize(4);
         System.out.println(userBaseService.findUserList(searchUserAO));
+        System.out.println(userBaseService.findUserList(searchUserAO));
+        System.out.println(userBaseService.findUserList(searchUserAO));
     }
 
     /**
