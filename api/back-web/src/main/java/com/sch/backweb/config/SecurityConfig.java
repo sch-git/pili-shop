@@ -3,6 +3,7 @@ package com.sch.backweb.config;
 import com.sch.backweb.filter.AccessDecisionManagerFilter;
 import com.sch.backweb.filter.InvocationFilter;
 import com.sch.backweb.filter.JsonAuthenticationFilter;
+import com.sch.backweb.filter.JwtFilter;
 import com.sch.backweb.handler.SecurityAuthEntryPointHandler;
 import com.sch.backweb.handler.SecurityFailureHandler;
 import com.sch.backweb.handler.SecuritySuccessHandler;
@@ -55,6 +56,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     private AccessDecisionManagerFilter managerFilter;
+    /**
+     * JWT过滤器
+     */
+    @Autowired
+    private JwtFilter jwtFilter;
 
     /**
      * 密码加密
@@ -114,6 +120,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .csrf().disable()
                 .exceptionHandling().authenticationEntryPoint(authEntryPointHandler);
         http.addFilterAt(jsonAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+        http.addFilterAt(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
     @Override

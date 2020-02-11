@@ -24,6 +24,11 @@ spring:
   devtools:
     restart:
       enabled: true
+  redis:
+    host: 47.101.37.181
+    port: 6379
+    password: sch1324!/
+    database: 0
   servlet:
     multipart:
       #上传单个文件的最大值

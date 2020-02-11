@@ -31,7 +31,7 @@ public class UserController {
      */
     @PostMapping("/list")
     public Result findUserList(@RequestBody SearchUserAO searchUserAO) {
-        PageInfo<UserVO> pageInfo = userBaseService.findUserList(searchUserAO);
+            PageInfo<UserVO> pageInfo = userBaseService.findUserList(searchUserAO);
         return Result.success(pageInfo);
     }
 

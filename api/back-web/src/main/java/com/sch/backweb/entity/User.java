@@ -57,6 +57,10 @@ public class User implements UserDetails {
      * 用户权限集合
      */
     private List<? extends GrantedAuthority> authorities;
+    /**
+     * JWT token
+     */
+    private String token;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
