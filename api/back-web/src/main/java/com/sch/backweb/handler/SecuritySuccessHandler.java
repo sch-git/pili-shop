@@ -5,6 +5,8 @@ import com.sch.backweb.entity.User;
 import com.sch.commonbasic.VO.Result;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -25,9 +27,12 @@ import java.util.Date;
  */
 @Configuration
 public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
+    private static final Logger LOGGER = LoggerFactory.getLogger(SecuritySuccessHandler.class);
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
+        LOGGER.info("SecuritySuccessHandler");
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         StringBuffer stringBuffer = new StringBuffer();
         for (GrantedAuthority authority : authorities) {

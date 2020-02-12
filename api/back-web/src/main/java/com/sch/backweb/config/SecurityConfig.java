@@ -4,6 +4,7 @@ import com.sch.backweb.filter.AccessDecisionManagerFilter;
 import com.sch.backweb.filter.InvocationFilter;
 import com.sch.backweb.filter.JsonAuthenticationFilter;
 import com.sch.backweb.filter.JwtFilter;
+import com.sch.backweb.handler.SecurityAccessDeniedHandler;
 import com.sch.backweb.handler.SecurityAuthEntryPointHandler;
 import com.sch.backweb.handler.SecurityFailureHandler;
 import com.sch.backweb.handler.SecuritySuccessHandler;
@@ -57,7 +58,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     private AccessDecisionManagerFilter managerFilter;
     /**
-     * JWT过滤器
+     * 自定义权限不足处理
+     */
+    @Autowired
+    private SecurityAccessDeniedHandler accessDeniedHandler;
+    /**
+     * 自定义JWT-token过滤器
      */
     @Autowired
     private JwtFilter jwtFilter;
@@ -118,8 +124,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .cors()
                 .and()
                 .csrf().disable()
-                .exceptionHandling().authenticationEntryPoint(authEntryPointHandler);
+                .exceptionHandling()
+                .authenticationEntryPoint(authEntryPointHandler)
+                .accessDeniedHandler(accessDeniedHandler);
         http.addFilterAt(jsonAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
+//        http.addFilterAt(new JwtAuthFilter("/login",authenticationManager()), UsernamePasswordAuthenticationFilter.class);
         http.addFilterAt(jwtFilter, UsernamePasswordAuthenticationFilter.class);
     }
 
