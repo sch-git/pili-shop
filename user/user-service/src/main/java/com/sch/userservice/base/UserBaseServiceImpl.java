@@ -8,6 +8,7 @@ import com.sch.commonbasic.enums.UserEnum;
 import com.sch.commonbasic.util.RedisUtil;
 import com.sch.userbase.AO.SearchUserAO;
 import com.sch.userbase.AO.UpdateUserStatusAO;
+import com.sch.userbase.VO.PageVO;
 import com.sch.userbase.VO.UserVO;
 import com.sch.userbase.base.UserBaseService;
 import com.sch.userbase.exception.UserException;
@@ -41,19 +42,23 @@ public class UserBaseServiceImpl implements UserBaseService {
      */
     @Override
     public PageInfo<UserVO> findUserList(SearchUserAO searchUserAO) {
-        Page page = PageHelper.startPage(searchUserAO.getPageNum(), searchUserAO.getPageSize());
         ValueOperations ops = RedisUtil.getOpsForValue(redisTemplate);
         // TODO 双重检测
         List<UserVO> userVOS = (List<UserVO>) ops.get("userVOS");
+        PageVO pageVO = (PageVO) ops.get("userVOS-page");
         if (userVOS == null) {
             LOGGER.info("查询数据库:userService.findAll(searchUserAO);");
-            userVOS = userVOS = userService.findAll(searchUserAO);
+            Page page = PageHelper.startPage(searchUserAO.getPageNum(), searchUserAO.getPageSize());
+            userVOS = userService.findAll(searchUserAO);
+            pageVO = new PageVO();
+            pageVO.setTotal(page.getTotal());
+            pageVO.setPages(page.getPages());
             ops.set("userVOS", userVOS);
+            ops.set("userVOS-page", pageVO);
         }
-
         PageInfo<UserVO> pageInfo = new PageInfo<>(userVOS);
-        pageInfo.setTotal(page.getTotal());
-        pageInfo.setPages(page.getPages());
+        pageInfo.setTotal(pageVO.getTotal());
+        pageInfo.setPages(pageVO.getPages());
         return pageInfo;
     }
 
@@ -70,6 +75,9 @@ public class UserBaseServiceImpl implements UserBaseService {
         if (updateUserStatusAO.getId() == null) {
             throw new UserException(UserEnum.EXCEPTION_NOT_PARAM);
         }
+        ValueOperations ops = RedisUtil.getOpsForValue(redisTemplate);
+        redisTemplate.delete("userVOS");
+        redisTemplate.delete("userVOS-page");
         userService.updateUserStatus(updateUserStatusAO);
     }
 }
