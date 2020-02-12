@@ -49,7 +49,7 @@ public class SecurityServiceImpl implements UserDetailsService {
         for (RoleVO roleVO : roleVOS) {
             authorities.add(new SimpleGrantedAuthority(roleVO.getCode()));
         }
-        authorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        authorities.add(new SimpleGrantedAuthority("ROLE_LOGIN"));
         user.setAuthorities(authorities);
         return user;
     }

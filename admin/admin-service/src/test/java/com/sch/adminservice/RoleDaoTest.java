@@ -28,6 +28,6 @@ public class RoleDaoTest {
      */
     @Test
     public void findRolesByUrl() {
-        System.out.println(roleDao.findRolesByUrl("/admin"));
+        System.out.println(roleDao.findRolesByUrl("/admin/test") == null);
     }
 }

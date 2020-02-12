@@ -5,10 +5,8 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sch.commonbasic.enums.UserEnum;
-import com.sch.commonbasic.util.RedisUtil;
 import com.sch.userbase.AO.SearchUserAO;
 import com.sch.userbase.AO.UpdateUserStatusAO;
-import com.sch.userbase.VO.PageVO;
 import com.sch.userbase.VO.UserVO;
 import com.sch.userbase.base.UserBaseService;
 import com.sch.userbase.exception.UserException;
@@ -17,7 +15,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.core.ValueOperations;
 
 import java.util.List;
 
@@ -42,23 +39,12 @@ public class UserBaseServiceImpl implements UserBaseService {
      */
     @Override
     public PageInfo<UserVO> findUserList(SearchUserAO searchUserAO) {
-        ValueOperations ops = RedisUtil.getOpsForValue(redisTemplate);
-        // TODO 双重检测
-        List<UserVO> userVOS = (List<UserVO>) ops.get("userVOS");
-        PageVO pageVO = (PageVO) ops.get("userVOS-page");
-        if (userVOS == null) {
-            LOGGER.info("查询数据库:userService.findAll(searchUserAO);");
-            Page page = PageHelper.startPage(searchUserAO.getPageNum(), searchUserAO.getPageSize());
-            userVOS = userService.findAll(searchUserAO);
-            pageVO = new PageVO();
-            pageVO.setTotal(page.getTotal());
-            pageVO.setPages(page.getPages());
-            ops.set("userVOS", userVOS);
-            ops.set("userVOS-page", pageVO);
-        }
+        LOGGER.info("查询数据库:userService.findAll(searchUserAO);");
+        Page page = PageHelper.startPage(searchUserAO.getPageNum(), searchUserAO.getPageSize());
+        List<UserVO> userVOS = userService.findAll(searchUserAO);
         PageInfo<UserVO> pageInfo = new PageInfo<>(userVOS);
-        pageInfo.setTotal(pageVO.getTotal());
-        pageInfo.setPages(pageVO.getPages());
+        pageInfo.setTotal(page.getTotal());
+        pageInfo.setPages(page.getPages());
         return pageInfo;
     }
 
@@ -75,9 +61,6 @@ public class UserBaseServiceImpl implements UserBaseService {
         if (updateUserStatusAO.getId() == null) {
             throw new UserException(UserEnum.EXCEPTION_NOT_PARAM);
         }
-        ValueOperations ops = RedisUtil.getOpsForValue(redisTemplate);
-        redisTemplate.delete("userVOS");
-        redisTemplate.delete("userVOS-page");
         userService.updateUserStatus(updateUserStatusAO);
     }
 }

@@ -51,7 +51,7 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<RoleVO> findRolesByUrl(String url) {
         List<Role> roles = roleDao.findRolesByUrl(url);
-        if (roles != null) {
+        if (roles.size() > 0) {
             List<RoleVO> roleVOS = new ArrayList<>();
             for (Role role : roles) {
                 RoleVO roleVO = new RoleVO();

@@ -22,6 +22,7 @@ public class AccessDecisionManagerFilter implements AccessDecisionManager {
     @Override
     public void decide(Authentication authentication, Object o, Collection<ConfigAttribute> collection)
             throws AccessDeniedException, InsufficientAuthenticationException {
+        // collection：请求所需角色
         for (ConfigAttribute attribute : collection) {
             if ("ROLE_LOGIN".equals(attribute.getAttribute())) {
                 if (authentication instanceof AnonymousAuthenticationToken) {
@@ -30,6 +31,7 @@ public class AccessDecisionManagerFilter implements AccessDecisionManager {
                     return;
                 }
             }
+            // authorities：用户所有角色
             Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
             for (GrantedAuthority authority : authorities) {
                 if (authority.getAuthority().equals(attribute.getAttribute())) {

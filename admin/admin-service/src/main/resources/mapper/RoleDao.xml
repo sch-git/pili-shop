@@ -24,6 +24,6 @@
         on r.id=rr.role_id
         left join t_resource re
         on re.id=rr.resource_id
-        and re.url=#{url}
+        where re.url=#{url}
     </select>
 </mapper>

@@ -24,10 +24,7 @@ public class UserDaoTest {
     void findAll() {
         SearchUserAO searchUserAO = new SearchUserAO();
         searchUserAO.setPageNum(1);
-        searchUserAO.setPageSize(3);
-        searchUserAO.setSex(1);
-        searchUserAO.setName("");
-        searchUserAO.setNickName("");
+        searchUserAO.setPageSize(4);
         System.out.println(userDao.findAll(searchUserAO));
     }
 
