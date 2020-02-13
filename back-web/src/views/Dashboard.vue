@@ -233,7 +233,7 @@ export default {
         ]
       },
       imageUrl: '',
-      tokenHeader: { Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4rLFJPTEVfVVNFUiwiLCJzdWIiOiJyb290IiwiZXhwIjoxNTgxNDg2NzA4fQ.aigSAv-M6gXkkgPiyC0_awOY4do1Pnk4BCbtzSdTuOMecm3QelKSnqiiNgpRr1S_n_UBOsROoLtvLFZFGK0qcQ' }
+      tokenHeader: { Authorization: this.$store.state.user.userInfo.token }
     }
   },
   components: {

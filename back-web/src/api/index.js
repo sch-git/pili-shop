@@ -28,7 +28,7 @@ axios.interceptors.response.use(res => {
 axios.interceptors.request.use(req => {
   console.log('interceptors', req)
   if (req.url !== '/login') {
-    req.headers['Authorization'] = 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4rLFJPTEVfVVNFUiwiLCJzdWIiOiJyb290IiwiZXhwIjoxNTgxNDg2NzA4fQ.aigSAv-M6gXkkgPiyC0_awOY4do1Pnk4BCbtzSdTuOMecm3QelKSnqiiNgpRr1S_n_UBOsROoLtvLFZFGK0qcQ'
+    req.headers['Authorization'] = this.$store.state.user.userInfo.token
   }
   return req
 }, error => {
