@@ -7,8 +7,9 @@
             <!--<img src="../assets/logo.png" class="user-avator" alt />-->
             <el-upload
               class="avatar-uploader"
-              action="http://localhost:8090/admin/avatar"
-              name="test"
+              action="http://localhost:10080/admin/avatar"
+              :headers="tokenHeader"
+              name="avatar"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload">
@@ -231,7 +232,8 @@ export default {
           }
         ]
       },
-      imageUrl: ''
+      imageUrl: '',
+      tokenHeader: { Authorization: 'Bearer eyJhbGciOiJIUzUxMiJ9.eyJhdXRob3JpdGllcyI6IlJPTEVfQURNSU4rLFJPTEVfVVNFUiwiLCJzdWIiOiJyb290IiwiZXhwIjoxNTgxNDg2NzA4fQ.aigSAv-M6gXkkgPiyC0_awOY4do1Pnk4BCbtzSdTuOMecm3QelKSnqiiNgpRr1S_n_UBOsROoLtvLFZFGK0qcQ' }
     }
   },
   components: {

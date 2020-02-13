@@ -29,6 +29,7 @@
 
 <script>
 import { login } from '@/api/admin/admin'
+import { mapMutations } from 'vuex'
 export default {
   data: function () {
     return {
@@ -43,6 +44,10 @@ export default {
     }
   },
   methods: {
+    ...mapMutations([
+      'SET_USER'
+    ]),
+    // 登录
     submitForm () {
       this.$refs.login.validate(valid => {
         if (valid) {
@@ -52,7 +57,7 @@ export default {
           }
           login(loginAO).then(res => {
             if (res) {
-              this.$message.success('登陆成功')
+              this.getUserInfo(res)
               this.$router.push('/dashboard')
             }
           })
@@ -62,6 +67,10 @@ export default {
           return false
         }
       })
+    },
+    // 登录成功-设置用户信息
+    getUserInfo (userInfo) {
+      this.SET_USER(userInfo)
     }
   }
 }
@@ -75,6 +84,7 @@ export default {
     background-image: url(../assets/img/login-bg.png);
     background-size: 100%;
   }
+
   .ms-title {
     width: 100%;
     line-height: 50px;
@@ -83,6 +93,7 @@ export default {
     color: #fff;
     border-bottom: 1px solid #ddd;
   }
+
   .ms-login {
     position: absolute;
     left: 50%;
@@ -93,17 +104,21 @@ export default {
     background: rgba(255, 255, 255, 0.3);
     overflow: hidden;
   }
+
   .ms-content {
     padding: 30px 30px;
   }
+
   .login-btn {
     text-align: center;
   }
+
   .login-btn button {
     width: 100%;
     height: 36px;
     margin-bottom: 10px;
   }
+
   .login-tips {
     font-size: 12px;
     line-height: 30px;
