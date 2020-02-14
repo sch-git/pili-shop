@@ -16,7 +16,7 @@ export default [
       {
         path: '/user',
         component: () => import(/* webpackChunkName: "table" */ '@/views/User.vue'),
-        meta: { title: '用户管理' }
+        meta: { title: '用户列表' }
       },
       {
         path: '/admin',
@@ -27,6 +27,11 @@ export default [
         path: '/commodity',
         component: () => import(/* webpackChunkName: "table" */ '@/views/Commodity.vue'),
         meta: { title: '商品管理' }
+      },
+      {
+        path: '/addProduct',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/AddProduct.vue'),
+        meta: { title: '添加商品' }
       },
       {
         path: '/adminInfo',

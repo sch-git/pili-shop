@@ -66,8 +66,19 @@ export default {
         },
         {
           icon: 'el-icon-s-goods',
-          index: 'commodity',
-          title: '商品管理'
+          index: '2',
+          title: '商品管理',
+          subs: [
+            {
+              icon: 'el-icon-s-goods',
+              index: 'commodity',
+              title: '商品列表'
+            },
+            {
+              index: 'addProduct',
+              title: '添加商品'
+            }
+          ]
         },
         {
           icon: 'el-icon-video-camera-solid',
@@ -110,12 +121,19 @@ export default {
         },
         {
           icon: 'el-icon-user',
-          index: 'user',
-          title: '用户管理'
+          index: '6',
+          title: '用户管理',
+          subs: [
+            {
+              icon: 'el-icon-user',
+              index: 'user',
+              title: '用户列表'
+            }
+          ]
         },
         {
           icon: 'el-icon-rank',
-          index: '6',
+          index: '7',
           title: '公告',
           subs: [
             {
@@ -135,7 +153,7 @@ export default {
         },
         {
           icon: 'el-icon-lx-warn',
-          index: '7',
+          index: '8',
           title: '错误处理',
           subs: [
             {
