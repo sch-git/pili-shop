@@ -127,6 +127,7 @@
 
 <script>
 import Schart from 'vue-schart'
+import { uploadSuccess, beforeUpload } from '@/api/common'
 
 export default {
   name: 'dashboard',
@@ -256,17 +257,13 @@ export default {
   //     bus.$off('collapse', this.handleBus);
   // },
   methods: {
+    // 上传头像成功
     handleAvatarSuccess (res, file) {
-      this.$message.success(res.message)
-      this.imageUrl = res.data
+      this.imageUrl = uploadSuccess(res)
     },
+    // 上传前的处理
     beforeAvatarUpload (file) {
-      const isLt2M = file.size / 1024 / 1024 < 2
-
-      if (!isLt2M) {
-        this.$message.error('上传头像图片大小不能超过 2MB!')
-      }
-      return isLt2M
+      return beforeUpload(file)
     }
   }
 }
@@ -336,12 +333,6 @@ export default {
     margin-bottom: 20px;
   }
 
-  .user-avatar {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
-  }
-
   .user-info-cont {
     padding-left: 50px;
     flex: 1;
@@ -390,29 +381,20 @@ export default {
     overflow: hidden;
   }
 
-  .avatar-uploader .el-upload:hover {
-    border-color: #409EFF;
-  }
-
-  .avatar-uploader-icon {
-    font-size: 28px;
-    color: #8c939d;
-    width: 120px;
-    height: 120px;
-    line-height: 120px;
-    text-align: center;
-  }
-
   .avatar {
-    width: 120px;
-    height: 120px;
+    width: 110px;
+    height: 110px;
     display: block;
+  }
+
+  .user-avatar {
+    width: 110px;
+    height: 110px;
+    border-radius: 10%;
   }
 </style>
 <style>
   .el-upload--text {
-    width: 120px;
-    height: 120px;
-    border-radius: 50%;
+    border-radius: 10%;
   }
 </style>
