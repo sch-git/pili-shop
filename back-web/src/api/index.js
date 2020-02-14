@@ -1,12 +1,16 @@
 import axios from '@/lib/axios'
 import { Message } from 'element-ui'
+import store from '@/store'
 
+/**
+ * axios响应拦截器
+ */
 axios.interceptors.response.use(res => {
   if (res.data && res.status === 200 && res.data.code !== 200) {
     Message.error({ message: res.data.message })
     return null
   }
-  if (res.data.message) {
+  if (res.data && res.data.message !== '') {
     Message.success(res.data.message)
   }
   return res.data.data
@@ -17,6 +21,8 @@ axios.interceptors.response.use(res => {
     Message.error({ message: '权限不足，请联系管理员' })
   } else if (error.response.status === 401) {
     Message.error({ message: '尚未登录，请登录' })
+  } else if (error.response.status === 500) {
+    Message.error({ message: '服务器崩溃(ง •_•)ง' })
   } else {
     if (error.response.data.message) {
       Message.error({ message: error.response.data.message })
@@ -25,10 +31,12 @@ axios.interceptors.response.use(res => {
     }
   }
 })
+/**
+ * axios请求拦截器
+ */
 axios.interceptors.request.use(req => {
-  console.log('interceptors', req)
   if (req.url !== '/login') {
-    req.headers['Authorization'] = this.$store.state.user.userInfo.token
+    req.headers['Authorization'] = store.state.user.userInfo.token
   }
   return req
 }, error => {
