@@ -1,13 +1,13 @@
-package com.sch.commodityservice.service;
+package com.sch.commoditybase.base;
 
 import com.sch.commoditybase.AO.AddCommodityAO;
 
 /**
- * @Description: 商品服务
+ * @Description: 商品模块外部接口
  * @Author: chenghao.su
- * @Date: 2020/2/6 21:43
+ * @Date: 2020/2/14 16:15
  */
-public interface CommodityService {
+public interface CommodityBaseService {
     /**
      * 添加商品
      *

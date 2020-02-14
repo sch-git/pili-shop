@@ -30,6 +30,11 @@ spring:
       max-file-size: 4MB
       #上传总文件的最大值
       max-request-size: 10MB
+  redis:
+    host: 47.101.37.181
+    port: 6379
+    password: sch1324!/
+    database: 0
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
     url: jdbc:mysql://47.101.37.181:3306/commodity?useUnicode=true&characterEncoding=utf-8&useSSL=true&serverTimezone=Asia/Shanghai

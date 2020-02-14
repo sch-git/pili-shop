@@ -35,6 +35,11 @@ public class QiNiuCloudUtil {
      * 外链域名
      */
     private static final String DOMAIN = "http://pili-shop.schblog.cn/";
+
+    public static String getDOMAIN() {
+        return DOMAIN;
+    }
+
     /**
      * 密钥
      */

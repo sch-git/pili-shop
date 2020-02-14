@@ -10,6 +10,8 @@ public enum CommodityEnum implements CommonEnum {
      * 异常信息提示
      */
     EXCEPTION_NULL("请求数据为空"),
+    EXCEPTION_NULL_CREATEID("创建人CREATEID为空"),
+    EXCEPTION_NULL_NAME("商品名称NAME为空"),
     EXCEPTION_NULL_CATEGORYID("分类ID为空"),
     EXCEPTION_NULL_DESCRIBE("商品描述DESCRIBE为空"),
     EXCEPTION_NULL_PRICE("商品售价PRICE为空"),

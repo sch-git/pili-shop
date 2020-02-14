@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sch.commodityservice.dao.CommodityDao">
+    <resultMap id="BaseResultMap" type="com.sch.commodityservice.entity.Commodity">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="category_id" jdbcType="BIGINT" property="categoryId"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="price" jdbcType="REAL" property="price"/>
+        <result column="describe" jdbcType="VARCHAR" property="describe"/>
+        <result column="status" jdbcType="BIT" property="status"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="create_id" jdbcType="BIGINT" property="createId"/>
+        <result column="create_name" jdbcType="VARCHAR" property="createName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_id" jdbcType="BIGINT" property="updateId"/>
+        <result column="update_name" jdbcType="VARCHAR" property="updateName"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <!--添加商品-->
+    <insert id="addCommodity" parameterType="com.sch.commodityservice.dto.AddCommodityDTO"
+            useGeneratedKeys="true" keyProperty="id">
+    insert into t_commodity (category_id, `name`,
+  price, `describe`, status, url,
+  create_id, create_name, create_time,
+  update_id, update_name, update_time)
+     values (#{categoryId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+  #{price,jdbcType=REAL}, #{describe,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{url,jdbcType=VARCHAR},
+  #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
+  #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
+  </insert>
+
+</mapper>
