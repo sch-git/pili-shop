@@ -24,4 +24,9 @@ public enum AdminEnum implements CommonEnum {
     AdminEnum(String msg) {
         this.msg = msg;
     }
+
+    @Override
+    public String getMsg() {
+        return msg;
+    }
 }

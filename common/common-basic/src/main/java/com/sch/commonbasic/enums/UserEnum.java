@@ -24,4 +24,9 @@ public enum UserEnum implements CommonEnum {
     UserEnum(String msg) {
         this.msg = msg;
     }
+
+    @Override
+    public String getMsg() {
+        return msg;
+    }
 }

@@ -6,4 +6,10 @@ package com.sch.commonbasic.enums;
  * @Date: 2020/1/20 19:50
  */
 public interface CommonEnum {
+    /**
+     * 获取枚举信息
+     *
+     * @return message
+     */
+    String getMsg();
 }

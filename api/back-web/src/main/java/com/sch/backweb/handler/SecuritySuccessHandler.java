@@ -3,10 +3,12 @@ package com.sch.backweb.handler;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sch.backweb.entity.User;
 import com.sch.commonbasic.VO.Result;
+import com.sch.commonbasic.enums.ResultEnum;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +17,7 @@ import org.springframework.security.web.authentication.AuthenticationSuccessHand
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.Collection;
@@ -27,6 +30,8 @@ import java.util.Date;
  */
 @Configuration
 public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
+    @Autowired
+    HttpSession session;
     private static final Logger LOGGER = LoggerFactory.getLogger(SecuritySuccessHandler.class);
 
     @Override
@@ -49,7 +54,8 @@ public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
         PrintWriter out = response.getWriter();
         User user = (User) authentication.getPrincipal();
         user.setToken(jwt);
-        String str = new ObjectMapper().writeValueAsString(Result.success(user));
+        session.setAttribute(session.getId(), user.getId());
+        String str = new ObjectMapper().writeValueAsString(new Result(ResultEnum.LOGIN_SUCCESS, user));
         out.write(str);
         out.flush();
         out.close();

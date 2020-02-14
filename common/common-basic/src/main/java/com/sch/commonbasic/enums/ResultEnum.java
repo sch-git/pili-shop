@@ -10,6 +10,7 @@ public enum ResultEnum {
      * 成功状态码
      */
     SUCCESS(200, ""),
+    LOGIN_SUCCESS(200, "登陆成功"),
     FAILURE(500, "失败"),
     UPLOAD_IMAGE(200, "上传图片成功"),
     /**
@@ -56,7 +57,4 @@ public enum ResultEnum {
         this.code = code;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
-    }
 }

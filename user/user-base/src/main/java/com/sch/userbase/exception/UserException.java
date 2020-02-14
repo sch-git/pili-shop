@@ -8,8 +8,8 @@ import com.sch.commonbasic.enums.CommonEnum;
  * @Date: 2020/2/3 20:59
  */
 public class UserException extends RuntimeException {
-    public UserException(CommonEnum message) {
-        super(message.toString());
+    public UserException(CommonEnum commonEnum) {
+        super(commonEnum.getMsg());
     }
 
     public UserException(String message) {

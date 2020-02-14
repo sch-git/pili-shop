@@ -8,8 +8,8 @@ import com.sch.commonbasic.enums.CommonEnum;
  * @Date: 2020/1/20 18:59
  */
 public class AdminException extends RuntimeException {
-    public AdminException(CommonEnum message) {
-        super(message.toString());
+    public AdminException(CommonEnum commonEnum) {
+        super(commonEnum.getMsg());
     }
 
     public AdminException(String message) {
