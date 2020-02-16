@@ -2,6 +2,7 @@ package com.sch.backweb.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
+import com.sch.commoditybase.AO.AddCategoryAO;
 import com.sch.commoditybase.AO.SearchCategoryAO;
 import com.sch.commoditybase.AO.UpdateCategoryAO;
 import com.sch.commoditybase.VO.CategoryVO;
@@ -35,8 +36,14 @@ public class CategoryController {
         return Result.success(pageInfo);
     }
 
-    @PutMapping("")
+    @PutMapping("/item")
     public Result updateCategory(@RequestBody UpdateCategoryAO updateCategoryAO) {
+        return Result.success();
+    }
+
+    @PostMapping("")
+    public Result addCategory(@RequestBody AddCategoryAO addCategoryAO) {
+        categoryBaseService.addCategory(addCategoryAO);
         return Result.success();
     }
 }

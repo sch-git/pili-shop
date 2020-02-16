@@ -1,18 +1,16 @@
-package com.sch.commodityservice.service;
+package com.sch.commoditybase.base;
 
+import com.github.pagehelper.PageInfo;
 import com.sch.commoditybase.AO.AddCategoryAO;
 import com.sch.commoditybase.AO.SearchCategoryAO;
 import com.sch.commoditybase.VO.CategoryVO;
 
-import java.util.List;
-
 /**
- * @Description: 商品分类服务
+ * @Description: 分类模块外部接口
  * @Author: chenghao.su
- * @Date: 2020/2/15 21:49
+ * @Date: 2020/2/16 09:44
  */
-public interface CategoryService {
-
+public interface CategoryBaseService {
     /**
      * 新增分类
      *
@@ -24,7 +22,7 @@ public interface CategoryService {
      * 通过实体作为筛选条件查询
      *
      * @param searchCategoryAO 实体对象
-     * @return 分类集合
+     * @return 分类列表
      */
-    List<CategoryVO> findAll(SearchCategoryAO searchCategoryAO);
+    PageInfo<CategoryVO> findCategoryList(SearchCategoryAO searchCategoryAO);
 }

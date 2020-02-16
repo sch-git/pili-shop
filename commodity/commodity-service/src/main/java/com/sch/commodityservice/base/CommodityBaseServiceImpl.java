@@ -32,13 +32,13 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
         if (addCommodityAO.getCategoryId() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CATEGORYID);
         }
-        if (addCommodityAO.getName() == null) {
+        if (addCommodityAO.getName().isEmpty() || addCommodityAO.getName() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_NAME);
         }
-        if (addCommodityAO.getCreateName() == null) {
+        if (addCommodityAO.getCreateName().isEmpty() || addCommodityAO.getCreateName() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATENAME);
         }
-        if (addCommodityAO.getDescribe() == null) {
+        if (addCommodityAO.getDescribe().isEmpty() || addCommodityAO.getDescribe() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_DESCRIBE);
         }
         if (addCommodityAO.getPrice() == null) {
@@ -47,7 +47,7 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
         if (addCommodityAO.getStatus() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_STATUS);
         }
-        if (addCommodityAO.getUrl() == null) {
+        if (addCommodityAO.getUrl().isEmpty() || addCommodityAO.getUrl() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_URL);
         }
         return commodityService.addCommodity(addCommodityAO);

@@ -1,11 +1,14 @@
 server:
   port: 8090
 spring:
+  session:
+    store-type: redis
   redis:
     host: 47.101.37.181
     port: 6379
     password: sch1324!/
     database: 0
+    timeout: 3000
 dubbo:
   application:
     name: back-web

@@ -1,5 +1,6 @@
 package com.sch.commodityservice.dao;
 
+import com.sch.commoditybase.AO.SearchCategoryAO;
 import com.sch.commodityservice.dto.AddCategoryDTO;
 import com.sch.commodityservice.entity.Category;
 import org.springframework.stereotype.Repository;
@@ -15,12 +16,12 @@ import java.util.List;
 public interface CategoryDao {
 
     /**
-     * 通过实体作为筛选条件查询 TODO
+     * 通过实体作为筛选条件查询
      *
-     * @param category 实例对象
+     * @param searchCategoryAO 实例对象
      * @return 对象列表
      */
-    List<Category> queryAll(Category category);
+    List<Category> findAll(SearchCategoryAO searchCategoryAO);
 
     /**
      * 新增分类
