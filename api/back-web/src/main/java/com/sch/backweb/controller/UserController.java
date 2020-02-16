@@ -21,7 +21,7 @@ public class UserController {
     /**
      * 用户服务
      */
-    @Reference
+    @Reference(timeout = 60000)
     UserBaseService userBaseService;
 
     /**

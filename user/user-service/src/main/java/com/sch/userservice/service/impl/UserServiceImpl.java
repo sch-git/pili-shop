@@ -30,9 +30,9 @@ public class UserServiceImpl implements UserService {
     UserDao userDao;
 
     /**
-     * 查询所有用户
+     * 通过实体作为筛选条件查询
      *
-     * @param searchUserAO 查询条件
+     * @param searchUserAO 实体对象
      * @return 用户列表
      */
     @Override
