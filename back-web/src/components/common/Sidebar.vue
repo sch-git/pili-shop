@@ -77,6 +77,10 @@ export default {
             {
               index: 'addProduct',
               title: '添加商品'
+            },
+            {
+              index: 'category',
+              title: '分类管理'
             }
           ]
         },

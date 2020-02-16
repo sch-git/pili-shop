@@ -34,6 +34,11 @@ export default [
         meta: { title: '添加商品' }
       },
       {
+        path: '/category',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/Category.vue'),
+        meta: { title: '分类管理' }
+      },
+      {
         path: '/adminInfo',
         component: () => import(/* webpackChunkName: "table" */ '@/views/AdminInfo.vue'),
         meta: { title: '个人中心' }
