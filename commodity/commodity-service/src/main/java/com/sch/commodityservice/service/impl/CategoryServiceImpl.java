@@ -3,12 +3,10 @@ package com.sch.commodityservice.service.impl;
 import com.sch.commoditybase.AO.AddCategoryAO;
 import com.sch.commoditybase.AO.SearchCategoryAO;
 import com.sch.commoditybase.VO.CategoryVO;
-import com.sch.commoditybase.exception.CommodityException;
 import com.sch.commodityservice.dao.CategoryDao;
 import com.sch.commodityservice.dto.AddCategoryDTO;
 import com.sch.commodityservice.entity.Category;
 import com.sch.commodityservice.service.CategoryService;
-import com.sch.commonbasic.enums.CommodityEnum;
 import com.sch.commonbasic.util.DateUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,15 +37,8 @@ public class CategoryServiceImpl implements CategoryService {
     @Transactional
     @Override
     public void addCategory(AddCategoryAO addCategoryAO) {
-        long userId;
-        try {
-            userId = (long) session.getAttribute(session.getId());
-        } catch (NullPointerException npe) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATEID);
-        }
         AddCategoryDTO addCategoryDTO = new AddCategoryDTO();
         addCategoryDTO.setAO(addCategoryAO);
-        addCategoryDTO.setCreateId(userId);
         categoryDao.addCategory(addCategoryDTO);
     }
 

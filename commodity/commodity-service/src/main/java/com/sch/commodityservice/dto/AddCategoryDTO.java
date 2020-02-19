@@ -47,14 +47,12 @@ public class AddCategoryDTO {
     public void setAO(AddCategoryAO AO) {
         this.name = AO.getName();
         this.status = AO.getStatus();
+        this.createId = AO.getCreateId();
+        this.updateId = AO.getCreateId();
         this.createName = AO.getCreateName();
         this.updateName = AO.getCreateName();
         this.createTime = DateUtil.createTime();
         this.updateTime = DateUtil.createTime();
     }
 
-    public void setCreateId(Long createId) {
-        this.createId = createId;
-        this.updateId = createId;
-    }
 }

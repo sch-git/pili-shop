@@ -12,6 +12,10 @@ import java.io.Serializable;
 @Data
 public class AddCategoryAO implements Serializable {
     /**
+     * 创建人id
+     */
+    private Long createId;
+    /**
      * 分类名称
      */
     private String name;

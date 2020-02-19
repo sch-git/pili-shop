@@ -25,4 +25,6 @@ public interface UserBaseService {
      * @param updateUserStatusAO 修改条件
      */
     void updateUserStatus(UpdateUserStatusAO updateUserStatusAO);
+
+    void test();
 }

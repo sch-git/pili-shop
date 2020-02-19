@@ -1,11 +1,9 @@
 package com.sch.commodityservice.service.impl;
 
 import com.sch.commoditybase.AO.AddCommodityAO;
-import com.sch.commoditybase.exception.CommodityException;
 import com.sch.commodityservice.dao.CommodityDao;
 import com.sch.commodityservice.dto.AddCommodityDTO;
 import com.sch.commodityservice.service.CommodityService;
-import com.sch.commonbasic.enums.CommodityEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,16 +31,8 @@ public class CommodityServiceImpl implements CommodityService {
     @Transactional
     @Override
     public long addCommodity(AddCommodityAO addCommodityAO) {
-        long userId;
-        try {
-            userId = (long) session.getAttribute(session.getId());
-        } catch (NullPointerException npe) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATEID);
-        }
-
         AddCommodityDTO addCommodityDTO = new AddCommodityDTO();
         addCommodityDTO.setAO(addCommodityAO);
-        addCommodityDTO.setCreateId(userId);
         commodityDao.addCommodity(addCommodityDTO);
         // TODO 添加商品的同时往添加商品图片表添加图片
         return addCommodityDTO.getId();

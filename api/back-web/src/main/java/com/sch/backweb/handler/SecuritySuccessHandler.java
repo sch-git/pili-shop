@@ -8,6 +8,7 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.GrantedAuthority;
@@ -31,6 +32,9 @@ import java.util.Date;
 public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
     private static final Logger LOGGER = LoggerFactory.getLogger(SecuritySuccessHandler.class);
 
+    @Autowired
+    HttpSession session;
+
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
@@ -51,7 +55,6 @@ public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
         PrintWriter out = response.getWriter();
         User user = (User) authentication.getPrincipal();
         user.setToken(jwt);
-        HttpSession session = request.getSession();
         session.setAttribute(session.getId(), user.getId());
         String str = new ObjectMapper().writeValueAsString(new Result(ResultEnum.LOGIN_SUCCESS, user));
         out.write(str);

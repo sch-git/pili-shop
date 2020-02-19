@@ -48,6 +48,11 @@ public class AddCommodityAO implements Serializable {
     private String url;
 
     /**
+     * 创建人id
+     */
+    private Long createId;
+
+    /**
      * 创建人名称
      */
     private String createName;

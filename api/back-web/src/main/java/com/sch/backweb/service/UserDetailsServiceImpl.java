@@ -1,4 +1,4 @@
-package com.sch.backweb.security;
+package com.sch.backweb.service;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.sch.adminbase.VO.AdminVO;
@@ -22,7 +22,7 @@ import java.util.List;
  * @Date: 2020/1/21 20:01
  */
 @Service
-public class SecurityServiceImpl implements UserDetailsService {
+public class UserDetailsServiceImpl implements UserDetailsService {
 
     /**
      * RPC调用Admin服务

@@ -3,7 +3,10 @@ package com.sch.backweb.controller;
 import com.sch.commonbasic.VO.Result;
 import com.sch.commonbasic.enums.ResultEnum;
 import com.sch.commonbasic.util.QiNiuCloudUtil;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 /**
@@ -14,16 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-
-    @GetMapping("/test")
-    public String test() {
-        return "test";
-    }
-
-    @GetMapping("/user")
-    public String user() {
-        return "user";
-    }
 
     /**
      * 上传头像

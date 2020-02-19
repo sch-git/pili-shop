@@ -1,5 +1,9 @@
 server:
   port: 8090
+  servlet:
+    session:
+      cookie:
+        path: /
 spring:
   session:
     store-type: redis

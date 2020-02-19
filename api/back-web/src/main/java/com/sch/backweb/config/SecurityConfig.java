@@ -8,7 +8,7 @@ import com.sch.backweb.handler.SecurityAccessDeniedHandler;
 import com.sch.backweb.handler.SecurityAuthEntryPointHandler;
 import com.sch.backweb.handler.SecurityFailureHandler;
 import com.sch.backweb.handler.SecuritySuccessHandler;
-import com.sch.backweb.security.SecurityServiceImpl;
+import com.sch.backweb.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -31,7 +31,7 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 @Configuration
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
-    private SecurityServiceImpl securityService;
+    private UserDetailsServiceImpl userDetailsService;
     /**
      * 登录成功处理器
      */
@@ -102,7 +102,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         // 使用自定义UserDetailsService
-        auth.userDetailsService(securityService).passwordEncoder(new BCryptPasswordEncoder());
+        auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder());
     }
 
     @Override

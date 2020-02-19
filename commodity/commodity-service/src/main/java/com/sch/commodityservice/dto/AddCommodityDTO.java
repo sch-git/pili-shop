@@ -85,14 +85,11 @@ public class AddCommodityDTO {
         this.describe = AO.getDescribe();
         this.status = AO.getStatus();
         this.url = AO.getUrl().split(QiNiuCloudUtil.getDOMAIN())[1];
+        this.createId = AO.getCreateId();
+        this.updateId = AO.getCreateId();
         this.createName = AO.getCreateName();
         this.updateName = AO.getCreateName();
         this.createTime = DateUtil.createTime();
         this.updateTime = DateUtil.createTime();
-    }
-
-    public void setCreateId(Long createId) {
-        this.createId = createId;
-        this.updateId = createId;
     }
 }

@@ -8,6 +8,10 @@ mybatis:
     map-underscore-to-camel-case: true
 server:
   port: 8092
+  servlet:
+    session:
+      cookie:
+        path: /
 dubbo:
   application:
     name: user-service

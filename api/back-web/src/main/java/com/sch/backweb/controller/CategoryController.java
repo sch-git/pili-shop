@@ -8,7 +8,10 @@ import com.sch.commoditybase.AO.UpdateCategoryAO;
 import com.sch.commoditybase.VO.CategoryVO;
 import com.sch.commoditybase.base.CategoryBaseService;
 import com.sch.commonbasic.VO.Result;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpSession;
 
 /**
  * @Description: 分类接口
@@ -18,6 +21,9 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/category")
 public class CategoryController {
+
+    @Autowired
+    HttpSession session;
     /**
      * 分类服务
      */
@@ -43,6 +49,7 @@ public class CategoryController {
 
     @PostMapping("")
     public Result addCategory(@RequestBody AddCategoryAO addCategoryAO) {
+        addCategoryAO.setCreateId((Long) session.getAttribute(session.getId()));
         categoryBaseService.addCategory(addCategoryAO);
         return Result.success();
     }
