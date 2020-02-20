@@ -48,8 +48,8 @@
           <template slot-scope="scope">
             <el-image
               class="table-td-thumb"
-              :src="scope.row.avatar"
-              :preview-src-list="[scope.row.avatar]"
+              src="http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w"
+              :preview-src-list="['http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w']"
             ></el-image>
           </template>
         </el-table-column>
@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { findUserList, updateUserStatus } from '@/api/user/user'
+import { findUserList, updateUserStatus } from '@/api/user'
 
 export default {
   name: 'user',
