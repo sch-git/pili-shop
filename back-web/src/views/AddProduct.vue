@@ -28,8 +28,8 @@
           <el-form-item label="商品名称" prop="name">
             <el-input v-model="form.name"></el-input>
           </el-form-item>
-          <el-form-item label="商品分类" prop="category">
-            <el-select v-model.number="form.category" placeholder="请选择">
+          <el-form-item label="商品分类" prop="categoryId">
+            <el-select v-model.number="form.categoryId" placeholder="请选择">
               <el-option
                 v-for="item in categoryOptions"
                 :key="item.id"
@@ -111,13 +111,12 @@ export default {
     }
     return {
       form: {
-        category: '',
+        categoryId: '',
         name: '',
         price: '',
         describe: '',
         status: true,
         url: '',
-        createId: 0,
         createName: ''
       },
       // 商品分类选择器
@@ -141,7 +140,7 @@ export default {
         price: [
           { validator: checkPrice, trigger: 'blur' }
         ],
-        category: [
+        categoryId: [
           { validator: checkCategory, trigger: 'blur' }
         ],
         describe: [
@@ -159,7 +158,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           addCommodity(this.form).then(res => {
-
+            this.$refs[formName].resetFields()
           })
         } else {
           this.$message.error('表单错误!')

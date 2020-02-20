@@ -2,11 +2,11 @@ import axios from '@/api/index'
 
 /**
  * @description 查询用户列表
- * @param searchUserAO 查询条件
+ * @param params 查询条件
  * @returns 用户列表
  */
-export const findUserList = (searchUserAO) => {
-  return axios.post('/user/list', searchUserAO)
+export const findUserList = params => {
+  return axios.get('/user/list', { params })
 }
 /**
  * @description 修改用户状态

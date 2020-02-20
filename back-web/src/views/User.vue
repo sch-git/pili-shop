@@ -145,7 +145,7 @@ export default {
     }
   },
   created () {
-    this.getData()
+    this.handleSearch()
   },
   methods: {
     // 初始化数据

@@ -7,7 +7,6 @@ import store from '@/store'
  * @returns
  */
 export const addCommodity = params => {
-  params.createId = store.state.user.userInfo.id
   params.createName = store.state.user.userInfo.username
   return axios.post('/commodity', params)
 }
