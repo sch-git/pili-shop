@@ -2,7 +2,9 @@ package com.sch.commodityservice.service.impl;
 
 import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commodityservice.dao.CommodityDao;
+import com.sch.commodityservice.dao.CommodityImageDao;
 import com.sch.commodityservice.dto.AddCommodityDTO;
+import com.sch.commodityservice.dto.AddCommodityImageDTO;
 import com.sch.commodityservice.service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,8 @@ import org.springframework.transaction.annotation.Transactional;
 public class CommodityServiceImpl implements CommodityService {
     @Autowired
     CommodityDao commodityDao;
+    @Autowired
+    CommodityImageDao commodityImageDao;
 
     /**
      * 添加商品
@@ -30,7 +34,10 @@ public class CommodityServiceImpl implements CommodityService {
         AddCommodityDTO addCommodityDTO = new AddCommodityDTO();
         addCommodityDTO.setAO(addCommodityAO);
         commodityDao.addCommodity(addCommodityDTO);
-        // TODO 添加商品的同时往添加商品图片表添加图片
+        // 添加商品的同时往添加商品图片表添加图片
+        AddCommodityImageDTO addCommodityImageDTO = new AddCommodityImageDTO(addCommodityDTO.getId(),
+                addCommodityDTO.getUrl(), addCommodityDTO.getCreateId(), addCommodityDTO.getCreateName());
+        commodityImageDao.addCommodityImage(addCommodityImageDTO);
         return addCommodityDTO.getId();
     }
 }

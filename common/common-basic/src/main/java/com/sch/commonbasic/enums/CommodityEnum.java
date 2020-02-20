@@ -11,6 +11,7 @@ public enum CommodityEnum implements CommonEnum {
      */
     EXCEPTION_NULL("请求数据为空"),
     EXCEPTION_NULL_CREATEID("创建人CREATEID为空"),
+    EXCEPTION_NULL_COMMODITYID("商品ID为空"),
     EXCEPTION_NULL_NAME("商品名称NAME为空"),
     EXCEPTION_NULL_CATEGORYNAME("分类名称NAME为空"),
     EXCEPTION_NULL_CATEGORYID("分类ID为空"),

@@ -81,7 +81,7 @@ public class CategoryBaseServiceImpl implements CategoryBaseService {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CATEGORYNAME);
         }
         if (updateCategoryAO.getUpdateName().isEmpty() || updateCategoryAO.getUpdateName() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATENAME);
+            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_UPDATENAME);
         }
         if (updateCategoryAO.getStatus() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_STATUS);

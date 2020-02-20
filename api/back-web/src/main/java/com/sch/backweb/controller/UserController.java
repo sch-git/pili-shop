@@ -29,9 +29,9 @@ public class UserController {
      *
      * @param searchUserAO 查询条件
      */
-    @PostMapping("/list")
-    public Result findUserList(@RequestBody SearchUserAO searchUserAO) {
-            PageInfo<UserVO> pageInfo = userBaseService.findUserList(searchUserAO);
+    @GetMapping("/list")
+    public Result findUserList(@ModelAttribute SearchUserAO searchUserAO) {
+        PageInfo<UserVO> pageInfo = userBaseService.findUserList(searchUserAO);
         return Result.success(pageInfo);
     }
 

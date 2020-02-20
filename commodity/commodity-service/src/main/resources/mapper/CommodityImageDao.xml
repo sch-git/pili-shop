@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sch.commodityservice.dao.CommodityImageDao">
+    <resultMap id="BaseResultMap" type="com.sch.commodityservice.entity.CommodityImage">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="commodity_id" jdbcType="BIGINT" property="commodityId"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="create_id" jdbcType="BIGINT" property="createId"/>
+        <result column="create_name" jdbcType="VARCHAR" property="createName"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <!--新增商品图片-->
+    <insert id="addCommodityImage" parameterType="com.sch.commodityservice.dto.AddCommodityImageDTO">
+    insert into t_commodity_image
+    (commodity_id, url,
+      create_id, create_name, create_time)
+    values (#{commodityId,jdbcType=BIGINT}, #{url,jdbcType=VARCHAR},
+      #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+</mapper>
