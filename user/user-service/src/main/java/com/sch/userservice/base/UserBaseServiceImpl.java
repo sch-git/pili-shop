@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 /**
@@ -63,13 +62,5 @@ public class UserBaseServiceImpl implements UserBaseService {
             throw new UserException(UserEnum.EXCEPTION_NOT_PARAM);
         }
         userService.updateUserStatus(updateUserStatusAO);
-    }
-
-    @Autowired
-    HttpSession session;
-
-    @Override
-    public void test() {
-        System.out.println(session.getAttribute(session.getId()));
     }
 }

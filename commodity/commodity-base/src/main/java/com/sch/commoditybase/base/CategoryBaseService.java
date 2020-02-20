@@ -3,6 +3,7 @@ package com.sch.commoditybase.base;
 import com.github.pagehelper.PageInfo;
 import com.sch.commoditybase.AO.AddCategoryAO;
 import com.sch.commoditybase.AO.SearchCategoryAO;
+import com.sch.commoditybase.AO.UpdateCategoryAO;
 import com.sch.commoditybase.VO.CategoryVO;
 
 /**
@@ -25,4 +26,11 @@ public interface CategoryBaseService {
      * @return 分类列表
      */
     PageInfo<CategoryVO> findCategoryList(SearchCategoryAO searchCategoryAO);
+
+    /**
+     * 修改数据
+     *
+     * @param updateCategoryAO 修改分类对象
+     */
+    void updateCategory(UpdateCategoryAO updateCategoryAO);
 }

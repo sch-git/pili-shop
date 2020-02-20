@@ -12,7 +12,7 @@ import java.io.Serializable;
 @Data
 public class UpdateCategoryAO implements Serializable {
     /**
-     * id
+     * 分类id
      */
     private Long id;
     /**
@@ -24,4 +24,12 @@ public class UpdateCategoryAO implements Serializable {
      * 分类名
      */
     private String name;
+    /**
+     * 修改人id
+     */
+    private Long updateId;
+    /**
+     * 修改人名称
+     */
+    private String updateName;
 }

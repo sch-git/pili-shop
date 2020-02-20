@@ -8,8 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
-
 /**
  * @Description: 商品服务实现
  * @Author: chenghao.su
@@ -19,8 +17,6 @@ import javax.servlet.http.HttpSession;
 public class CommodityServiceImpl implements CommodityService {
     @Autowired
     CommodityDao commodityDao;
-    @Autowired
-    HttpSession session;
 
     /**
      * 添加商品

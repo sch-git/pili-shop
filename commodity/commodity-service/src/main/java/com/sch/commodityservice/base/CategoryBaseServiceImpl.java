@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sch.commoditybase.AO.AddCategoryAO;
 import com.sch.commoditybase.AO.SearchCategoryAO;
+import com.sch.commoditybase.AO.UpdateCategoryAO;
 import com.sch.commoditybase.VO.CategoryVO;
 import com.sch.commoditybase.base.CategoryBaseService;
 import com.sch.commoditybase.exception.CommodityException;
@@ -61,5 +62,30 @@ public class CategoryBaseServiceImpl implements CategoryBaseService {
         pageInfo.setTotal(page.getTotal());
         pageInfo.setPages(page.getPages());
         return pageInfo;
+    }
+
+    /**
+     * 修改数据
+     *
+     * @param updateCategoryAO 修改分类对象
+     */
+    @Override
+    public void updateCategory(UpdateCategoryAO updateCategoryAO) {
+        if (updateCategoryAO == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_NULL);
+        }
+        if (updateCategoryAO.getId() == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CATEGORYID);
+        }
+        if (updateCategoryAO.getName().isEmpty() || updateCategoryAO.getName() == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CATEGORYNAME);
+        }
+        if (updateCategoryAO.getUpdateName().isEmpty() || updateCategoryAO.getUpdateName() == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATENAME);
+        }
+        if (updateCategoryAO.getStatus() == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_STATUS);
+        }
+        categoryService.updateCategory(updateCategoryAO);
     }
 }

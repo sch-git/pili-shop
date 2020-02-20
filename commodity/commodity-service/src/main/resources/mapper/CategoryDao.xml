@@ -39,23 +39,14 @@
     </insert>
 
     <!--通过主键修改数据-->
-    <update id="update">
-        update commodity.t_category
+    <update id="updateCategory" parameterType="com.sch.commodityservice.dto.UpdateCategoryDTO">
+        update t_category
         <set>
             <if test="name != null and name != ''">
                 name = #{name},
             </if>
             <if test="status != null">
                 status = #{status},
-            </if>
-            <if test="createId != null">
-                create_id = #{createId},
-            </if>
-            <if test="createName != null and createName != ''">
-                create_name = #{createName},
-            </if>
-            <if test="createTime != null">
-                create_time = #{createTime},
             </if>
             <if test="updateId != null">
                 update_id = #{updateId},

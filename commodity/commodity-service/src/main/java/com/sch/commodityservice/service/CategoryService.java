@@ -2,6 +2,7 @@ package com.sch.commodityservice.service;
 
 import com.sch.commoditybase.AO.AddCategoryAO;
 import com.sch.commoditybase.AO.SearchCategoryAO;
+import com.sch.commoditybase.AO.UpdateCategoryAO;
 import com.sch.commoditybase.VO.CategoryVO;
 
 import java.util.List;
@@ -27,4 +28,11 @@ public interface CategoryService {
      * @return 分类集合
      */
     List<CategoryVO> findAll(SearchCategoryAO searchCategoryAO);
+
+    /**
+     * 修改数据
+     *
+     * @param updateCategoryAO 实例对象
+     */
+    void updateCategory(UpdateCategoryAO updateCategoryAO);
 }

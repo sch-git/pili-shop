@@ -2,9 +2,11 @@ package com.sch.commodityservice.service.impl;
 
 import com.sch.commoditybase.AO.AddCategoryAO;
 import com.sch.commoditybase.AO.SearchCategoryAO;
+import com.sch.commoditybase.AO.UpdateCategoryAO;
 import com.sch.commoditybase.VO.CategoryVO;
 import com.sch.commodityservice.dao.CategoryDao;
 import com.sch.commodityservice.dto.AddCategoryDTO;
+import com.sch.commodityservice.dto.UpdateCategoryDTO;
 import com.sch.commodityservice.entity.Category;
 import com.sch.commodityservice.service.CategoryService;
 import com.sch.commonbasic.util.DateUtil;
@@ -13,7 +15,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import javax.servlet.http.HttpSession;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,8 +27,6 @@ import java.util.List;
 public class CategoryServiceImpl implements CategoryService {
     @Autowired
     CategoryDao categoryDao;
-    @Autowired
-    HttpSession session;
 
     /**
      * 新增分类
@@ -63,5 +62,18 @@ public class CategoryServiceImpl implements CategoryService {
             categoryVOS.add(categoryVO);
         }
         return categoryVOS;
+    }
+
+    /**
+     * 修改数据
+     *
+     * @param updateCategoryAO 实例对象
+     */
+    @Transactional
+    @Override
+    public void updateCategory(UpdateCategoryAO updateCategoryAO) {
+        UpdateCategoryDTO updateCategoryDTO = new UpdateCategoryDTO();
+        updateCategoryDTO.setAO(updateCategoryAO);
+        categoryDao.updateCategory(updateCategoryDTO);
     }
 }

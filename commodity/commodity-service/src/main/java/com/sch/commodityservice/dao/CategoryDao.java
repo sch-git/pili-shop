@@ -2,6 +2,7 @@ package com.sch.commodityservice.dao;
 
 import com.sch.commoditybase.AO.SearchCategoryAO;
 import com.sch.commodityservice.dto.AddCategoryDTO;
+import com.sch.commodityservice.dto.UpdateCategoryDTO;
 import com.sch.commodityservice.entity.Category;
 import org.springframework.stereotype.Repository;
 
@@ -31,11 +32,11 @@ public interface CategoryDao {
     void addCategory(AddCategoryDTO category);
 
     /**
-     * 修改数据 TODO
+     * 修改数据
      *
-     * @param category 实例对象
+     * @param updateCategoryDTO 实例对象
      * @return 影响行数
      */
-    int update(Category category);
+    int updateCategory(UpdateCategoryDTO updateCategoryDTO);
 
 }
