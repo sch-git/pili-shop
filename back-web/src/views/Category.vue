@@ -19,7 +19,7 @@
           </el-option>
         </el-select>
         <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
-        <el-button type="primary" icon="el-icon-search" @click="handleAdd">添加分类</el-button>
+        <el-button type="primary" icon="el-icon-search" @click="handleAdd()">添加分类</el-button>
       </div>
       <el-table
         :data="tableData"
@@ -172,6 +172,9 @@ export default {
     },
     // 触发添加按钮
     handleAdd () {
+      this.form.name = ''
+      this.form.status = ''
+      this.form.createName = this.$store.state.user.userInfo.username
       this.dialog = true
     },
     // 分页导航
@@ -185,12 +188,15 @@ export default {
       let updateCategoryAO = {
         id: row.id,
         name: row.name,
-        status: row.status
+        status: row.status,
+        updateName: this.$store.state.user.userInfo.username
       }
-      console.log(updateCategoryAO)
-      updateCategory(updateCategoryAO).then(res => {
-        this.getData()
-      })
+      if (updateCategoryAO.name === '') {
+        this.$message.error('分类名称不能为空')
+      } else {
+        updateCategory(updateCategoryAO)
+      }
+      this.getData()
     },
     // 双击修改分类名
     dbclick (row, event, column) {
@@ -210,6 +216,7 @@ export default {
         if (valid) {
           addCategory(this.form).then(res => {
             this.getData()
+            this.dialog = false
           })
         } else {
           this.$message.error('表单错误!')

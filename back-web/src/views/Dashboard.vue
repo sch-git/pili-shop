@@ -133,7 +133,7 @@ export default {
   name: 'dashboard',
   data () {
     return {
-      name: localStorage.getItem('ms_username'),
+      name: 'root',
       todoList: [
         {
           title: '今天要修复100个bug',
@@ -242,7 +242,7 @@ export default {
   },
   computed: {
     role () {
-      return this.name === 'admin' ? '超级管理员' : '管理员'
+      return this.name === 'root' ? '超级管理员' : '管理员'
     }
   },
   // created() {
@@ -336,7 +336,7 @@ export default {
   .user-info-cont {
     padding-left: 50px;
     flex: 1;
-    font-size: 14px;
+    font-size: 16px;
     color: #999;
   }
 
@@ -395,6 +395,21 @@ export default {
 </style>
 <style>
   .el-upload--text {
-    border-radius: 10%;
+    width: 120px;
+    height: 120px;
+    padding: 5px;
+  }
+
+  .avatar-uploader .el-upload:hover {
+    border-color: #409EFF;
+  }
+
+  .avatar-uploader-icon {
+    font-size: 35px;
+    color: #8c939d;
+    width: 110px;
+    height: 110px;
+    line-height: 110px;
+    text-align: center;
   }
 </style>

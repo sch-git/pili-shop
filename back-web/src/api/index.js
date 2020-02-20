@@ -13,6 +13,7 @@ axios.interceptors.response.use(res => {
   if (res.data && res.data.message !== '') {
     Message.success(res.data.message)
   }
+  console.log('response', res)
   return res.data.data
 }, error => {
   if (error.response.status === 504 || error.response.status === 404) {
@@ -38,6 +39,7 @@ axios.interceptors.request.use(req => {
   if (req.url !== '/login') {
     req.headers['Authorization'] = store.state.user.userInfo.token
   }
+  console.log('request', req)
   return req
 }, error => {
   console.log('interceptors-error', error)
