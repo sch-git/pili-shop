@@ -1,6 +1,7 @@
 package com.sch.commodityservice;
 
 import com.sch.commoditybase.AO.AddCommodityAO;
+import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commoditybase.base.CommodityBaseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,19 @@ public class CommodityServiceTest {
         addCommodityAO.setDescribe("测试描述001");
         addCommodityAO.setPrice(99.00f);
         System.out.println(commodityBaseService.addCommodity(addCommodityAO));
+    }
 
+    /**
+     * 查询商品
+     */
+    @Test
+    public void findAll() {
+        SearchCommodityAO searchCommodityAO = new SearchCommodityAO();
+        searchCommodityAO.setCategoryId(null);
+        searchCommodityAO.setName("");
+        searchCommodityAO.setPageNum(1);
+        searchCommodityAO.setPageSize(3);
+        searchCommodityAO.setStatus(null);
+        System.out.println(commodityBaseService.findCommodityList(searchCommodityAO));
     }
 }

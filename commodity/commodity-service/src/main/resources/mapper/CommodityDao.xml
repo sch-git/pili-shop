@@ -28,5 +28,22 @@
   #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
   #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>
+    <!--通过实体作为筛选条件查询-->
+    <select id="findAll" parameterType="com.sch.commoditybase.AO.SearchCommodityAO" resultMap="BaseResultMap">
+        select id, category_id, `name`, price, `describe`, status, url,
+        create_name, create_time, update_name, update_time
+        from t_commodity
+        <where>
+            <if test="name != null and name != ''">
+                and `name` like concat('%',#{name},'%')
+            </if>
+            <if test="categoryId != null">
+                and category_id = #{categoryId}
+            </if>
+            <if test="status != null">
+                and status = #{status}
+            </if>
+        </where>
+    </select>
 
 </mapper>

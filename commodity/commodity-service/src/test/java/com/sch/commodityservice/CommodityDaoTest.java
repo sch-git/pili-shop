@@ -1,6 +1,7 @@
 package com.sch.commodityservice;
 
 import com.sch.commoditybase.AO.AddCommodityAO;
+import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commodityservice.dao.CommodityDao;
 import com.sch.commodityservice.dto.AddCommodityDTO;
 import org.junit.jupiter.api.Test;
@@ -35,5 +36,19 @@ public class CommodityDaoTest {
         addCommodityDTO.setCreateId(1L);
         commodityDao.addCommodity(addCommodityDTO);
         System.out.println(addCommodityDTO.getId());
+    }
+
+    /**
+     * 查询商品
+     */
+    @Test
+    public void findAll() {
+        SearchCommodityAO searchCommodityAO = new SearchCommodityAO();
+        searchCommodityAO.setCategoryId(null);
+        searchCommodityAO.setName("");
+        searchCommodityAO.setPageNum(1);
+        searchCommodityAO.setPageSize(3);
+        searchCommodityAO.setStatus(true);
+        System.out.println(commodityDao.findAll(searchCommodityAO));
     }
 }

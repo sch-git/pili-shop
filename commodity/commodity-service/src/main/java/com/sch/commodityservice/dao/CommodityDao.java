@@ -1,7 +1,11 @@
 package com.sch.commodityservice.dao;
 
+import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commodityservice.dto.AddCommodityDTO;
+import com.sch.commodityservice.entity.Commodity;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @Description: 商品
@@ -16,4 +20,12 @@ public interface CommodityDao {
      * @param addCommodityDTO 商品信息
      */
     void addCommodity(AddCommodityDTO addCommodityDTO);
+
+    /**
+     * 查询商品
+     *
+     * @param searchCommodityAO 查询条件
+     * @return 商品列表
+     */
+    List<Commodity> findAll(SearchCommodityAO searchCommodityAO);
 }

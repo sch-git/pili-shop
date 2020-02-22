@@ -1,12 +1,19 @@
 package com.sch.commodityservice.base;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.sch.commoditybase.AO.AddCommodityAO;
+import com.sch.commoditybase.AO.SearchCommodityAO;
+import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
 import com.sch.commoditybase.exception.CommodityException;
 import com.sch.commodityservice.service.CommodityService;
 import com.sch.commonbasic.enums.CommodityEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * @Description: 商品模块外部接口实现
@@ -51,5 +58,21 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_URL);
         }
         return commodityService.addCommodity(addCommodityAO);
+    }
+
+    /**
+     * 查询商品
+     *
+     * @param searchCommodityAO 查询条件
+     * @return 商品列表
+     */
+    @Override
+    public PageInfo<CommodityVO> findCommodityList(SearchCommodityAO searchCommodityAO) {
+        Page page = PageHelper.startPage(searchCommodityAO.getPageNum(), searchCommodityAO.getPageSize());
+        List<CommodityVO> commodityVOS = commodityService.findAll(searchCommodityAO);
+        PageInfo<CommodityVO> pageInfo = new PageInfo<>(commodityVOS);
+        pageInfo.setPages(page.getPages());
+        pageInfo.setTotal(page.getTotal());
+        return pageInfo;
     }
 }
