@@ -2,6 +2,7 @@ package com.sch.commodityservice.service;
 
 import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
+import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
 import com.sch.commoditybase.VO.CommodityVO;
 
 import java.util.List;
@@ -27,4 +28,11 @@ public interface CommodityService {
      * @return 商品列表
      */
     List<CommodityVO> findAll(SearchCommodityAO searchCommodityAO);
+
+    /**
+     * 修改商品状态
+     *
+     * @param updateCommodityStatusAO 修改条件
+     */
+    void updateCommodityStatus(UpdateCommodityStatusAO updateCommodityStatusAO);
 }

@@ -36,10 +36,10 @@ public class CategoryBaseServiceImpl implements CategoryBaseService {
         if (addCategoryAO == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL);
         }
-        if (addCategoryAO.getName().isEmpty() || addCategoryAO.getName() == null) {
+        if (addCategoryAO.getName() == null || addCategoryAO.getName().isEmpty()) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CATEGORYNAME);
         }
-        if (addCategoryAO.getCreateName().isEmpty() || addCategoryAO.getCreateName() == null) {
+        if (addCategoryAO.getCreateName() == null || addCategoryAO.getCreateName().isEmpty()) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATENAME);
         }
         if (addCategoryAO.getStatus() == null) {
@@ -77,10 +77,10 @@ public class CategoryBaseServiceImpl implements CategoryBaseService {
         if (updateCategoryAO.getId() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CATEGORYID);
         }
-        if (updateCategoryAO.getName().isEmpty() || updateCategoryAO.getName() == null) {
+        if (updateCategoryAO.getName() == null || updateCategoryAO.getName().isEmpty()) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CATEGORYNAME);
         }
-        if (updateCategoryAO.getUpdateName().isEmpty() || updateCategoryAO.getUpdateName() == null) {
+        if (updateCategoryAO.getUpdateName() == null || updateCategoryAO.getUpdateName().isEmpty()) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_UPDATENAME);
         }
         if (updateCategoryAO.getStatus() == null) {

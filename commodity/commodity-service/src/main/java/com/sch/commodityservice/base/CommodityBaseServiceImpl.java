@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
+import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
 import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
 import com.sch.commoditybase.exception.CommodityException;
@@ -39,13 +40,13 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
         if (addCommodityAO.getCategoryId() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CATEGORYID);
         }
-        if (addCommodityAO.getName().isEmpty() || addCommodityAO.getName() == null) {
+        if (addCommodityAO.getName() == null || addCommodityAO.getName().isEmpty()) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_NAME);
         }
-        if (addCommodityAO.getCreateName().isEmpty() || addCommodityAO.getCreateName() == null) {
+        if (addCommodityAO.getCreateName() == null || addCommodityAO.getCreateName().isEmpty()) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATENAME);
         }
-        if (addCommodityAO.getDescribe().isEmpty() || addCommodityAO.getDescribe() == null) {
+        if (addCommodityAO.getDescribe() == null || addCommodityAO.getDescribe().isEmpty()) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_DESCRIBE);
         }
         if (addCommodityAO.getPrice() == null) {
@@ -54,7 +55,7 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
         if (addCommodityAO.getStatus() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_STATUS);
         }
-        if (addCommodityAO.getUrl().isEmpty() || addCommodityAO.getUrl() == null) {
+        if (addCommodityAO.getUrl() == null || addCommodityAO.getUrl().isEmpty()) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_URL);
         }
         return commodityService.addCommodity(addCommodityAO);
@@ -74,5 +75,24 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
         pageInfo.setPages(page.getPages());
         pageInfo.setTotal(page.getTotal());
         return pageInfo;
+    }
+
+    /**
+     * 修改商品状态
+     *
+     * @param updateCommodityStatusAO 修改条件
+     */
+    @Override
+    public void updateCommodityStatus(UpdateCommodityStatusAO updateCommodityStatusAO) {
+        if (updateCommodityStatusAO.getId() == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
+        }
+        if (updateCommodityStatusAO.getStatus() == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
+        }
+        if (updateCommodityStatusAO.getUpdateName() == null || updateCommodityStatusAO.getUpdateName().isEmpty()) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
+        }
+        commodityService.updateCommodityStatus(updateCommodityStatusAO);
     }
 }

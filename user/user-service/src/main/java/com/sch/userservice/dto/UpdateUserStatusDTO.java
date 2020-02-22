@@ -1,5 +1,6 @@
 package com.sch.userservice.dto;
 
+import com.sch.commonbasic.util.DateUtil;
 import com.sch.userbase.AO.UpdateUserStatusAO;
 import lombok.Data;
 
@@ -18,7 +19,7 @@ public class UpdateUserStatusDTO {
     /**
      * 状态
      */
-    private Integer status;
+    private Boolean status;
 
     /**
      * 修改时间
@@ -27,10 +28,7 @@ public class UpdateUserStatusDTO {
 
     public void setAO(UpdateUserStatusAO ao) {
         this.id = ao.getId();
-        if (ao.getStatus()) {
-            this.status = 1;
-        } else {
-            this.status = 0;
-        }
+        this.status = ao.getStatus();
+        this.updateTime = DateUtil.createTime();
     }
 }

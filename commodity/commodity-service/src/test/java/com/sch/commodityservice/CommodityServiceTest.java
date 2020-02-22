@@ -2,6 +2,7 @@ package com.sch.commodityservice;
 
 import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
+import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
 import com.sch.commoditybase.base.CommodityBaseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +46,15 @@ public class CommodityServiceTest {
         searchCommodityAO.setPageSize(3);
         searchCommodityAO.setStatus(null);
         System.out.println(commodityBaseService.findCommodityList(searchCommodityAO));
+    }
+
+    @Test
+    public void updateCommodityStatus() {
+        UpdateCommodityStatusAO ao = new UpdateCommodityStatusAO();
+        ao.setId(1L);
+        ao.setUpdateId(1L);
+        ao.setStatus(false);
+        ao.setUpdateName(null);
+        commodityBaseService.updateCommodityStatus(ao);
     }
 }

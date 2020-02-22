@@ -35,7 +35,7 @@ public class UserDaoTest {
     void updateUserStatus() {
         UpdateUserStatusDTO updateUserStatusDTO = new UpdateUserStatusDTO();
         updateUserStatusDTO.setId(2L);
-        updateUserStatusDTO.setStatus(0);
+        updateUserStatusDTO.setStatus(false);
         userDao.updateUserStatus(updateUserStatusDTO);
     }
 }

@@ -45,5 +45,10 @@
             </if>
         </where>
     </select>
-
+    <!--修改商品状态-->
+    <update id="updateCommodityStatus" parameterType="com.sch.commodityservice.dto.UpdateCommodityStatusDTO">
+        update t_commodity
+        set status=#{status},update_id=#{updateId},update_name=#{updateName},update_time=#{updateTime}
+        where id=#{id}
+    </update>
 </mapper>

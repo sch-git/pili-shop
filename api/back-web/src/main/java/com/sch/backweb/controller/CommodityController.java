@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
+import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
 import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
 import com.sch.commonbasic.VO.Result;
@@ -51,8 +52,16 @@ public class CommodityController {
         return Result.success(pageInfo);
     }
 
+    /**
+     * 修改商品状态
+     *
+     * @param updateCommodityStatusAO 修改条件
+     * @return
+     */
     @PutMapping("/status")
-    public Result updateCommodityStatus() {
-        return Result.success();
+    public Result updateCommodityStatus(@RequestBody UpdateCommodityStatusAO updateCommodityStatusAO) {
+        updateCommodityStatusAO.setUpdateId((Long) session.getAttribute(session.getId()));
+        commodityBaseService.updateCommodityStatus(updateCommodityStatusAO);
+        return new Result(ResultEnum.UPDATE_SUCCESS);
     }
 }

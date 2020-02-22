@@ -34,10 +34,10 @@ public class CommodityImageBaseServiceImpl implements CommodityImageBaseService 
         if (addCommodityImageAO.getCreateId() == null) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATEID);
         }
-        if (addCommodityImageAO.getCreateName().isEmpty() || addCommodityImageAO.getCreateName() == null) {
+        if (addCommodityImageAO.getCreateName() == null || addCommodityImageAO.getCreateName().isEmpty()) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATENAME);
         }
-        if (addCommodityImageAO.getUrl().isEmpty() || addCommodityImageAO.getUrl() == null) {
+        if (addCommodityImageAO.getUrl() == null || addCommodityImageAO.getUrl().isEmpty()) {
             throw new CommodityException(CommodityEnum.EXCEPTION_NULL_URL);
         }
         commodityImageService.addCommodityImage(addCommodityImageAO);

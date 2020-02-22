@@ -4,6 +4,8 @@ import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commodityservice.dao.CommodityDao;
 import com.sch.commodityservice.dto.AddCommodityDTO;
+import com.sch.commodityservice.dto.UpdateCommodityStatusDTO;
+import com.sch.commonbasic.util.DateUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -50,5 +52,19 @@ public class CommodityDaoTest {
         searchCommodityAO.setPageSize(3);
         searchCommodityAO.setStatus(true);
         System.out.println(commodityDao.findAll(searchCommodityAO));
+    }
+
+    /**
+     * 修改商品状态
+     */
+    @Test
+    public void updateCommodityStatus() {
+        UpdateCommodityStatusDTO updateCommodityStatusDTO = new UpdateCommodityStatusDTO();
+        updateCommodityStatusDTO.setId(1L);
+        updateCommodityStatusDTO.setStatus(true);
+        updateCommodityStatusDTO.setUpdateId(1L);
+        updateCommodityStatusDTO.setUpdateName("root");
+        updateCommodityStatusDTO.setUpdateTime(DateUtil.createTime());
+        commodityDao.updateCommodityStatus(updateCommodityStatusDTO);
     }
 }

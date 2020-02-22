@@ -62,7 +62,6 @@ public class UserServiceImpl implements UserService {
     public void updateUserStatus(UpdateUserStatusAO updateUserStatusAO) {
         UpdateUserStatusDTO updateUserStatusDTO = new UpdateUserStatusDTO();
         updateUserStatusDTO.setAO(updateUserStatusAO);
-        updateUserStatusDTO.setUpdateTime(DateUtil.createTime());
         userDao.updateUserStatus(updateUserStatusDTO);
     }
 }
