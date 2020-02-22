@@ -24,5 +24,6 @@ export const findCommodityList = params => {
  * @returns
  */
 export const updateCommodityStatus = params => {
-  return axios.put('/commodity/list', params)
+  params.updateName = store.state.user.userInfo.username
+  return axios.put('/commodity/status', params)
 }

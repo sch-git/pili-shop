@@ -57,7 +57,7 @@
         <el-table-column label="是否上架" align="center">
           <template slot-scope="scope">
             <el-switch
-              @click="handleStatusChange(scope.row)"
+              @change="handleStatusChange(scope.row)"
               style="display: block"
               v-model="scope.row.status"
               active-color="#13ce66"
@@ -196,7 +196,7 @@ export default {
     handleStatusChange (row) {
       let updateCommodityStatusAO = {
         id: row.id,
-        status: !row.status
+        status: row.status
       }
       updateCommodityStatus(updateCommodityStatusAO).then(res => {
         this.handleSearch()
