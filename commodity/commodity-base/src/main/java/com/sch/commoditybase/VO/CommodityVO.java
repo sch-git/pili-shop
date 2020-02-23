@@ -22,6 +22,11 @@ public class CommodityVO implements Serializable {
     private Long categoryId;
 
     /**
+     * 前端分类名称
+     */
+    private String categoryName;
+
+    /**
      * 商品名称
      */
     private String name;

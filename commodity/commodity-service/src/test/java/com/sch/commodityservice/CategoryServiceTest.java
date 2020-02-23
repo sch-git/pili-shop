@@ -35,10 +35,8 @@ public class CategoryServiceTest {
     @Test
     public void findAll() {
         SearchCategoryAO searchCategoryAO = new SearchCategoryAO();
-        searchCategoryAO.setName("");
-        searchCategoryAO.setStatus(true);
         searchCategoryAO.setPageNum(1);
-        searchCategoryAO.setPageSize(10);
+        searchCategoryAO.setPageSize(0);
         System.out.println(service.findCategoryList(searchCategoryAO));
     }
 
