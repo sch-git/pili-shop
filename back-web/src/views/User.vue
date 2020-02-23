@@ -30,6 +30,7 @@
         <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
       </div>
       <el-table
+        v-loading="loading_table"
         :data="tableData"
         border
         class="table"
@@ -141,7 +142,9 @@ export default {
           value: 1,
           label: '禁用'
         }
-      ]
+      ],
+      // 其他
+      loading_table: true
     }
   },
   created () {
@@ -157,6 +160,7 @@ export default {
       findUserList(this.searchUserAO).then(res => {
         this.tableData = res.list
         this.pageInfo.total = res.total
+        this.loading_table = false
       })
     },
     // 多选操作

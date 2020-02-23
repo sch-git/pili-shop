@@ -29,6 +29,7 @@
         <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
       </div>
       <el-table
+        v-loading="loading_table || loading_category"
         :data="tableData"
         border
         class="table"
@@ -234,35 +235,35 @@ export default {
         ]
       },
       // 其他
-      categoryKey: {}
+      loading_table: true,
+      loading_category: true
     }
   },
   created () {
     this.handleSearch()
+    this.handleInitCategory()
+  },
+  updated () {
+    this.getCategoryName()
   },
   methods: {
     // 初始化数据
     getData () {
       this.handleSearch()
     },
+    //
+    handleInitCategory () {
+      findCategoryList(this.searchCategoryAO).then(res => {
+        this.categoryOptions = res.list
+        this.loading_category = false
+      })
+    },
     // 触发搜索按钮
     handleSearch () {
       findCommodityList(this.searchCommodityAO).then(res => {
         this.tableData = res.list
         this.pageInfo.total = res.total
-      }).then(res => {
-        findCategoryList(this.searchCategoryAO).then(res => {
-          this.categoryOptions = res.list
-        }).finally(res => {
-          const temp = this
-          for (let i = 0; i < this.tableData.length; i++) {
-            this.categoryOptions.find(function (item) {
-              if (temp.tableData[i].categoryId === item.id) {
-                temp.tableData[i].categoryName = item.name
-              }
-            })
-          }
-        })
+        this.loading_table = false
       })
     },
     // 多选操作
@@ -311,6 +312,16 @@ export default {
           return false
         }
       })
+    },
+    getCategoryName () {
+      const temp = this
+      for (let i = 0; i < this.tableData.length; i++) {
+        this.categoryOptions.find(function (item) {
+          if (temp.tableData[i].categoryId === item.id) {
+            temp.tableData[i].categoryName = item.name
+          }
+        })
+      }
     }
   }
 }

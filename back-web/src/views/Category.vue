@@ -22,6 +22,7 @@
         <el-button type="primary" icon="el-icon-search" @click="handleAdd()">添加分类</el-button>
       </div>
       <el-table
+        v-loading="loading_table"
         :data="tableData"
         border
         class="table"
@@ -148,11 +149,13 @@ export default {
         name: [
           { validator: checkName, trigger: 'blur' }
         ]
-      }
+      },
+      // 其他
+      loading_table: true
     }
   },
   created () {
-    this.getData()
+    this.handleSearch()
   },
   methods: {
     // 初始化数据
@@ -168,6 +171,7 @@ export default {
       findCategoryList(this.searchAO).then(res => {
         this.tableData = res.list
         this.pageInfo.total = res.total
+        this.loading_table = false
       })
     },
     // 触发添加按钮
@@ -194,9 +198,10 @@ export default {
       if (updateCategoryAO.name === '') {
         this.$message.error('分类名称不能为空')
       } else {
-        updateCategory(updateCategoryAO)
+        updateCategory(updateCategoryAO).then(res => {
+          this.handleSearch()
+        })
       }
-      this.getData()
     },
     // 双击修改分类名
     dbclick (row, event, column) {
