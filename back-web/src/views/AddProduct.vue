@@ -63,52 +63,11 @@
 <script>
 import { beforeUpload, uploadSuccess } from '@/api/common'
 import { addCommodity } from '@/api/commodity'
+import { checkName, checkPrice, checkCategory, checkDescribe, checkUrl } from '@/lib/tools'
 
 export default {
   name: 'addProduct',
   data () {
-    let checkName = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('商品名称不能为空'))
-      }
-      // TODO 判断商品名称是否已存在
-      callback()
-    }
-    let checkPrice = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('商品售价不能为空'))
-      }
-      setTimeout(() => {
-        if (!Number.isInteger(value)) {
-          callback(new Error('请输入数字值'))
-        } else {
-          if (value <= 0) {
-            callback(new Error('售价必须大于0'))
-          } else {
-            callback()
-          }
-        }
-      }, 1000)
-    }
-    let checkCategory = (rule, value, callback) => {
-      console.log(value)
-      if (!value) {
-        return callback(new Error('商品分类不能为空'))
-      }
-      callback()
-    }
-    let checkDescribe = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('商品描述不能为空'))
-      }
-      callback()
-    }
-    let checkUrl = (rule, value, callback) => {
-      if (!value) {
-        return callback(new Error('请上传商品图片'))
-      }
-      callback()
-    }
     return {
       form: {
         categoryId: '',
