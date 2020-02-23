@@ -27,3 +27,12 @@ export const updateCommodityStatus = params => {
   params.updateName = store.state.user.userInfo.username
   return axios.put('/commodity/status', params)
 }
+/**
+ * 修改商品信息
+ * @param params 修改条件
+ * @returns
+ */
+export const updateCommodity = params => {
+  params.updateName = store.state.user.userInfo.username
+  return axios.put('/commodity/item', params)
+}

@@ -83,7 +83,6 @@
             </el-button>
           </template>
         </el-table-column>
-
       </el-table>
       <div class="pagination">
         <el-pagination
@@ -95,13 +94,54 @@
           @current-change="handlePageChange"
         ></el-pagination>
       </div>
+      <!-- 编辑商品弹出框 -->
+      <el-dialog title="编辑商品" :visible.sync="dialog" width="30%">
+        <el-form ref="form" :model="form" :rules="rules" label-width="70px">
+          <el-form-item label="商品名" prop="name">
+            <el-input v-model="form.name"></el-input>
+          </el-form-item>
+          <el-form-item label="价格" prop="price">
+            <el-input v-model.number="form.price"></el-input>
+          </el-form-item>
+          <el-form-item label="描述" prop="describe">
+            <el-input type="textarea"
+                      :autosize="{ minRows: 2, maxRows: 4}"
+                      v-model="form.describe"></el-input>
+          </el-form-item>
+          <el-form-item label="商品分类" prop="categoryId">
+            <el-select v-model="form.categoryId" clearable placeholder="请选择分类" class="handle-input mr10">
+              <el-option
+                v-for="item in categoryOptions"
+                :key="item.id"
+                :label="item.name"
+                :value="item.id">
+              </el-option>
+            </el-select>
+          </el-form-item>
+          <el-form-item label="是否上架" prop="status">
+            <el-switch
+              style="display: block;margin-top: 10px"
+              v-model="form.status"
+              active-color="#13ce66"
+              inactive-color="#ff4949"
+              active-text="上架"
+              inactive-text="下架">
+            </el-switch>
+          </el-form-item>
+        </el-form>
+        <span slot="footer" class="dialog-footer">
+                <el-button @click="resetForm('form')">取 消</el-button>
+                <el-button type="primary" @click="submitForm('form')">确 定</el-button>
+            </span>
+      </el-dialog>
     </div>
   </div>
 </template>
 
 <script>
 
-import { findCommodityList, updateCommodityStatus } from '@/api/commodity'
+import { findCommodityList, updateCommodity, updateCommodityStatus } from '@/api/commodity'
+import { checkPrice, checkName, checkCategory, checkDescribe } from '@/lib/tools'
 
 export default {
   name: 'commodity',
@@ -162,8 +202,29 @@ export default {
       // 对话框
       dialog: false,
       form: {
+        id: '',
+        categoryId: '',
         name: '',
-        status: ''
+        price: 0.00,
+        describe: '',
+        status: true,
+        updateName: '',
+        updateTime: ''
+      },
+      // 校检规则
+      rules: {
+        name: [
+          { validator: checkName, trigger: 'blur' }
+        ],
+        price: [
+          { validator: checkPrice, trigger: 'blur' }
+        ],
+        categoryId: [
+          { validator: checkCategory, trigger: 'blur' }
+        ],
+        describe: [
+          { validator: checkDescribe, trigger: 'blur' }
+        ]
       }
     }
   },
@@ -204,10 +265,30 @@ export default {
     },
     // 触发编辑按钮
     handleEdit (index, row) {
+      this.form = JSON.parse(JSON.stringify(row))
       this.dialog = true
     },
     // 触发修改图片按钮
     handleEditImage (index, row) {
+    },
+    // 重置表单
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
+      this.dialog = false
+    },
+    // 提交表单
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          updateCommodity(this.form).then(res => {
+            this.handleSearch()
+            this.dialog = false
+          })
+        } else {
+          this.$message.error('请填写完整信息!')
+          return false
+        }
+      })
     }
   }
 }
