@@ -4,6 +4,7 @@ import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commodityservice.dao.CommodityDao;
 import com.sch.commodityservice.dto.AddCommodityDTO;
+import com.sch.commodityservice.dto.UpdateCommodityDTO;
 import com.sch.commodityservice.dto.UpdateCommodityStatusDTO;
 import com.sch.commonbasic.util.DateUtil;
 import org.junit.jupiter.api.Test;
@@ -66,5 +67,23 @@ public class CommodityDaoTest {
         updateCommodityStatusDTO.setUpdateName("root");
         updateCommodityStatusDTO.setUpdateTime(DateUtil.createTime());
         commodityDao.updateCommodityStatus(updateCommodityStatusDTO);
+    }
+
+    /**
+     * 修改商品信息
+     */
+    @Test
+    public void updateCommodity() {
+        UpdateCommodityDTO updateCommodityDTO = new UpdateCommodityDTO();
+        updateCommodityDTO.setId(1L);
+        updateCommodityDTO.setCategoryId(2L);
+        updateCommodityDTO.setName("测试商品001");
+        updateCommodityDTO.setPrice(100.00F);
+        updateCommodityDTO.setDescribe("测试描述001");
+        updateCommodityDTO.setStatus(false);
+        updateCommodityDTO.setUpdateId(1L);
+        updateCommodityDTO.setUpdateName("root");
+        updateCommodityDTO.setUpdateTime(DateUtil.createTime());
+        commodityDao.updateCommodity(updateCommodityDTO);
     }
 }

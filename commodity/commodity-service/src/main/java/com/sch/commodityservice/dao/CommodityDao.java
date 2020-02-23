@@ -2,6 +2,7 @@ package com.sch.commodityservice.dao;
 
 import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commodityservice.dto.AddCommodityDTO;
+import com.sch.commodityservice.dto.UpdateCommodityDTO;
 import com.sch.commodityservice.dto.UpdateCommodityStatusDTO;
 import com.sch.commodityservice.entity.Commodity;
 import org.springframework.stereotype.Repository;
@@ -36,4 +37,11 @@ public interface CommodityDao {
      * @param updateCommodityStatusDTO 修改条件
      */
     void updateCommodityStatus(UpdateCommodityStatusDTO updateCommodityStatusDTO);
+
+    /**
+     * 修改商品信息
+     *
+     * @param updateCommodityDTO 修改条件
+     */
+    void updateCommodity(UpdateCommodityDTO updateCommodityDTO);
 }

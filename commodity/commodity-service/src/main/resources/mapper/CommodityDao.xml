@@ -51,4 +51,11 @@
         set status=#{status},update_id=#{updateId},update_name=#{updateName},update_time=#{updateTime}
         where id=#{id}
     </update>
+    <!--修改商品信息-->
+    <update id="updateCommodity" parameterType="com.sch.commodityservice.dto.UpdateCommodityDTO">
+        update t_commodity
+        set category_id=#{categoryId},status=#{status},`name`=#{name},price=#{price},`describe`=#{describe}
+        ,update_id=#{updateId},update_name=#{updateName},update_time=#{updateTime}
+        where id=#{id}
+    </update>
 </mapper>

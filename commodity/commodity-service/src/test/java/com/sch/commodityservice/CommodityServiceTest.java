@@ -2,6 +2,7 @@ package com.sch.commodityservice;
 
 import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
+import com.sch.commoditybase.AO.UpdateCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
 import com.sch.commoditybase.base.CommodityBaseService;
 import org.junit.jupiter.api.Test;
@@ -56,5 +57,22 @@ public class CommodityServiceTest {
         ao.setStatus(false);
         ao.setUpdateName(null);
         commodityBaseService.updateCommodityStatus(ao);
+    }
+
+    /**
+     * 修改商品信息
+     */
+    @Test
+    public void updateCommodity() {
+        UpdateCommodityAO updateCommodityAO = new UpdateCommodityAO();
+        updateCommodityAO.setId(1L);
+        updateCommodityAO.setCategoryId(1L);
+        updateCommodityAO.setName("");
+        updateCommodityAO.setPrice(99.00F);
+        updateCommodityAO.setDescribe("测试描述001");
+        updateCommodityAO.setStatus(true);
+        updateCommodityAO.setUpdateId(1L);
+        updateCommodityAO.setUpdateName("root");
+        commodityBaseService.updateCommodity(updateCommodityAO);
     }
 }

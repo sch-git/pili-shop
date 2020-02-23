@@ -2,12 +2,14 @@ package com.sch.commodityservice.service.impl;
 
 import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
+import com.sch.commoditybase.AO.UpdateCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
 import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commodityservice.dao.CommodityDao;
 import com.sch.commodityservice.dao.CommodityImageDao;
 import com.sch.commodityservice.dto.AddCommodityDTO;
 import com.sch.commodityservice.dto.AddCommodityImageDTO;
+import com.sch.commodityservice.dto.UpdateCommodityDTO;
 import com.sch.commodityservice.dto.UpdateCommodityStatusDTO;
 import com.sch.commodityservice.entity.Commodity;
 import com.sch.commodityservice.service.CommodityService;
@@ -85,5 +87,18 @@ public class CommodityServiceImpl implements CommodityService {
         UpdateCommodityStatusDTO dto = new UpdateCommodityStatusDTO();
         dto.setAO(updateCommodityStatusAO);
         commodityDao.updateCommodityStatus(dto);
+    }
+
+    /**
+     * 修改商品信息
+     *
+     * @param updateCommodityAO 修改条件
+     */
+    @Transactional
+    @Override
+    public void updateCommodity(UpdateCommodityAO updateCommodityAO) {
+        UpdateCommodityDTO dto = new UpdateCommodityDTO();
+        dto.setAO(updateCommodityAO);
+        commodityDao.updateCommodity(dto);
     }
 }

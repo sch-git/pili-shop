@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
+import com.sch.commoditybase.AO.UpdateCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
 import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
@@ -94,5 +95,36 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
             throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
         }
         commodityService.updateCommodityStatus(updateCommodityStatusAO);
+    }
+
+    /**
+     * 修改商品信息
+     *
+     * @param updateCommodityAO 修改条件
+     */
+    @Override
+    public void updateCommodity(UpdateCommodityAO updateCommodityAO) {
+        if (updateCommodityAO.getId() == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
+        }
+        if (updateCommodityAO.getCategoryId() == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
+        }
+        if (updateCommodityAO.getPrice() == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
+        }
+        if (updateCommodityAO.getName() == null || updateCommodityAO.getName().isEmpty()) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
+        }
+        if (updateCommodityAO.getDescribe() == null || updateCommodityAO.getDescribe().isEmpty()) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
+        }
+        if (updateCommodityAO.getStatus() == null) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
+        }
+        if (updateCommodityAO.getUpdateName() == null || updateCommodityAO.getUpdateName().isEmpty()) {
+            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
+        }
+        commodityService.updateCommodity(updateCommodityAO);
     }
 }
