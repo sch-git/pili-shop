@@ -49,6 +49,7 @@
         </el-table-column>
         <el-table-column prop="name" label="商品名称" align="center"></el-table-column>
         <el-table-column prop="price" label="价格" align="center"></el-table-column>
+        <el-table-column prop="categoryName" label="分类" align="center"></el-table-column>
         <el-table-column prop="describe" label="描述" align="center">
           <!--
                     <template slot-scope="scope">{{scope.row.describe}}</template>
@@ -142,6 +143,7 @@
 
 import { findCommodityList, updateCommodity, updateCommodityStatus } from '@/api/commodity'
 import { checkPrice, checkName, checkCategory, checkDescribe } from '@/lib/tools'
+import { findCategoryList } from '@/api/commodity/category'
 
 export default {
   name: 'commodity',
@@ -156,11 +158,16 @@ export default {
         pageNum: 1,
         pageSize: 3
       },
+      searchCategoryAO: {
+        pageNum: 1,
+        pageSize: 0
+      },
       // 列表数据
       tableData: [
         {
           id: '',
           categoryId: '',
+          categoryName: '',
           name: '',
           price: 0.00,
           describe: '',
@@ -225,7 +232,9 @@ export default {
         describe: [
           { validator: checkDescribe, trigger: 'blur' }
         ]
-      }
+      },
+      // 其他
+      categoryKey: {}
     }
   },
   created () {
@@ -241,6 +250,19 @@ export default {
       findCommodityList(this.searchCommodityAO).then(res => {
         this.tableData = res.list
         this.pageInfo.total = res.total
+      }).then(res => {
+        findCategoryList(this.searchCategoryAO).then(res => {
+          this.categoryOptions = res.list
+        }).finally(res => {
+          const temp = this
+          for (let i = 0; i < this.tableData.length; i++) {
+            this.categoryOptions.find(function (item) {
+              if (temp.tableData[i].categoryId === item.id) {
+                temp.tableData[i].categoryName = item.name
+              }
+            })
+          }
+        })
       })
     },
     // 多选操作
