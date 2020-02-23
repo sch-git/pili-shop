@@ -10,9 +10,7 @@ import com.sch.commoditybase.AO.UpdateCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
 import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
-import com.sch.commoditybase.exception.CommodityException;
 import com.sch.commodityservice.service.CommodityService;
-import com.sch.commonbasic.enums.CommodityEnum;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -35,30 +33,6 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
      */
     @Override
     public long addCommodity(AddCommodityAO addCommodityAO) {
-        if (addCommodityAO == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL);
-        }
-        if (addCommodityAO.getCategoryId() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CATEGORYID);
-        }
-        if (addCommodityAO.getName() == null || addCommodityAO.getName().isEmpty()) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_NAME);
-        }
-        if (addCommodityAO.getCreateName() == null || addCommodityAO.getCreateName().isEmpty()) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATENAME);
-        }
-        if (addCommodityAO.getDescribe() == null || addCommodityAO.getDescribe().isEmpty()) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_DESCRIBE);
-        }
-        if (addCommodityAO.getPrice() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_PRICE);
-        }
-        if (addCommodityAO.getStatus() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_STATUS);
-        }
-        if (addCommodityAO.getUrl() == null || addCommodityAO.getUrl().isEmpty()) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_URL);
-        }
         return commodityService.addCommodity(addCommodityAO);
     }
 
@@ -85,15 +59,6 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
      */
     @Override
     public void updateCommodityStatus(UpdateCommodityStatusAO updateCommodityStatusAO) {
-        if (updateCommodityStatusAO.getId() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
-        }
-        if (updateCommodityStatusAO.getStatus() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
-        }
-        if (updateCommodityStatusAO.getUpdateName() == null || updateCommodityStatusAO.getUpdateName().isEmpty()) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
-        }
         commodityService.updateCommodityStatus(updateCommodityStatusAO);
     }
 
@@ -104,27 +69,6 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
      */
     @Override
     public void updateCommodity(UpdateCommodityAO updateCommodityAO) {
-        if (updateCommodityAO.getId() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
-        }
-        if (updateCommodityAO.getCategoryId() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
-        }
-        if (updateCommodityAO.getPrice() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
-        }
-        if (updateCommodityAO.getName() == null || updateCommodityAO.getName().isEmpty()) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
-        }
-        if (updateCommodityAO.getDescribe() == null || updateCommodityAO.getDescribe().isEmpty()) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
-        }
-        if (updateCommodityAO.getStatus() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
-        }
-        if (updateCommodityAO.getUpdateName() == null || updateCommodityAO.getUpdateName().isEmpty()) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_PARAMS_NULL);
-        }
         commodityService.updateCommodity(updateCommodityAO);
     }
 }

@@ -10,6 +10,7 @@ import com.sch.commoditybase.base.CategoryBaseService;
 import com.sch.commonbasic.VO.Result;
 import com.sch.commonbasic.enums.ResultEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -50,7 +51,7 @@ public class CategoryController {
      * @return 修改结果
      */
     @PutMapping("/item")
-    public Result updateCategory(@RequestBody UpdateCategoryAO updateCategoryAO) {
+    public Result updateCategory(@RequestBody @Validated UpdateCategoryAO updateCategoryAO) {
         updateCategoryAO.setUpdateId((Long) session.getAttribute(session.getId()));
         categoryBaseService.updateCategory(updateCategoryAO);
         return new Result(ResultEnum.UPDATE_SUCCESS);
@@ -63,7 +64,7 @@ public class CategoryController {
      * @return 新增结果
      */
     @PostMapping("")
-    public Result addCategory(@RequestBody AddCategoryAO addCategoryAO) {
+    public Result addCategory(@RequestBody @Validated AddCategoryAO addCategoryAO) {
         addCategoryAO.setCreateId((Long) session.getAttribute(session.getId()));
         categoryBaseService.addCategory(addCategoryAO);
         return new Result(ResultEnum.ADD_SUCCESS);

@@ -11,6 +11,7 @@ import com.sch.commoditybase.base.CommodityBaseService;
 import com.sch.commonbasic.VO.Result;
 import com.sch.commonbasic.enums.ResultEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
@@ -35,7 +36,7 @@ public class CommodityController {
      * @return
      */
     @PostMapping("")
-    public Result addCommodity(@RequestBody AddCommodityAO addCommodityAO) {
+    public Result addCommodity(@RequestBody @Validated AddCommodityAO addCommodityAO) {
         addCommodityAO.setCreateId((Long) session.getAttribute(session.getId()));
         commodityBaseService.addCommodity(addCommodityAO);
         return new Result(ResultEnum.ADD_SUCCESS);
@@ -60,7 +61,7 @@ public class CommodityController {
      * @return
      */
     @PutMapping("/status")
-    public Result updateCommodityStatus(@RequestBody UpdateCommodityStatusAO updateCommodityStatusAO) {
+    public Result updateCommodityStatus(@RequestBody @Validated UpdateCommodityStatusAO updateCommodityStatusAO) {
         updateCommodityStatusAO.setUpdateId((Long) session.getAttribute(session.getId()));
         commodityBaseService.updateCommodityStatus(updateCommodityStatusAO);
         return new Result(ResultEnum.UPDATE_SUCCESS);
@@ -73,7 +74,7 @@ public class CommodityController {
      * @return
      */
     @PutMapping("/item")
-    public Result updateCommodity(@RequestBody UpdateCommodityAO updateCommodityAO) {
+    public Result updateCommodity(@RequestBody @Validated UpdateCommodityAO updateCommodityAO) {
         updateCommodityAO.setUpdateId((Long) session.getAttribute(session.getId()));
         commodityBaseService.updateCommodity(updateCommodityAO);
         return new Result(ResultEnum.UPDATE_SUCCESS);

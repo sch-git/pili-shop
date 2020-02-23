@@ -2,6 +2,8 @@ package com.sch.commoditybase.AO;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -14,10 +16,12 @@ public class UpdateCommodityStatusAO implements Serializable {
     /**
      * 商品id
      */
+    @NotNull
     private Long id;
     /**
      * 商品状态
      */
+    @NotNull
     private Boolean status;
     /**
      * 修改人id
@@ -26,5 +30,6 @@ public class UpdateCommodityStatusAO implements Serializable {
     /**
      * 修改人名称
      */
+    @NotBlank
     private String updateName;
 }

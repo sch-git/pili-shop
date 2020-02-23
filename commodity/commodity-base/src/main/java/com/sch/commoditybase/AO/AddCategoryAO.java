@@ -2,6 +2,8 @@ package com.sch.commoditybase.AO;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -18,13 +20,16 @@ public class AddCategoryAO implements Serializable {
     /**
      * 分类名称
      */
+    @NotBlank
     private String name;
     /**
      * 是否可用（0：否；1：是）
      */
+    @NotNull
     private Boolean status;
     /**
      * 创建人名称
      */
+    @NotBlank
     private String createName;
 }
