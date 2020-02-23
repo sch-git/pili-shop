@@ -79,6 +79,11 @@ export default {
               title: '添加商品'
             },
             {
+              icon: 'el-icon-s-goods',
+              index: 'commodityImage',
+              title: '商品图片'
+            },
+            {
               index: 'category',
               title: '分类管理'
             }

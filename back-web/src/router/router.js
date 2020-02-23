@@ -34,6 +34,11 @@ export default [
         meta: { title: '添加商品' }
       },
       {
+        path: '/commodityImage',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/CommodityImage.vue'),
+        meta: { title: '商品图片' }
+      },
+      {
         path: '/category',
         component: () => import(/* webpackChunkName: "table" */ '@/views/Category.vue'),
         meta: { title: '分类管理' }
