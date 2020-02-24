@@ -1,7 +1,10 @@
 package com.sch.commodityservice.dao;
 
 import com.sch.commodityservice.dto.AddCommodityImageDTO;
+import com.sch.commodityservice.entity.CommodityImage;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @Description: 商品图片DAO
@@ -17,4 +20,12 @@ public interface CommodityImageDao {
      * @return 影响行数
      */
     int addCommodityImage(AddCommodityImageDTO addCommodityImageDTO);
+
+    /**
+     * 根据商品id查询所有图片
+     *
+     * @param commodityId 商品id
+     * @return 图片列表
+     */
+    List<CommodityImage> findImageByCommodityId(Long commodityId);
 }

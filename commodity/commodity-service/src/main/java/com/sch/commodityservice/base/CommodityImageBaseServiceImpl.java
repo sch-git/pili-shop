@@ -2,11 +2,12 @@ package com.sch.commodityservice.base;
 
 import com.alibaba.dubbo.config.annotation.Service;
 import com.sch.commoditybase.AO.AddCommodityImageAO;
+import com.sch.commoditybase.VO.CommodityImageVO;
 import com.sch.commoditybase.base.CommodityImageBaseService;
-import com.sch.commoditybase.exception.CommodityException;
 import com.sch.commodityservice.service.CommodityImageService;
-import com.sch.commonbasic.enums.CommodityEnum;
 import org.springframework.beans.factory.annotation.Autowired;
+
+import java.util.List;
 
 /**
  * @Description: 商品图片服务外部接口实现
@@ -25,21 +26,17 @@ public class CommodityImageBaseServiceImpl implements CommodityImageBaseService 
      */
     @Override
     public void addCommodityImage(AddCommodityImageAO addCommodityImageAO) {
-        if (addCommodityImageAO == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL);
-        }
-        if (addCommodityImageAO.getCommodityId() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_COMMODITYID);
-        }
-        if (addCommodityImageAO.getCreateId() == null) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATEID);
-        }
-        if (addCommodityImageAO.getCreateName() == null || addCommodityImageAO.getCreateName().isEmpty()) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_CREATENAME);
-        }
-        if (addCommodityImageAO.getUrl() == null || addCommodityImageAO.getUrl().isEmpty()) {
-            throw new CommodityException(CommodityEnum.EXCEPTION_NULL_URL);
-        }
         commodityImageService.addCommodityImage(addCommodityImageAO);
+    }
+
+    /**
+     * 根据商品id查询商品图片
+     *
+     * @param commodityId 商品id
+     * @return 图片列表
+     */
+    @Override
+    public List<CommodityImageVO> findImageByCommodityId(Long commodityId) {
+        return commodityImageService.findImageByCommodityId(commodityId);
     }
 }

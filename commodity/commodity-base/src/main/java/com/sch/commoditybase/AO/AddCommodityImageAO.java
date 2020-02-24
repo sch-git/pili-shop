@@ -2,6 +2,8 @@ package com.sch.commoditybase.AO;
 
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 
 /**
@@ -15,11 +17,13 @@ public class AddCommodityImageAO implements Serializable {
     /**
      * 商品id
      */
+    @NotNull
     private Long commodityId;
 
     /**
      * 商品图片地址
      */
+    @NotBlank
     private String url;
 
     /**
@@ -30,6 +34,7 @@ public class AddCommodityImageAO implements Serializable {
     /**
      * 创建人名称
      */
+    @NotBlank
     private String createName;
 
 }

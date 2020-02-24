@@ -6,8 +6,10 @@ import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
+import com.sch.commoditybase.VO.CommodityImageVO;
 import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
+import com.sch.commoditybase.base.CommodityImageBaseService;
 import com.sch.commonbasic.VO.Result;
 import com.sch.commonbasic.enums.ResultEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +17,7 @@ import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @Description: 商品接口
@@ -26,6 +29,8 @@ import javax.servlet.http.HttpSession;
 public class CommodityController {
     @Reference(timeout = 60000)
     CommodityBaseService commodityBaseService;
+    @Reference(timeout = 60000)
+    CommodityImageBaseService commodityImageBaseService;
     @Autowired
     HttpSession session;
 
@@ -78,5 +83,17 @@ public class CommodityController {
         updateCommodityAO.setUpdateId((Long) session.getAttribute(session.getId()));
         commodityBaseService.updateCommodity(updateCommodityAO);
         return new Result(ResultEnum.UPDATE_SUCCESS);
+    }
+
+    /**
+     * 根据商品id查询图片
+     *
+     * @param commodityId 商品id
+     * @return 图片列表
+     */
+    @GetMapping("/image")
+    public Result findImageByCommodityId(@RequestParam Long commodityId) {
+        List<CommodityImageVO> commodityImageVOS = commodityImageBaseService.findImageByCommodityId(commodityId);
+        return Result.success(commodityImageVOS);
     }
 }

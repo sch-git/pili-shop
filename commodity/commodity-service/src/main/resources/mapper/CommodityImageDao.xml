@@ -18,4 +18,11 @@
       #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
+
+    <!--根据商品id获取所有图片-->
+    <select id="findImageByCommodityId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select *
+        from t_commodity_image
+        where commodity_id=#{commodityId}
+    </select>
 </mapper>

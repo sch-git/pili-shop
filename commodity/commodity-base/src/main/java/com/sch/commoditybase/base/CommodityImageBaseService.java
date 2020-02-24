@@ -1,6 +1,9 @@
 package com.sch.commoditybase.base;
 
 import com.sch.commoditybase.AO.AddCommodityImageAO;
+import com.sch.commoditybase.VO.CommodityImageVO;
+
+import java.util.List;
 
 /**
  * @Description: 商品图片服务外部接口
@@ -14,4 +17,12 @@ public interface CommodityImageBaseService {
      * @param addCommodityImageAO 商品图片对象
      */
     void addCommodityImage(AddCommodityImageAO addCommodityImageAO);
+
+    /**
+     * 根据商品id查询商品图片
+     *
+     * @param commodityId 商品id
+     * @return 图片列表
+     */
+    List<CommodityImageVO> findImageByCommodityId(Long commodityId);
 }
