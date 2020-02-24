@@ -34,8 +34,9 @@ export default [
         meta: { title: '添加商品' }
       },
       {
-        path: '/commodityImage',
+        path: '/commodity/image/:commodityId',
         component: () => import(/* webpackChunkName: "table" */ '@/views/CommodityImage.vue'),
+        props: true,
         meta: { title: '商品图片' }
       },
       {

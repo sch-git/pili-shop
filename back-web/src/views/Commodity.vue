@@ -293,6 +293,7 @@ export default {
     },
     // 触发修改图片按钮
     handleEditImage (index, row) {
+      this.$router.push('/commodity/image/' + row.id)
     },
     // 重置表单
     resetForm (formName) {

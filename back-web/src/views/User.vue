@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <main>
     <div class="crumbs">
       <el-breadcrumb separator="/">
         <el-breadcrumb-item>
@@ -82,7 +82,7 @@
         ></el-pagination>
       </div>
     </div>
-  </div>
+  </main>
 </template>
 
 <script>

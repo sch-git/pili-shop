@@ -80,7 +80,7 @@ export default {
             },
             {
               icon: 'el-icon-s-goods',
-              index: 'commodityImage',
+              index: 'commodity/image',
               title: '商品图片'
             },
             {
