@@ -2,10 +2,7 @@ package com.sch.backweb.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
-import com.sch.commoditybase.AO.AddCommodityAO;
-import com.sch.commoditybase.AO.SearchCommodityAO;
-import com.sch.commoditybase.AO.UpdateCommodityAO;
-import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
+import com.sch.commoditybase.AO.*;
 import com.sch.commoditybase.VO.CommodityImageVO;
 import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
@@ -95,5 +92,31 @@ public class CommodityController {
     public Result findImageByCommodityId(@RequestParam Long commodityId) {
         List<CommodityImageVO> commodityImageVOS = commodityImageBaseService.findImageByCommodityId(commodityId);
         return Result.success(commodityImageVOS);
+    }
+
+    /**
+     * 添加商品图片
+     *
+     * @param addCommodityImageAO 图片信息
+     * @return
+     */
+    @PostMapping("/image")
+    public Result addCommodityImage(@RequestBody AddCommodityImageAO addCommodityImageAO) {
+        addCommodityImageAO.setCreateId((Long) session.getAttribute(session.getId()));
+        commodityImageBaseService.addCommodityImage(addCommodityImageAO);
+        return Result.success();
+    }
+
+    /**
+     * 删除商品图片
+     *
+     * @param id 图片id
+     * @return
+     */
+    @DeleteMapping("/image")
+    public Result deleteCommodityImage(@RequestParam Long id) {
+        System.out.println(id);
+        commodityImageBaseService.deleteImageById(id);
+        return new Result(ResultEnum.DELETE_SUCCESS);
     }
 }

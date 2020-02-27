@@ -39,4 +39,14 @@ public class CommodityImageBaseServiceImpl implements CommodityImageBaseService 
     public List<CommodityImageVO> findImageByCommodityId(Long commodityId) {
         return commodityImageService.findImageByCommodityId(commodityId);
     }
+
+    /**
+     * 根据id删除图片
+     *
+     * @param id 图片id
+     */
+    @Override
+    public void deleteImageById(Long id) {
+        commodityImageService.deleteImageById(id);
+    }
 }

@@ -28,4 +28,11 @@ public interface CommodityImageDao {
      * @return 图片列表
      */
     List<CommodityImage> findImageByCommodityId(Long commodityId);
+
+    /**
+     * 根据id删除图片
+     *
+     * @param id 图片id
+     */
+    void deleteImageById(Long id);
 }

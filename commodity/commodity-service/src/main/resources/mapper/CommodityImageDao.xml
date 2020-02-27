@@ -25,4 +25,10 @@
         from t_commodity_image
         where commodity_id=#{commodityId}
     </select>
+
+    <!--删除图片-->
+    <delete id="deleteImageById" parameterType="java.lang.Long">
+        delete from t_commodity_image
+        where id=#{id}
+    </delete>
 </mapper>

@@ -2,6 +2,7 @@ package com.sch.commodityservice.dto;
 
 import com.sch.commoditybase.AO.AddCommodityImageAO;
 import com.sch.commonbasic.util.DateUtil;
+import com.sch.commonbasic.util.QiNiuCloudUtil;
 import lombok.Data;
 
 /**
@@ -51,7 +52,7 @@ public class AddCommodityImageDTO {
 
     public void setAO(AddCommodityImageAO AO) {
         this.commodityId = AO.getCommodityId();
-        this.url = AO.getUrl();
+        this.url = AO.getUrl().split(QiNiuCloudUtil.getDOMAIN())[1];
         this.createName = AO.getCreateName();
         this.createId = AO.getCreateId();
         this.createTime = DateUtil.createTime();

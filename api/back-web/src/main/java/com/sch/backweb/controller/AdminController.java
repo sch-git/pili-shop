@@ -21,12 +21,12 @@ public class AdminController {
     /**
      * 上传头像
      *
-     * @param files 文件数据
+     * @param file 文件数据
      * @return 头像地址
      */
     @PostMapping("/avatar")
-    public Result uploadAvatar(@RequestParam("avatar") MultipartFile files) {
-        String path = QiNiuCloudUtil.uploadImg(files);
+    public Result uploadAvatar(@RequestParam MultipartFile file) {
+        String path = QiNiuCloudUtil.uploadImg(file);
         return new Result(ResultEnum.UPLOAD_IMAGE, path);
     }
 }

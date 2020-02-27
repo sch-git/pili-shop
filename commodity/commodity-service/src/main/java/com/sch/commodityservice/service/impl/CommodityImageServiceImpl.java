@@ -55,4 +55,14 @@ public class CommodityImageServiceImpl implements CommodityImageService {
         }
         return commodityImageVOS;
     }
+
+    /**
+     * 根据id删除图片
+     *
+     * @param id 图片id
+     */
+    @Override
+    public void deleteImageById(Long id) {
+        commodityImageDao.deleteImageById(id);
+    }
 }
