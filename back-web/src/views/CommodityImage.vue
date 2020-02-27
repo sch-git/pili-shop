@@ -15,7 +15,8 @@
       <div class="form-box">
         <el-upload
           class="avatar-uploader avatar-box"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="http://localhost:10080/admin/avatar"
+          :headers="tokenHeader"
           :on-preview="handlePictureCardPreview"
           :on-remove="handleRemove"
           :on-success="handleAvatarSuccess"
@@ -32,7 +33,8 @@
 </template>
 
 <script>
-import { findImageList } from '@/api/commodity/commodityImage'
+import { addCommodityImage, deleteCommodityImage, findImageList } from '@/api/commodity/commodityImage'
+import { uploadSuccess } from '@/api/common'
 
 export default {
   name: 'CommodityImage',
@@ -47,26 +49,33 @@ export default {
       commodityName: '',
       dialog: false,
       dialogImageUrl: '',
-      imageList: []
+      imageList: [],
+      tokenHeader: { Authorization: this.$store.state.user.userInfo.token }
     }
   },
   created () {
     this.handleSearch()
   },
   methods: {
+    // 查询图片
     handleSearch () {
       findImageList(this.commodityId).then(data => {
         this.imageList = data
       })
     },
+    // 图片上传成功
     handleAvatarSuccess (res, file) {
-      console.log('上传图片 TODO')
-      this.url = URL.createObjectURL(file.raw)
-      console.log(this.url)
+      this.url = uploadSuccess(res)
+      let addCommodityImageAO = {
+        commodityId: this.commodityId,
+        url: this.url,
+        createName: this.$store.state.user.userInfo.username
+      }
+      addCommodityImage(addCommodityImageAO)
     },
     // 删除图片
     handleRemove (file, imageList) {
-      console.log('删除图片 TODO')
+      deleteCommodityImage(file.id)
     },
     // 放大查看图片
     handlePictureCardPreview (file) {
@@ -92,8 +101,8 @@ export default {
   }
 
   .form-box {
-    width: 50%;
-    padding: 50px 25%;
+    width: 54%;
+    padding: 50px 23%;
   }
 
   .avatar-uploader >>> .el-upload {
@@ -116,9 +125,11 @@ export default {
     line-height: 146px;
     text-align: center;
   }
-  .avatar-uploader{
+
+  .avatar-uploader {
     width: 100%;
   }
+
   .avatar-box {
     padding: 10px;
   }

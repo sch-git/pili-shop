@@ -61,7 +61,7 @@ export default {
       items: [
         {
           icon: 'el-icon-s-home',
-          index: 'dashboard',
+          index: '/dashboard',
           title: '系统首页'
         },
         {
@@ -71,20 +71,20 @@ export default {
           subs: [
             {
               icon: 'el-icon-s-goods',
-              index: 'commodity',
+              index: '/commodity',
               title: '商品列表'
             },
             {
-              index: 'addProduct',
+              index: '/addProduct',
               title: '添加商品'
             },
             {
               icon: 'el-icon-s-goods',
-              index: 'commodity/image',
+              index: '/commodity/image',
               title: '商品图片'
             },
             {
-              index: 'category',
+              index: '/category',
               title: '分类管理'
             }
           ]
@@ -135,7 +135,7 @@ export default {
           subs: [
             {
               icon: 'el-icon-user',
-              index: 'user',
+              index: '/user',
               title: '用户列表'
             }
           ]

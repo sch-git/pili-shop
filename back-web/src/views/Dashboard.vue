@@ -9,7 +9,6 @@
               class="avatar-uploader"
               action="http://localhost:10080/admin/avatar"
               :headers="tokenHeader"
-              name="avatar"
               :show-file-list="false"
               :on-success="handleAvatarSuccess"
               :before-upload="beforeAvatarUpload">
@@ -234,7 +233,10 @@ export default {
         ]
       },
       imageUrl: '',
-      tokenHeader: { Authorization: this.$store.state.user.userInfo.token }
+      tokenHeader: {
+        Authorization: this.$store.state.user.userInfo.token,
+        ImageType: 'admin/avatar'
+      }
     }
   },
   components: {
