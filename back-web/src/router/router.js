@@ -19,14 +19,14 @@ export default [
         meta: { title: '用户列表' }
       },
       {
-        path: '/admin',
-        component: () => import(/* webpackChunkName: "table" */ '@/views/Admin.vue'),
-        meta: { title: '权限管理' }
+        path: '/rights',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/Rights.vue'),
+        meta: { title: '权限列表' }
       },
       {
         path: '/commodity',
         component: () => import(/* webpackChunkName: "table" */ '@/views/Commodity.vue'),
-        meta: { title: '商品管理' }
+        meta: { title: '商品列表' }
       },
       {
         path: '/addProduct',

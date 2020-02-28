@@ -125,8 +125,15 @@ export default {
         },
         {
           icon: 'el-icon-lock',
-          index: 'admin',
-          title: '权限管理'
+          index: '4',
+          title: '权限管理',
+          subs: [
+            {
+              icon: 'el-icon-user',
+              index: '/rights',
+              title: '权限列表'
+            }
+          ]
         },
         {
           icon: 'el-icon-user',
