@@ -1,18 +1,29 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main>
+    <Header></Header>
+    <router-view/>
+    <!-- 部分路由不应该包含这个Footer -->
+    <Footer v-if="excludeRoutes.indexOf($route.name) === -1"></Footer>
+  </main>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
+import Header from '~c/common/Header'
+import Footer from '~c/common/Footer'
 
 export default {
-  name: 'Home',
+  name: 'home',
+  data () {
+    return {
+      excludeRoutes: ['HomeIndex', 'MyAddress', 'AddAddress', 'MyOrder', 'MyShoppingCart']
+    }
+  },
   components: {
-    HelloWorld
+    Header,
+    Footer
+  },
+  created () {
+
   }
 }
 </script>
