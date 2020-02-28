@@ -1,29 +1,25 @@
 <template>
   <main>
-    <el-menu
-      :default-active="activeIndex2"
-      class="el-menu-demo"
+    <div class="header">
+      <el-menu
+      class="el-menu-demo my-container"
       mode="horizontal"
       @select="handleSelect"
-      background-color="#545c64"
-      text-color="#fff"
-      active-text-color="#ffd04b">
-      <el-menu-item index="1">处理中心</el-menu-item>
-      <el-submenu index="2">
-        <template slot="title">我的工作台</template>
-        <el-menu-item index="2-1">选项1</el-menu-item>
-        <el-menu-item index="2-2">选项2</el-menu-item>
-        <el-menu-item index="2-3">选项3</el-menu-item>
-        <el-submenu index="2-4">
-          <template slot="title">选项4</template>
-          <el-menu-item index="2-4-1">选项1</el-menu-item>
-          <el-menu-item index="2-4-2">选项2</el-menu-item>
-          <el-menu-item index="2-4-3">选项3</el-menu-item>
+      background-color="#242f42"
+      text-color="#fff">
+        <el-menu-item index="1">pili-shop</el-menu-item>
+        <el-submenu index="2">
+          <template slot="title">我的工作台</template>
+          <el-menu-item index="2-1">选项1</el-menu-item>
+          <el-submenu index="2-4">
+            <template slot="title">选项4</template>
+            <el-menu-item index="2-4-1">选项1</el-menu-item>
+          </el-submenu>
         </el-submenu>
-      </el-submenu>
-      <el-menu-item index="3" disabled>消息中心</el-menu-item>
-      <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">订单管理</a></el-menu-item>
+        <el-menu-item class="header-right" index="4"><a href="https://www.ele.me" target="_blank">登录</a></el-menu-item>
+        <el-menu-item index="5" class="header-right">购物车<i class="el-icon-shopping-cart-1"/></el-menu-item>
     </el-menu>
+    </div>
   </main>
 </template>
 
@@ -33,7 +29,6 @@ export default {
   name: 'Header',
   data () {
     return {
-      activeIndex: '1',
       activeIndex2: '1'
     }
   },
@@ -47,6 +42,21 @@ export default {
 }
 </script>
 
-<style scoped>
-
+<style scoped lang="scss">
+  @import "../../assets/css/base.css";
+  .header{
+    height: 60px;
+    .my-container{
+      .header-right{
+        float: right;
+      }
+    }
+  }
+  .el-menu--horizontal>.el-menu-item>.el-icon-shopping-cart-1{
+    color: #f0f0f0;
+  }
+  .el-menu--horizontal>.el-menu-item.is-active{
+    border-bottom: 2px solid #fb9f16;
+    color: #fb9f16;
+  }
 </style>
