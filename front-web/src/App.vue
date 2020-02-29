@@ -6,11 +6,7 @@
 
 <script>
 export default {
-  name: 'App',
-  data () {
-    return {}
-  },
-  components: {}
+  name: 'App'
 }
 </script>
 <style>

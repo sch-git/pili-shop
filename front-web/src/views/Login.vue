@@ -1,6 +1,8 @@
 <template>
   <main>
+    <div class="login-wrap">
 
+    </div>
   </main>
 </template>
 

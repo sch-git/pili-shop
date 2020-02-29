@@ -6,19 +6,20 @@
       mode="horizontal"
       @select="handleSelect"
       background-color="#242f42"
-      text-color="#fff">
-        <el-menu-item index="1">pili-shop</el-menu-item>
+      text-color="#fff"
+      router>
+        <el-menu-item>pili-shop</el-menu-item>
         <el-submenu index="2">
           <template slot="title">我的工作台</template>
-          <el-menu-item index="2-1">选项1</el-menu-item>
+          <el-menu-item>选项1</el-menu-item>
           <el-submenu index="2-4">
             <template slot="title">选项4</template>
-            <el-menu-item index="2-4-1">选项1</el-menu-item>
+            <el-menu-item>选项1</el-menu-item>
           </el-submenu>
         </el-submenu>
-        <el-menu-item class="header-right" index="4"><a href="https://www.ele.me" target="_blank">登录</a></el-menu-item>
-        <el-menu-item index="5" class="header-right">购物车<i class="el-icon-shopping-cart-1"/></el-menu-item>
-    </el-menu>
+        <el-menu-item class="header-right" index="/login">登录</el-menu-item>
+        <el-menu-item class="header-right">购物车<i class="el-icon-shopping-cart-1"/></el-menu-item>
+      </el-menu>
     </div>
   </main>
 </template>
@@ -43,7 +44,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../assets/css/base.css";
+  @import "../../assets/css/base";
   .header{
     height: 60px;
     .my-container{

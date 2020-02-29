@@ -1,6 +1,6 @@
 # 编辑器配置文件
 root = true
-[*.{js,jsx,ts,tsx,vue}]
+[*.{js,jsx,ts,tsx,vue,scss}]
 charset = utf-8
 indent_style = space
 indent_size = 2

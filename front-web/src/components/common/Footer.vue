@@ -1,48 +1,49 @@
 <template>
   <div>
     <footer class="footer">
-      <div class="clearfix"></div>
-      <div class="icon-row">
-        <div class="footer-icon">
-          <h5 class="footer-icon-child"></h5>
-          <span class="footer-icon-text">品类齐全，轻松购物</span>
-        </div>
-        <div class="footer-icon">
-          <h5 class="footer-icon-child footer-icon-child-2"></h5>
-          <span class="footer-icon-text">多仓直发，极速配送</span>
-        </div>
-        <div class="footer-icon">
-          <h5 class="footer-icon-child footer-icon-child-3"></h5>
-          <span class="footer-icon-text">正品行货，精致服务</span>
-        </div>
-        <div class="footer-icon">
-          <h5 class="footer-icon-child footer-icon-child-4"></h5>
-          <span class="footer-icon-text">天天低价，畅选无忧</span>
-        </div>
-      </div>
-      <div class="service-intro">
-        <div class="servece-type">
-          <div class="servece-type-info" v-for="(guide, index) in guideArr" :key="index">
-            <ul>
-              <li v-for="(item, index) in guide" :key="index">{{item}}</li>
-            </ul>
+      <main class=" my-container">
+        <div class="icon-row">
+          <div class="footer-icon">
+            <h5 class="footer-icon-child"></h5>
+            <span class="footer-icon-text">品类齐全，轻松购物</span>
+          </div>
+          <div class="footer-icon">
+            <h5 class="footer-icon-child footer-icon-child-2"></h5>
+            <span class="footer-icon-text">多仓直发，极速配送</span>
+          </div>
+          <div class="footer-icon">
+            <h5 class="footer-icon-child footer-icon-child-3"></h5>
+            <span class="footer-icon-text">正品行货，精致服务</span>
+          </div>
+          <div class="footer-icon">
+            <h5 class="footer-icon-child footer-icon-child-4"></h5>
+            <span class="footer-icon-text">天天低价，畅选无忧</span>
           </div>
         </div>
-        <div class="clearfix"></div>
-        <div class="friend-link">
-          <div class="friend-link-item">
-            <ul>
-              <li v-for="(link, index) in moreLink" :key="index">
-                <span :class="[linkItemClass, {'link-last-item': index === 9}]">{{link}}</span>
-              </li>
-            </ul>
+        <div class="service-intro">
+          <div class="servece-type">
+            <div class="servece-type-info" v-for="(guide, index) in guideArr" :key="index">
+              <ul>
+                <li v-for="(item, index) in guide" :key="index">{{item}}</li>
+              </ul>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="friend-link">
+            <div class="friend-link-item">
+              <ul>
+                <li v-for="(link, index) in moreLink" :key="index">
+                  <span :class="[linkItemClass, {'link-last-item': index === 9}]">{{link}}</span>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="clearfix"></div>
+          <div class="copyright">
+            <p>Copyright © 2018 by Gavin <a href="https://github.com/sch-git/pili-shop"></a></p>
           </div>
         </div>
-        <div class="clearfix"></div>
-        <div class="copyright">
-          <p>Copyright © 2018 by Gavin <a href="https://github.com/sch-git/pili-shop"></a></p>
-        </div>
-      </div>
+      </main>
     </footer>
   </div>
 </template>
