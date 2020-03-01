@@ -43,7 +43,7 @@
           <el-row>
             <el-col :span="6" class="item" v-for="item in commodityList" :key="item.id">
               <div class="item-img">
-                <img :src="item.url" alt=""/>
+                <img v-lazy="item.url" alt=""/>
               </div>
               <div class="item-info">
                 <h5>{{ item.name }}</h5>
@@ -62,6 +62,7 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import { findCategoryList } from '@/api/commodity/category'
 import { findCommodityList } from '@/api/commodity'
+import VueLazyload from '@/lib/tools'
 
 export default {
   name: 'Index',
@@ -269,16 +270,18 @@ export default {
               height: 16px;
               line-height: 16px;
               color: #333333;
-              margin: 10px 0 10px;
+              margin: 20px 0 21px;
             }
 
             p {
-              font-size: 14px;
-              height: 14px;
-              line-height: 14px;
-              color: #999999;
+              font-size: 15px;
+              height: 18px;
+              line-height: 18px;
+              color: #99999f;
               i{
                 float: right;
+                margin-right: 10px;
+                color: red;
               }
             }
 
