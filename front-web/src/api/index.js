@@ -1,6 +1,5 @@
 import axios from '@/lib/axios'
 import { Message } from 'element-ui'
-import store from '@/store'
 
 /**
  * axios响应拦截器
@@ -16,6 +15,9 @@ axios.interceptors.response.use(res => {
   console.log('response', res)
   return res.data.data
 }, error => {
+  if (!error.response.status) {
+    Message.error({ message: '神秘错误' })
+  }
   if (error.response.status === 504 || error.response.status === 404) {
     Message.error({ message: '服务器被吃了(ง •_•)ง' })
   } else if (error.response.status === 403) {
@@ -37,7 +39,7 @@ axios.interceptors.response.use(res => {
  */
 axios.interceptors.request.use(req => {
   if (req.url !== '/login') {
-    req.headers.Authorization = store.state.user.userInfo.token
+    // req.headers.Authorization = store.state.user.userInfo.token
   }
   console.log('request', req)
   return req

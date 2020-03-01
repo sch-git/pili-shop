@@ -9,9 +9,9 @@
             background-color="#242f42"
             text-color="#fff"
             active-text-color="#ffd04b">
-            <el-menu-item index="1">
+            <el-menu-item v-for="item in categoryList" :key="item.id">
               <i class="el-icon-menu"></i>
-              <span slot="title">分类</span>
+              <span slot="title">{{ item.name }}</span>
             </el-menu-item>
           </el-menu>
         </div>
@@ -41,7 +41,7 @@
         <div class="banner-top"></div>
         <div class="list-box">
           <el-row>
-            <el-col :span="6" class="item" v-for="item in proList" :key="item.id">
+            <el-col :span="6" class="item" v-for="item in commodityList" :key="item.id">
               <div class="item-img">
                 <img :src="item.url" alt=""/>
               </div>
@@ -60,6 +60,8 @@
 <script>
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
+import { findCategoryList } from '@/api/commodity/category'
+import { findCommodityList } from '@/api/commodity'
 
 export default {
   name: 'Index',
@@ -69,6 +71,44 @@ export default {
   },
   data () {
     return {
+      // 分类
+      categoryList: [
+        {
+          id: 0,
+          name: '手办',
+          status: true
+        }
+      ],
+      categoryAO: {
+        status: true,
+        name: '',
+        pageNum: 1,
+        pageSize: 6
+      },
+      // 商品
+      commodityList: [
+        {
+          id: '',
+          categoryId: '',
+          categoryName: '',
+          name: '',
+          price: 0.00,
+          describe: '',
+          status: true,
+          url: '',
+          createName: '',
+          createTime: '',
+          updateName: '',
+          updateTime: ''
+        }
+      ],
+      commodityAO: {
+        name: '',
+        categoryId: '',
+        status: true,
+        pageNum: 1,
+        pageSize: 12
+      },
       // 轮播图
       swiperOptions: {
         autoplay: true,
@@ -124,49 +164,30 @@ export default {
           name: 'name-5',
           url: 'http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w'
         }
-      ],
-      // 商品
-      proList: [
-        {
-          id: 1,
-          name: 'pro-1',
-          price: 99.00,
-          url: 'http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w'
-        },
-        {
-          id: 2,
-          name: 'pro-2',
-          price: 99.00,
-          url: 'http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w'
-        },
-        {
-          id: 3,
-          name: 'pro-3',
-          price: 99.00,
-          url: 'http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w'
-        },
-        {
-          id: 4,
-          name: 'pro-4',
-          price: 99.00,
-          url: 'http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w'
-        },
-        {
-          id: 5,
-          name: 'pro-5',
-          price: 99.00,
-          url: 'http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w'
-        }
       ]
     }
   },
   created () {
-
+    this.handlerInit()
   },
   methods: {
     // 初始化数据
     handlerInit () {
-
+      this.findCategoryList()
+      this.findCommodityList()
+    },
+    // 获取分类
+    findCategoryList () {
+      findCategoryList(this.categoryAO).then(res => {
+        this.categoryList = res.list
+        console.log(this.categoryList)
+      })
+    },
+    // 获取商品
+    findCommodityList () {
+      findCommodityList(this.commodityAO).then(res => {
+        this.commodityList = res.list
+      })
     },
     // 获取轮播图
     handlerSwiperImage () {
