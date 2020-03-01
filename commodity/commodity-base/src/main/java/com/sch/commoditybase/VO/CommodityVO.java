@@ -1,5 +1,6 @@
 package com.sch.commoditybase.VO;
 
+import com.sch.commonbasic.util.QiNiuCloudUtil;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -71,4 +72,8 @@ public class CommodityVO implements Serializable {
      * 修改时间
      */
     private String updateTime;
+
+    public void setUrl(String url) {
+        this.url = QiNiuCloudUtil.getDOMAIN() + url;
+    }
 }

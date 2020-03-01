@@ -44,8 +44,8 @@ public class CommodityServiceTest {
         searchCommodityAO.setCategoryId(null);
         searchCommodityAO.setName("");
         searchCommodityAO.setPageNum(1);
-        searchCommodityAO.setPageSize(3);
-        searchCommodityAO.setStatus(null);
+        searchCommodityAO.setPageSize(6);
+        searchCommodityAO.setStatus(true);
         System.out.println(commodityBaseService.findCommodityList(searchCommodityAO));
     }
 
