@@ -12,7 +12,6 @@
       <el-upload
         class="avatar-uploader avatar-box"
         action="http://localhost:10080/admin/avatar"
-        name="avatar"
         :headers="tokenHeader"
         :show-file-list="false"
         :on-success="handleAvatarSuccess"
@@ -64,11 +63,13 @@
 import { beforeUpload, uploadSuccess } from '@/api/common'
 import { addCommodity } from '@/api/commodity'
 import { checkName, checkPrice, checkCategory, checkDescribe, checkUrl } from '@/lib/tools'
+import { findCategoryList } from '@/api/commodity/category'
 
 export default {
   name: 'addProduct',
   data () {
     return {
+      // 添加表单
       form: {
         categoryId: '',
         name: '',
@@ -77,6 +78,13 @@ export default {
         status: true,
         url: '',
         createName: ''
+      },
+      // 商品查询条件
+      searchAO: {
+        status: true,
+        name: '',
+        pageNum: 1,
+        pageSize: 0
       },
       // 商品分类选择器
       categoryOptions: [
@@ -111,7 +119,16 @@ export default {
       }
     }
   },
+  created () {
+    this.searchCategory()
+  },
   methods: {
+    // 查询分类
+    searchCategory () {
+      findCategoryList(this.searchAO).then(res => {
+        this.categoryOptions = res.list
+      })
+    },
     // 提交表单
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
@@ -147,6 +164,7 @@ export default {
   }
 
   .form-item-box {
+    min-width: 400px;
     padding: 10px 25%;
   }
 

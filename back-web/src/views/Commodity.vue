@@ -43,7 +43,7 @@
           <template slot-scope="scope">
             <el-image
               class="table-td-thumb"
-              src="http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w"
+              :src="scope.row.url"
               :preview-src-list="['http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w']"
             ></el-image>
           </template>
@@ -262,6 +262,7 @@ export default {
     handleSearch () {
       findCommodityList(this.searchCommodityAO).then(res => {
         this.tableData = res.list
+        console.log(this.tableData)
         this.pageInfo.total = res.total
         this.loading_table = false
       })
@@ -358,7 +359,7 @@ export default {
   .table-td-thumb {
     display: block;
     margin: auto;
-    width: 40px;
-    height: 40px;
+    width: 75px;
+    height: 75px;
   }
 </style>
