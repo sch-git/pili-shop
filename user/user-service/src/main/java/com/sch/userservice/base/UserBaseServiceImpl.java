@@ -55,4 +55,15 @@ public class UserBaseServiceImpl implements UserBaseService {
     public void updateUserStatus(UpdateUserStatusAO updateUserStatusAO) {
         userService.updateUserStatus(updateUserStatusAO);
     }
+
+    /**
+     * 根据用户名查询对象
+     *
+     * @param name 用户名
+     * @return user对象
+     */
+    @Override
+    public UserVO findUserByName(String name) {
+        return userService.findUserByName(name);
+    }
 }

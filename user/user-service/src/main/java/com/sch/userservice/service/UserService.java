@@ -26,4 +26,12 @@ public interface UserService {
      * @param updateUserStatusAO 修改条件
      */
     void updateUserStatus(UpdateUserStatusAO updateUserStatusAO);
+
+    /**
+     * 根据用户名查询对象
+     *
+     * @param name 用户名
+     * @return user对象
+     */
+    UserVO findUserByName(String name);
 }

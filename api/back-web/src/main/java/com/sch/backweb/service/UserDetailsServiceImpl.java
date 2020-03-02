@@ -39,7 +39,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
         AdminVO adminVO = adminBaseService.findByName(name);
         if (adminVO == null) {
-            throw new UsernameNotFoundException("用户名不存在");
+            throw new UsernameNotFoundException("用户名或密码错误!");
         }
         User user = new User();
         BeanUtils.copyProperties(adminVO, user);

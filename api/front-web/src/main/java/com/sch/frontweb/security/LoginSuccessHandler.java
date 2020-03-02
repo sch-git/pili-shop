@@ -1,13 +1,11 @@
-package com.sch.backweb.handler;
+package com.sch.frontweb.security;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.sch.backweb.entity.User;
 import com.sch.commonbasic.VO.Result;
 import com.sch.commonbasic.enums.ResultEnum;
+import com.sch.frontweb.entity.MyUser;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.core.Authentication;
@@ -26,11 +24,10 @@ import java.util.Date;
 /**
  * @Description: json登录成功处理器
  * @Author: chenghao.su
- * @Date: 2020/1/20 20:57
+ * @Date: 2020/3/2 14:20
  */
 @Configuration
-public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
-    private static final Logger LOGGER = LoggerFactory.getLogger(SecuritySuccessHandler.class);
+public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 
     @Autowired
     HttpSession session;
@@ -38,7 +35,6 @@ public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
                                         Authentication authentication) throws IOException, ServletException {
-        LOGGER.info("SecuritySuccessHandler");
         Collection<? extends GrantedAuthority> authorities = authentication.getAuthorities();
         StringBuffer stringBuffer = new StringBuffer();
         for (GrantedAuthority authority : authorities) {
@@ -54,7 +50,7 @@ public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
 
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
-        User user = (User) authentication.getPrincipal();
+        MyUser user = (MyUser) authentication.getPrincipal();
         user.setToken(jwt);
         session.setAttribute(session.getId(), user.getId());
         String str = new ObjectMapper().writeValueAsString(new Result(ResultEnum.LOGIN_SUCCESS, user));
@@ -62,4 +58,5 @@ public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
         out.flush();
         out.close();
     }
+
 }

@@ -29,4 +29,12 @@ public interface UserDao {
      * @param updateUserStatusDTO 修改条件
      */
     void updateUserStatus(UpdateUserStatusDTO updateUserStatusDTO);
+
+    /**
+     * 根据用户名查询对象
+     *
+     * @param name 用户名
+     * @return user对象
+     */
+    User findUserByName(String name);
 }

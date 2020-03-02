@@ -64,4 +64,23 @@ public class UserServiceImpl implements UserService {
         updateUserStatusDTO.setAO(updateUserStatusAO);
         userDao.updateUserStatus(updateUserStatusDTO);
     }
+
+    /**
+     * 根据用户名查询对象
+     *
+     * @param name 用户名
+     * @return user对象
+     */
+    @Override
+    public UserVO findUserByName(String name) {
+        User user = userDao.findUserByName(name);
+        if (user == null) {
+            return null;
+        }
+        UserVO userVO = new UserVO();
+        BeanUtils.copyProperties(user, userVO);
+        userVO.setUpdateTime(DateUtil.toString(user.getUpdateTime()));
+        userVO.setCreateTime(DateUtil.toString(user.getCreateTime()));
+        return userVO;
+    }
 }

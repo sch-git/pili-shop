@@ -38,4 +38,12 @@ public class UserDaoTest {
         updateUserStatusDTO.setStatus(false);
         userDao.updateUserStatus(updateUserStatusDTO);
     }
+
+    /**
+     * 根据用户名查询用户
+     */
+    @Test
+    void findUserByName() {
+        System.out.println(userDao.findUserByName("test123"));
+    }
 }

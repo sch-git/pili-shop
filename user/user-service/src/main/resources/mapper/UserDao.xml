@@ -38,4 +38,9 @@
         set status=#{status},update_time=#{updateTime}
         where id=#{id}
     </update>
+    <select id="findUserByName" resultMap="BaseResultMap">
+        select *
+        from t_user
+        where name=#{name}
+    </select>
 </mapper>
