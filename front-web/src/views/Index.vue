@@ -35,7 +35,7 @@
         background-color="#f0f0f0"
         text-color="#242f42"
         router>
-        <el-menu-item>更多商品>>></el-menu-item>
+        <el-menu-item class="more-commodity">更多商品>>></el-menu-item>
       </el-menu>
       <div class="product-box">
         <div class="banner-top"></div>
@@ -207,6 +207,10 @@ export default {
 
   .index {
     /*margin-top: 15px;*/
+    .more-commodity{
+      font-weight: bolder;
+      font-size: 18px;
+    }
     .swiper-box {
       .nav-menu {
         position: absolute;

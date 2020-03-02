@@ -55,10 +55,10 @@ export default {
     return {
       linkItemClass: 'link-item',
       guideArr: [
-        ['购物指南', '购物流程', '会员介绍', '生活旅行', '常见问题', '大家电', '联系客服'],
-        ['配送方式', '上门自提', '211限时达', '配送服务查询', '收取标准', '海外配送'],
-        ['支付方式', '货到付款', '在线支付', '分期付款', '邮局汇款', '公司转账'],
-        ['售后服务', '售后政策', '价格保护', '退款说明', '返修/退换货', '取消订单']
+        ['购物指南', '购物流程', '会员介绍', '生活旅行', '常见问题'],
+        ['配送方式', '上门自提', '211限时达', '配送服务查询', '收取标准'],
+        ['支付方式', '货到付款', '在线支付', '分期付款', '邮局汇款'],
+        ['售后服务', '售后政策', '价格保护', '退款说明', '返修/退换货']
       ],
       moreLink: [
         '关于我们', '联系我们', '联系客服', '合作招商', '商家帮助', '营销中心', '销售联盟', '校园社区', '风险监测', '隐私政策'
@@ -72,9 +72,8 @@ export default {
   /*****************************底 部 开 始*****************************/
   .footer {
     width: 100%;
-    height: 390px;
     margin-top: 30px;
-    background-color: #eaeaea;
+    background-color: #1b1b1b;
   }
   .icon-row {
     margin: 15px auto;
@@ -107,7 +106,7 @@ export default {
   }
   .footer-icon-text {
     margin-left: 45px;
-    color: #444444;
+    color: #fff;
     font-size: 18px;
     font-weight: bold;
     line-height: 64px;
@@ -118,14 +117,13 @@ export default {
   }
   .servece-type {
     margin: 15px auto;
-    height: 200px;
     width: 800px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
   }
   .servece-type-info {
-    color: #666666;
+    color: #ffffff;
   }
   .servece-type-info ul {
     list-style: none;
@@ -143,10 +141,9 @@ export default {
   .friend-link {
     display: flex;
     align-items: center;
-    width: 908px;
+    width: 1000px;
     height: 30px;
-    margin: 0px auto;
-    color: #666;
+    color: #ffffff;
     border-top: 1px solid #b2dfdb;
   }
   .friend-link-item {
@@ -169,7 +166,7 @@ export default {
   }
   .copyright {
     width: 100%;
-    color: #666;
+    color: #f0f0f0;
     line-height:25px;
     text-align: center;
   }
