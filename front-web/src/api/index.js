@@ -1,10 +1,12 @@
 import axios from '@/lib/axios'
 import { Message } from 'element-ui'
+import store from '@/store'
 
 /**
  * axios响应拦截器
  */
 axios.interceptors.response.use(res => {
+  console.log('response', res)
   if (res.data && res.status === 200 && res.data.code !== 200) {
     Message.error({ message: res.data.message })
     return null
@@ -12,7 +14,6 @@ axios.interceptors.response.use(res => {
   if (res.data && res.data.message !== '') {
     Message.success(res.data.message)
   }
-  console.log('response', res)
   return res.data.data
 }, error => {
   if (!error.response.status) {
@@ -39,7 +40,7 @@ axios.interceptors.response.use(res => {
  */
 axios.interceptors.request.use(req => {
   if (req.url !== '/login') {
-    // req.headers.Authorization = store.state.user.userInfo.token
+    req.headers.Authorization = store.state.userInfo.token
   }
   console.log('request', req)
   return req

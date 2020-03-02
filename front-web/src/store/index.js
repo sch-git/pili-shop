@@ -1,11 +1,17 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 import state from './state'
-import mutations from './mutations'
 import actions from './actions'
 import user from './module/user'
+import saveInLocal from '@/plugins/saveInLocal'
 
 Vue.use(Vuex)
+
+const mutations = {
+  SET_USER (state, params) {
+    state.userInfo = params
+  }
+}
 
 export default new Vuex.Store({
   state,
@@ -13,5 +19,6 @@ export default new Vuex.Store({
   actions,
   modules: {
     user
-  }
+  },
+  plugins: [saveInLocal]
 })

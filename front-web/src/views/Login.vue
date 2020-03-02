@@ -26,15 +26,15 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
-import { login } from '@/api/user'
 
+import { login } from '@/api/user'
+import { mapMutations } from 'vuex'
 export default {
   data: function () {
     return {
       param: {
-        username: '',
-        password: ''
+        username: 'user',
+        password: '123'
       },
       rules: {
         username: [{ required: true, message: '请输入用户名', trigger: 'blur' }],
@@ -69,7 +69,7 @@ export default {
     },
     // 登录成功-设置用户信息
     getUserInfo (userInfo) {
-      // this.SET_USER(userInfo)
+      this.SET_USER(userInfo)
     }
   }
 }
