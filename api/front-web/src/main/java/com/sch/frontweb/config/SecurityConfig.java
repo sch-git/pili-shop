@@ -101,6 +101,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers(HttpMethod.OPTIONS).permitAll()
+                .antMatchers(HttpMethod.GET).permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
@@ -111,7 +112,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .exceptionHandling()
                 .authenticationEntryPoint(authEntryPointHandler);
         http.addFilterAt(jsonAuthenticationFilter(), UsernamePasswordAuthenticationFilter.class);
-        http.addFilterAt(jwtFilter, UsernamePasswordAuthenticationFilter.class);
-
     }
 }

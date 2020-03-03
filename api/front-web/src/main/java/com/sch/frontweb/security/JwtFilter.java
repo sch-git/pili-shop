@@ -3,6 +3,9 @@ package com.sch.frontweb.security;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;
@@ -15,6 +18,7 @@ import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 import java.util.List;
 
@@ -25,11 +29,22 @@ import java.util.List;
  */
 @Configuration
 public class JwtFilter extends GenericFilterBean {
+    private static final Logger LOGGER = LoggerFactory.getLogger(JwtFilter.class);
+    private static final String GET = "GET";
+    @Autowired
+    HttpSession session;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse
             , FilterChain filterChain) throws IOException, ServletException {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+        // 如果用户未登录就不做token校检
+        LOGGER.info("JWT校检登录{}", session.getId());
+        LOGGER.info("JWT校检登录-SESSION{}", session.getAttribute(session.getId()));
+        if (session.getAttribute(session.getId()) == null) {
+            filterChain.doFilter(servletRequest, servletResponse);
+            return;
+        }
         String jwtToken = request.getHeader("Authorization");
         Jws<Claims> jws = Jwts.parser().setSigningKey("jwt-security")
                 .parseClaimsJws(jwtToken.replace("Bearer", ""));
