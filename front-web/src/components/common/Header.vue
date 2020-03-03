@@ -2,12 +2,12 @@
   <main>
     <div class="header">
       <el-menu
-      class="el-menu-demo my-container"
-      mode="horizontal"
-      @select="handleSelect"
-      background-color="#242f42"
-      text-color="#fff"
-      router>
+        class="el-menu-demo my-container"
+        mode="horizontal"
+        @select="handleSelect"
+        background-color="#242f42"
+        text-color="#fff"
+        router>
         <el-menu-item>pili-shop</el-menu-item>
         <el-submenu index="2">
           <template slot="title">我的工作台</template>
@@ -17,7 +17,12 @@
             <el-menu-item>选项1</el-menu-item>
           </el-submenu>
         </el-submenu>
-        <el-menu-item class="header-right" index="/login">登录</el-menu-item>
+        <el-menu-item v-if="!userInfo.token" class="header-right" index="/login">登录</el-menu-item>
+        <el-submenu v-else class="header-right" index="3">
+          <template slot="title">{{ userInfo.username }}</template>
+          <el-menu-item>个人中心</el-menu-item>
+          <el-menu-item>退出</el-menu-item>
+        </el-submenu>
         <el-menu-item class="header-right">购物车<i class="el-icon-shopping-cart-1"/></el-menu-item>
       </el-menu>
     </div>
@@ -26,12 +31,17 @@
 
 <script>
 
+import { mapState } from 'vuex'
+
 export default {
   name: 'Header',
   data () {
     return {
       activeIndex2: '1'
     }
+  },
+  computed: {
+    ...mapState(['userInfo'])
   },
   created () {
   },
@@ -45,18 +55,22 @@ export default {
 
 <style scoped lang="scss">
   @import "../../assets/css/base";
-  .header{
+
+  .header {
     height: 60px;
-    .my-container{
-      .header-right{
+
+    .my-container {
+      .header-right {
         float: right;
       }
     }
   }
-  .el-menu--horizontal>.el-menu-item>.el-icon-shopping-cart-1{
+
+  .el-menu--horizontal > .el-menu-item > .el-icon-shopping-cart-1 {
     color: #f0f0f0;
   }
-  .el-menu--horizontal>.el-menu-item.is-active{
+
+  .el-menu--horizontal > .el-menu-item.is-active {
     border-bottom: 2px solid #fb9f16;
     color: #fb9f16;
   }

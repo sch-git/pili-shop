@@ -35,7 +35,9 @@
         background-color="#f0f0f0"
         text-color="#242f42"
         router>
-        <el-menu-item class="more-commodity">更多商品>>></el-menu-item>
+        <el-menu-item class="more-commodity">
+          <router-link to="/goodList">更多商品>>></router-link>
+        </el-menu-item>
       </el-menu>
       <div class="product-box">
         <div class="banner-top"></div>
@@ -62,6 +64,7 @@ import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import { findCategoryList } from '@/api/commodity/category'
 import { findCommodityList } from '@/api/commodity'
+// eslint-disable-next-line
 import VueLazyload from '@/lib/tools'
 
 export default {

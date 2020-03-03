@@ -40,7 +40,9 @@ axios.interceptors.response.use(res => {
  */
 axios.interceptors.request.use(req => {
   if (req.url !== '/login') {
-    req.headers.Authorization = store.state.userInfo.token
+    if (store.state.userInfo && store.state.userInfo.token) {
+      req.headers.Authorization = store.state.userInfo.token
+    }
   }
   console.log('request', req)
   return req
