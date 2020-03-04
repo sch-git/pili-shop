@@ -8,6 +8,7 @@ import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
+import com.sch.commoditybase.VO.CommodityDetailVO;
 import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
 import com.sch.commodityservice.service.CommodityService;
@@ -70,5 +71,16 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
     @Override
     public void updateCommodity(UpdateCommodityAO updateCommodityAO) {
         commodityService.updateCommodity(updateCommodityAO);
+    }
+
+    /**
+     * 根据id查询商品详情
+     *
+     * @param id 商品id
+     * @return 商品详情（包括分类名，商品图片）
+     */
+    @Override
+    public List<CommodityDetailVO> findById(Long id) {
+        return commodityService.findById(id);
     }
 }

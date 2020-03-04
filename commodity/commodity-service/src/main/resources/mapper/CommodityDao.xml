@@ -58,4 +58,15 @@
         ,update_id=#{updateId},update_name=#{updateName},update_time=#{updateTime}
         where id=#{id}
     </update>
+    <!--根据商品id查询商品，分类名，图片-->
+    <select id="findById" resultType="com.sch.commodityservice.dto.CommodityDetailDTO">
+        select tc.id,tci.url,tc.category_id,c.name as 'categoryName', tc.name, tc.price, tc.describe, tc.status,
+        tc.create_name, tc.create_time, tc.update_name, tc.update_time
+        from t_commodity tc
+        left join t_commodity_image tci
+        on tc.id=tci.commodity_id
+        left join t_category c
+        on tc.category_id=c.id
+        where tc.id=#{id}
+    </select>
 </mapper>

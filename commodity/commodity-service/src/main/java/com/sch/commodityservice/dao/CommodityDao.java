@@ -2,6 +2,7 @@ package com.sch.commodityservice.dao;
 
 import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commodityservice.dto.AddCommodityDTO;
+import com.sch.commodityservice.dto.CommodityDetailDTO;
 import com.sch.commodityservice.dto.UpdateCommodityDTO;
 import com.sch.commodityservice.dto.UpdateCommodityStatusDTO;
 import com.sch.commodityservice.entity.Commodity;
@@ -44,4 +45,12 @@ public interface CommodityDao {
      * @param updateCommodityDTO 修改条件
      */
     void updateCommodity(UpdateCommodityDTO updateCommodityDTO);
+
+    /**
+     * 根据id查询商品详情
+     *
+     * @param id 商品id
+     * @return 商品详情（包括分类名，商品图片）
+     */
+    List<CommodityDetailDTO> findById(Long id);
 }

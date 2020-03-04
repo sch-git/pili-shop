@@ -5,7 +5,10 @@ import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
+import com.sch.commoditybase.VO.CommodityDetailVO;
 import com.sch.commoditybase.VO.CommodityVO;
+
+import java.util.List;
 
 /**
  * @Description: 商品模块外部接口
@@ -42,4 +45,12 @@ public interface CommodityBaseService {
      * @param updateCommodityAO 修改条件
      */
     void updateCommodity(UpdateCommodityAO updateCommodityAO);
+
+    /**
+     * 根据id查询商品详情
+     *
+     * @param id 商品id
+     * @return 商品详情（包括分类名，商品图片）
+     */
+    List<CommodityDetailVO> findById(Long id);
 }

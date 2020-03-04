@@ -7,10 +7,7 @@ import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
 import com.sch.commoditybase.base.CommodityImageBaseService;
 import com.sch.commonbasic.VO.Result;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @Description: 前台-商品接口
@@ -35,5 +32,16 @@ public class CommodityController {
     public Result findCommodityList(@ModelAttribute SearchCommodityAO searchCommodityAO) {
         PageInfo<CommodityVO> pageInfo = commodityBaseService.findCommodityList(searchCommodityAO);
         return Result.success(pageInfo);
+    }
+
+    /**
+     * 根据id查询商品详情
+     *
+     * @param commodityId 商品id
+     * @return 商品详情（包括分类名，商品图片）
+     */
+    @GetMapping("/item")
+    public Result findCommodityById(@RequestParam Long commodityId) {
+        return Result.success(commodityBaseService.findById(commodityId));
     }
 }

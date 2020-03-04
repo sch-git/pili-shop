@@ -86,4 +86,12 @@ public class CommodityDaoTest {
         updateCommodityDTO.setUpdateTime(DateUtil.createTime());
         commodityDao.updateCommodity(updateCommodityDTO);
     }
+
+    /**
+     * 查询商品详情
+     */
+    @Test
+    public void findById() {
+        System.out.println(commodityDao.findById(1L));
+    }
 }

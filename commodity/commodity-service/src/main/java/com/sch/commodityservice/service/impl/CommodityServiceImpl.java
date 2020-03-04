@@ -4,13 +4,11 @@ import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
+import com.sch.commoditybase.VO.CommodityDetailVO;
 import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commodityservice.dao.CommodityDao;
 import com.sch.commodityservice.dao.CommodityImageDao;
-import com.sch.commodityservice.dto.AddCommodityDTO;
-import com.sch.commodityservice.dto.AddCommodityImageDTO;
-import com.sch.commodityservice.dto.UpdateCommodityDTO;
-import com.sch.commodityservice.dto.UpdateCommodityStatusDTO;
+import com.sch.commodityservice.dto.*;
 import com.sch.commodityservice.entity.Commodity;
 import com.sch.commodityservice.service.CommodityService;
 import com.sch.commonbasic.util.DateUtil;
@@ -100,5 +98,29 @@ public class CommodityServiceImpl implements CommodityService {
         UpdateCommodityDTO dto = new UpdateCommodityDTO();
         dto.setAO(updateCommodityAO);
         commodityDao.updateCommodity(dto);
+    }
+
+    /**
+     * 根据id查询商品详情
+     *
+     * @param id 商品id
+     * @return 商品详情（包括分类名，商品图片）
+     */
+    @Override
+    public List<CommodityDetailVO> findById(Long id) {
+        List<CommodityDetailDTO> commodityDetailDTOs = commodityDao.findById(id);
+        if (commodityDetailDTOs == null) {
+            return null;
+        }
+        List<CommodityDetailVO> commodityDetailVOS = new ArrayList<>(commodityDetailDTOs.size());
+        for (CommodityDetailDTO dto : commodityDetailDTOs) {
+            CommodityDetailVO commodityDetailVO = new CommodityDetailVO();
+            BeanUtils.copyProperties(dto, commodityDetailVO);
+            commodityDetailVO.setCreateTime(DateUtil.toString(dto.getCreateTime()));
+            commodityDetailVO.setUpdateTime(DateUtil.toString(dto.getUpdateTime()));
+            commodityDetailVO.setUrl(dto.getUrl());
+            commodityDetailVOS.add(commodityDetailVO);
+        }
+        return commodityDetailVOS;
     }
 }
