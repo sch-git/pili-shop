@@ -8,3 +8,7 @@ import axios from '@/api/index'
 export const findCommodityList = params => {
   return axios.get('/commodity/list', { params })
 }
+
+export const findCommodityById = commodityId => {
+  return axios.get('/commodity/item', { params: { commodityId } })
+}

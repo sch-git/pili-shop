@@ -44,12 +44,14 @@
         <div class="list-box">
           <el-row>
             <el-col :span="6" class="item" v-for="item in commodityList" :key="item.id">
-              <div class="item-img">
-                <img v-lazy="item.url" alt=""/>
-              </div>
-              <div class="item-info">
-                <h5>{{ item.name }}</h5>
-                <p>{{ item.price }}<i class="el-icon-shopping-cart-1"/></p>
+              <div @click="handleDetail(item.id)" style="cursor: pointer">
+                <div class="item-img">
+                  <img v-lazy="item.url" alt=""/>
+                </div>
+                <div class="item-info">
+                  <h5>{{ item.name }}</h5>
+                  <p>{{ item.price }}<i class="el-icon-shopping-cart-1"/></p>
+                </div>
               </div>
             </el-col>
           </el-row>
@@ -65,7 +67,7 @@ import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import { findCategoryList } from '@/api/commodity/category'
 import { findCommodityList } from '@/api/commodity'
 // eslint-disable-next-line
-import VueLazyload from '@/lib/tools'
+  import VueLazyload from '@/lib/tools'
 
 export default {
   name: 'Index',
@@ -172,11 +174,11 @@ export default {
     }
   },
   created () {
-    this.handlerInit()
+    this.handleInit()
   },
   methods: {
     // 初始化数据
-    handlerInit () {
+    handleInit () {
       this.findCategoryList()
       this.findCommodityList()
     },
@@ -197,23 +199,25 @@ export default {
     handlerSwiperImage () {
 
     },
-    // 获取分类信息
-    handlerGetCategory () {
-
+    // 点击查看商品详情
+    handleDetail (commodityId) {
+      console.log(commodityId)
+      this.$router.push(`/goodDetail/${commodityId}`)
     }
   }
 }
 </script>
 
-<style lang="scss">
+<style scoped lang="scss">
   @import "../assets/css/base";
 
   .index {
     /*margin-top: 15px;*/
-    .more-commodity{
+    .more-commodity {
       font-weight: bolder;
       font-size: 18px;
     }
+
     .swiper-box {
       .nav-menu {
         position: absolute;
@@ -285,7 +289,8 @@ export default {
               height: 18px;
               line-height: 18px;
               color: #99999f;
-              i{
+
+              i {
                 float: right;
                 margin-right: 10px;
                 color: red;

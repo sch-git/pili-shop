@@ -74,4 +74,10 @@ export default {
     border-bottom: 2px solid #fb9f16;
     color: #fb9f16;
   }
+  .el-menu--horizontal{
+    border-bottom:none;
+  }
+</style>
+<style>
+
 </style>

@@ -4,7 +4,7 @@ import Register from '@/views/Register.vue'
 export default [
   {
     path: '/',
-    redirect: '/login'
+    redirect: '/index'
   },
   {
     path: '/login',
@@ -26,8 +26,14 @@ export default [
       },
       {
         path: '/goodList',
-        component: () => import(/* webpackChunkName: "home" */ '~c/goods/GoodsList'),
+        component: () => import(/* webpackChunkName: "home" */ '~c/goods/GoodList'),
         meta: { title: '商品列表' }
+      },
+      {
+        path: '/goodDetail/:commodityId',
+        component: () => import(/* webpackChunkName: "home" */ '~c/goods/GoodDetail'),
+        props: true,
+        meta: { title: '商品详情' }
       }
     ]
   }

@@ -28,12 +28,14 @@
       <div class="list-box" v-else>
         <el-row>
           <el-col :span="6" class="item" v-for="item in commodityList" :key="item.id">
-            <div class="item-img">
-              <img v-lazy="item.url" alt=""/>
-            </div>
-            <div class="item-info">
-              <h5>{{ item.name }}</h5>
-              <p>{{ item.price }}<i class="el-icon-shopping-cart-1"/></p>
+            <div @click="handleDetail(item.id)" style="cursor: pointer">
+              <div class="item-img">
+                <img v-lazy="item.url" alt=""/>
+              </div>
+              <div class="item-info">
+                <h5>{{ item.name }}</h5>
+                <p>{{ item.price }}<i class="el-icon-shopping-cart-1"/></p>
+              </div>
             </div>
           </el-col>
         </el-row>
@@ -57,9 +59,10 @@
 import { findCategoryList } from '@/api/commodity/category'
 import { findCommodityList } from '@/api/commodity'
 // eslint-disable-next-line
-import VueLazyload from '@/lib/tools'
+  import VueLazyload from '@/lib/tools'
+
 export default {
-  name: 'GoodsList',
+  name: 'GoodList',
   data () {
     return {
       // 分页数据
@@ -145,6 +148,11 @@ export default {
         this.commodityAO.categoryId = null
       }
       this.findCommodityList()
+    },
+    // 点击查看商品详情
+    handleDetail (commodityId) {
+      console.log(commodityId)
+      this.$router.push(`/goodDetail/${commodityId}`)
     }
   }
 }
@@ -196,8 +204,9 @@ export default {
 
   .product-box {
     margin-top: 20px;
+
     .banner-top {
-      h1{
+      h1 {
         margin: 50px 0;
         text-align: center;
       }
@@ -247,7 +256,7 @@ export default {
     }
   }
 
-  .pagination > .el-pagination{
+  .pagination > .el-pagination {
     height: 30px;
     padding-top: 30px;
   }
