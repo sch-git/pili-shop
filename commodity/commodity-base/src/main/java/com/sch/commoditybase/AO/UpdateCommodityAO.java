@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @Description: 修改商品AO
@@ -32,7 +33,7 @@ public class UpdateCommodityAO implements Serializable {
      * 商品价格
      */
     @NotNull
-    private Float price;
+    private BigDecimal price;
     /**
      * 商品描述
      */

@@ -141,6 +141,7 @@ export default {
   .friend-link {
     display: flex;
     align-items: center;
+    margin: auto;
     width: 1000px;
     height: 30px;
     color: #ffffff;

@@ -30,6 +30,7 @@
         <module>common</module>
         <module>user</module>
         <module>commodity</module>
+        <module>order</module>
     </modules>
     <dependencies>
 

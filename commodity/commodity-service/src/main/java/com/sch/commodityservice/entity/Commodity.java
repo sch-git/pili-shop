@@ -2,6 +2,7 @@ package com.sch.commodityservice.entity;
 
 import lombok.Data;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 /**
@@ -29,7 +30,7 @@ public class Commodity {
     /**
      * 商品价格
      */
-    private Float price;
+    private BigDecimal price;
 
     /**
      * 商品描述

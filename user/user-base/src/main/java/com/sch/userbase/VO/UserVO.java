@@ -1,5 +1,6 @@
 package com.sch.userbase.VO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -14,6 +15,7 @@ public class UserVO implements Serializable {
     /**
      * 用户id
      */
+    @JsonIgnore
     private Long id;
 
     /**

@@ -5,7 +5,7 @@
         <result column="id" jdbcType="BIGINT" property="id"/>
         <result column="category_id" jdbcType="BIGINT" property="categoryId"/>
         <result column="name" jdbcType="VARCHAR" property="name"/>
-        <result column="price" jdbcType="REAL" property="price"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
         <result column="describe" jdbcType="VARCHAR" property="describe"/>
         <result column="status" jdbcType="BIT" property="status"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
@@ -24,7 +24,7 @@
   create_id, create_name, create_time,
   update_id, update_name, update_time)
      values (#{categoryId,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
-  #{price,jdbcType=REAL}, #{describe,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{url,jdbcType=VARCHAR},
+  #{price,jdbcType=DECIMAL}, #{describe,jdbcType=VARCHAR}, #{status,jdbcType=BIT}, #{url,jdbcType=VARCHAR},
   #{createId,jdbcType=BIGINT}, #{createName,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP},
   #{updateId,jdbcType=BIGINT}, #{updateName,jdbcType=VARCHAR}, #{updateTime,jdbcType=TIMESTAMP})
   </insert>

@@ -11,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+
 /**
  * @Description: 商品DAO测试
  * @Author: chenghao.su
@@ -33,7 +35,7 @@ public class CommodityDaoTest {
         addCommodityAO.setUrl("root");
         addCommodityAO.setCreateName("root");
         addCommodityAO.setDescribe("测试描述001");
-        addCommodityAO.setPrice(99.00f);
+        addCommodityAO.setPrice(new BigDecimal("99.00"));
         AddCommodityDTO addCommodityDTO = new AddCommodityDTO();
         addCommodityDTO.setAO(addCommodityAO);
         addCommodityDTO.setCreateId(1L);
@@ -78,7 +80,7 @@ public class CommodityDaoTest {
         updateCommodityDTO.setId(1L);
         updateCommodityDTO.setCategoryId(2L);
         updateCommodityDTO.setName("测试商品001");
-        updateCommodityDTO.setPrice(100.00F);
+        updateCommodityDTO.setPrice(new BigDecimal("99.00"));
         updateCommodityDTO.setDescribe("测试描述001");
         updateCommodityDTO.setStatus(false);
         updateCommodityDTO.setUpdateId(1L);

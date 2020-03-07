@@ -4,6 +4,8 @@ import com.sch.commoditybase.AO.UpdateCommodityAO;
 import com.sch.commonbasic.util.DateUtil;
 import lombok.Data;
 
+import java.math.BigDecimal;
+
 /**
  * @Description: 修改商品DTO
  * @Author: chenghao.su
@@ -26,7 +28,7 @@ public class UpdateCommodityDTO {
     /**
      * 商品价格
      */
-    private Float price;
+    private BigDecimal price;
     /**
      * 商品描述
      */

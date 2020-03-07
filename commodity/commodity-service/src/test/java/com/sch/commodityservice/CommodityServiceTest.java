@@ -9,6 +9,8 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
+import java.math.BigDecimal;
+
 /**
  * @Description: 商品服务测试
  * @Author: chenghao.su
@@ -31,7 +33,7 @@ public class CommodityServiceTest {
         addCommodityAO.setUrl("http://pili-shop.schblog.cn/testUrl001");
         addCommodityAO.setCreateName("root");
         addCommodityAO.setDescribe("测试描述001");
-        addCommodityAO.setPrice(99.00f);
+        addCommodityAO.setPrice(new BigDecimal("99.00"));
         System.out.println(commodityBaseService.addCommodity(addCommodityAO));
     }
 
@@ -68,7 +70,7 @@ public class CommodityServiceTest {
         updateCommodityAO.setId(1L);
         updateCommodityAO.setCategoryId(1L);
         updateCommodityAO.setName("");
-        updateCommodityAO.setPrice(99.00F);
+        updateCommodityAO.setPrice(new BigDecimal("99.00"));
         updateCommodityAO.setDescribe("测试描述001");
         updateCommodityAO.setStatus(true);
         updateCommodityAO.setUpdateId(1L);

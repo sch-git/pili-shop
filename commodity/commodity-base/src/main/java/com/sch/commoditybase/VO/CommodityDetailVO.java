@@ -4,6 +4,7 @@ import com.sch.commonbasic.util.QiNiuCloudUtil;
 import lombok.Data;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @Description: 商品详情VO
@@ -35,7 +36,7 @@ public class CommodityDetailVO implements Serializable {
     /**
      * 商品价格
      */
-    private Float price;
+    private BigDecimal price;
 
     /**
      * 商品描述

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sch.orderservice.dao.OrderDetailMapper">
+    <resultMap id="BaseResultMap" type="com.sch.orderservice.entity.OrderDetail">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="order_id" jdbcType="BIGINT" property="orderId"/>
+        <result column="commodity_id" jdbcType="BIGINT" property="commodityId"/>
+        <result column="commodity_name" jdbcType="VARCHAR" property="commodityName"/>
+        <result column="price" jdbcType="DECIMAL" property="price"/>
+        <result column="number" jdbcType="INTEGER" property="number"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+    </resultMap>
+</mapper>

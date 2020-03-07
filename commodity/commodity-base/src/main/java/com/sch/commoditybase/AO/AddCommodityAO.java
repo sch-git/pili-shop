@@ -5,6 +5,7 @@ import lombok.Data;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.io.Serializable;
+import java.math.BigDecimal;
 
 /**
  * @Description: 添加商品AO
@@ -34,7 +35,7 @@ public class AddCommodityAO implements Serializable {
      * 商品价格
      */
     @NotNull
-    private Float price;
+    private BigDecimal price;
 
     /**
      * 商品描述
