@@ -1,17 +1,18 @@
 package com.sch.frontweb;
 
+import com.sch.frontweb.config.RedisUtil;
 import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 
 @SpringBootTest
 class FrontWebApplicationTests {
+    @Autowired
+    private RedisUtil redisUtil;
 
     @Test
     void contextLoads() {
-        PasswordEncoder encoder = new BCryptPasswordEncoder();
-        System.out.println(encoder.encode("123"));
+
     }
 
 }

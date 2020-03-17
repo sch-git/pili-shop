@@ -22,6 +22,12 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-data-redis</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>io.lettuce</groupId>
+                    <artifactId>io.lettuce:lettuce-core:5.2.1.RELEASE</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <!-- jedis -->
         <dependency>
