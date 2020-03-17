@@ -44,7 +44,7 @@
             <el-image
               class="table-td-thumb"
               :src="scope.row.url"
-              :preview-src-list="['http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w']"
+              :preview-src-list="[scope.row.url]"
             ></el-image>
           </template>
         </el-table-column>

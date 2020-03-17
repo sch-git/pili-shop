@@ -57,7 +57,7 @@ export default {
           login(loginAO).then(res => {
             if (res) {
               this.getUserInfo(res)
-              this.$router.push('/index')
+              this.$router.go(-1)
             }
           })
         } else {

@@ -61,7 +61,7 @@
           <div class="add-buy-car-box">
             <div class="add-buy-car">
               <el-button type="danger" plain>立即购买</el-button>
-              <el-button type="warning" icon="el-icon-shopping-cart-1">加入购物车</el-button>
+              <el-button type="warning" icon="el-icon-shopping-cart-1" @click="addGoodToCart">加入购物车</el-button>
             </div>
           </div>
         </div>
@@ -74,7 +74,7 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import ShopHeader from '~c/common/ShopHeader'
-import { findCommodityById } from '@/api/commodity'
+import { addCartItem, findCommodityById } from '@/api/commodity'
 
 export default {
   name: 'GoodDetail',
@@ -120,22 +120,6 @@ export default {
           updateTime: ''
         }
       ],
-      commodity: [
-        {
-          id: '',
-          categoryId: '',
-          categoryName: '',
-          name: '',
-          price: 0.00,
-          describe: '',
-          status: true,
-          url: '',
-          createName: '',
-          createTime: '',
-          updateName: '',
-          updateTime: ''
-        }
-      ],
       num: 1,
       min: 1,
       max: 9999
@@ -149,6 +133,16 @@ export default {
     findGoodDetail () {
       findCommodityById(this.commodityId).then(res => {
         this.commodityList = res
+      })
+    },
+    // 添加商品到购物车
+    addGoodToCart () {
+      const addCartAO = {
+        commodityId: this.commodityList[0].id,
+        number: this.num
+      }
+      addCartItem(addCartAO).then(res => {
+        this.num = 1
       })
     }
   }
@@ -272,12 +266,12 @@ export default {
             }
           }
           .item-select-intro{
-            width: 150px;
             height: 40px;
             line-height: 40px;
             font-size: 12px;
             font-weight: bold;
             text-align: center;
+            padding: 0 6px;
           }
         }
 

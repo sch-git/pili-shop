@@ -27,19 +27,19 @@ export default [
       {
         path: '/goodList',
         component: () => import(/* webpackChunkName: "home" */ '~c/goods/GoodList'),
-        meta: {title: '商品列表'}
+        meta: { title: '商品列表' }
       },
       {
         path: '/goodDetail/:commodityId',
         component: () => import(/* webpackChunkName: "home" */ '~c/goods/GoodDetail'),
         props: true,
-        meta: {title: '商品详情'}
+        meta: { title: '商品详情' }
       },
       {
         path: '/cart/:userId',
         component: () => import(/* webpackChunkName: "home" */ '~c/order/Cart'),
         props: true,
-        meta: {title: '购物车'}
+        meta: { title: '购物车', login: true }
       }
     ]
   }
