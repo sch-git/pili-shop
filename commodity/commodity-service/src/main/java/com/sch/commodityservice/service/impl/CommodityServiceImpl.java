@@ -19,6 +19,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Description: 商品服务实现
@@ -122,5 +123,31 @@ public class CommodityServiceImpl implements CommodityService {
             commodityDetailVOS.add(commodityDetailVO);
         }
         return commodityDetailVOS;
+    }
+
+    /**
+     * 根据商品id列表查询
+     *
+     * @param commodityIds 商品id集合
+     * @return 商品列表
+     */
+    @Override
+    public List<CommodityVO> findByIds(Set<String> commodityIds) {
+        if (commodityIds == null) {
+            return null;
+        }
+        List<Commodity> commodities = commodityDao.findByIds(commodityIds);
+        if (commodities == null) {
+            return null;
+        }
+        List<CommodityVO> commodityVOS = new ArrayList<>();
+        for (Commodity commodity : commodities) {
+            CommodityVO commodityVO = new CommodityVO();
+            BeanUtils.copyProperties(commodity, commodityVO);
+            commodityVO.setCreateTime(DateUtil.toString(commodity.getCreateTime()));
+            commodityVO.setUpdateTime(DateUtil.toString(commodity.getUpdateTime()));
+            commodityVOS.add(commodityVO);
+        }
+        return commodityVOS;
     }
 }

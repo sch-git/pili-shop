@@ -4,12 +4,17 @@ import com.sch.commoditybase.AO.AddCommodityAO;
 import com.sch.commoditybase.AO.SearchCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityAO;
 import com.sch.commoditybase.AO.UpdateCommodityStatusAO;
+import com.sch.commoditybase.VO.CommodityDetailVO;
+import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @Description: 商品服务测试
@@ -76,5 +81,31 @@ public class CommodityServiceTest {
         updateCommodityAO.setUpdateId(1L);
         updateCommodityAO.setUpdateName("root");
         commodityBaseService.updateCommodity(updateCommodityAO);
+    }
+
+    /**
+     * 根据商品id查询详情
+     */
+    @Test
+    public void findById() {
+        List<CommodityDetailVO> commodityDetailVOS = commodityBaseService.findById(1L);
+        for (CommodityDetailVO vo : commodityDetailVOS) {
+            System.out.println(vo);
+        }
+    }
+
+    /**
+     * 查询购物车数据
+     */
+    @Test
+    public void findByIds() {
+        Set<String> strings = new HashSet<>();
+        strings.add("1");
+        strings.add("2");
+        strings.add("3");
+        List<CommodityVO> commodityVOS = commodityBaseService.findByIds(strings);
+        for (CommodityVO commodityVO : commodityVOS) {
+            System.out.println(commodityVO);
+        }
     }
 }

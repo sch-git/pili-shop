@@ -24,7 +24,7 @@ public class CommodityVO implements Serializable {
     private Long categoryId;
 
     /**
-     * 前端分类名称
+     * 前端-分类名称
      */
     private String categoryName;
 
@@ -73,6 +73,10 @@ public class CommodityVO implements Serializable {
      * 修改时间
      */
     private String updateTime;
+    /**
+     * 前端-购物车中商品数量
+     */
+    private String number;
 
     public void setUrl(String url) {
         this.url = QiNiuCloudUtil.getDOMAIN() + url;

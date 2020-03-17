@@ -9,6 +9,7 @@ import com.sch.commodityservice.entity.Commodity;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Description: 商品
@@ -53,4 +54,12 @@ public interface CommodityDao {
      * @return 商品详情（包括分类名，商品图片）
      */
     List<CommodityDetailDTO> findById(Long id);
+
+    /**
+     * 根据商品id列表查询
+     *
+     * @param commodityIds 商品id集合
+     * @return 商品列表
+     */
+    List<Commodity> findByIds(Set<String> commodityIds);
 }

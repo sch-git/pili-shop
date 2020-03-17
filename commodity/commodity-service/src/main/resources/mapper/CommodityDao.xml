@@ -69,4 +69,14 @@
         on tc.category_id=c.id
         where tc.id=#{id}
     </select>
+    <!--根据商品id列表查询-->
+    <select id="findByIds" resultMap="BaseResultMap">
+        select id, category_id, `name`, price, `describe`, status, url,
+        create_name, create_time, update_name, update_time
+        from t_commodity
+        where id in
+        <foreach collection="collection" item="id" open="(" close=")" separator=",">
+            #{id}
+        </foreach>
+    </select>
 </mapper>

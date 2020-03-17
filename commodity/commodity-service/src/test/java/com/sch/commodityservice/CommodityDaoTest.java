@@ -6,12 +6,16 @@ import com.sch.commodityservice.dao.CommodityDao;
 import com.sch.commodityservice.dto.AddCommodityDTO;
 import com.sch.commodityservice.dto.UpdateCommodityDTO;
 import com.sch.commodityservice.dto.UpdateCommodityStatusDTO;
+import com.sch.commodityservice.entity.Commodity;
 import com.sch.commonbasic.util.DateUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import java.math.BigDecimal;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 /**
  * @Description: 商品DAO测试
@@ -95,5 +99,18 @@ public class CommodityDaoTest {
     @Test
     public void findById() {
         System.out.println(commodityDao.findById(1L));
+    }
+
+    @Test
+    public void findByIds() {
+        Set<String> strings = new HashSet<>();
+        strings.add("1");
+        strings.add("2");
+        strings.add("3");
+        strings.add("4");
+        List<Commodity> commodities = commodityDao.findByIds(strings);
+        for (Commodity commodity : commodities) {
+            System.out.println(commodity.getName());
+        }
     }
 }

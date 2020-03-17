@@ -15,6 +15,7 @@ import com.sch.commodityservice.service.CommodityService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * @Description: 商品模块外部接口实现
@@ -82,5 +83,16 @@ public class CommodityBaseServiceImpl implements CommodityBaseService {
     @Override
     public List<CommodityDetailVO> findById(Long id) {
         return commodityService.findById(id);
+    }
+
+    /**
+     * 根据商品id列表查询
+     *
+     * @param commodityIds 商品id集合
+     * @return 商品列表
+     */
+    @Override
+    public List<CommodityVO> findByIds(Set<String> commodityIds) {
+        return commodityService.findByIds(commodityIds);
     }
 }
