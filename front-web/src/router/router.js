@@ -36,7 +36,7 @@ export default [
         meta: { title: '商品详情' }
       },
       {
-        path: '/cart/:userId',
+        path: '/cart/:username',
         component: () => import(/* webpackChunkName: "home" */ '~c/order/Cart'),
         props: true,
         meta: { title: '购物车', login: true }
