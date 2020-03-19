@@ -66,10 +66,9 @@ export default {
     }
   }
 
-  .el-menu--horizontal > .el-menu-item > .el-icon-shopping-cart-1 {
-    color: #f0f0f0;
+  .el-menu--horizontal > .el-menu-item > .el-icon-shopping-cart-1 .is-active{
+    color: #fb9f16;
   }
-
   .el-menu--horizontal > .el-menu-item.is-active {
     border-bottom: 2px solid #fb9f16;
     color: #fb9f16;
