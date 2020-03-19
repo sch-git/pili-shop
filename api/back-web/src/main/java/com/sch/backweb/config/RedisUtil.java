@@ -16,7 +16,7 @@ import java.util.Map;
 import java.util.Set;
 
 /**
- * @Description: TODO
+ * @Description: Jedis操作Redis工具类
  * @Author: chenghao.su
  * @Date: 2020/3/17 14:03
  */
