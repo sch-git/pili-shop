@@ -35,6 +35,10 @@ public class QiNiuCloudUtil {
      * 外链域名
      */
     private static final String DOMAIN = "http://pili-shop.schblog.cn/";
+    /**
+     * 图片瘦身
+     */
+    private static final String IMAGESLIM = "?imageslim";
 
     public static String getDOMAIN() {
         return DOMAIN;
@@ -69,7 +73,7 @@ public class QiNiuCloudUtil {
                 Response response = uploadManager.put(uploadBytes, null, upToken);
                 //解析上传成功的结果
                 DefaultPutRet putRet = new Gson().fromJson(response.bodyString(), DefaultPutRet.class);
-                return DOMAIN + putRet.hash;
+                return DOMAIN + putRet.hash + IMAGESLIM;
             } catch (QiniuException ex) {
                 Response r = ex.response;
                 try {
