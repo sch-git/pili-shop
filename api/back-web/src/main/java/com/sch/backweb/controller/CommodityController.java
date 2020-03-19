@@ -115,7 +115,6 @@ public class CommodityController {
      */
     @DeleteMapping("/image")
     public Result deleteCommodityImage(@RequestParam Long id) {
-        System.out.println(id);
         commodityImageBaseService.deleteImageById(id);
         return new Result(ResultEnum.DELETE_SUCCESS);
     }

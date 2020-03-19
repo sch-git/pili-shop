@@ -19,6 +19,10 @@ spring:
         max-wait: 3000
         max-idle: 200
         min-idle: 0
+  servlet:
+    multipart:
+      max-file-size: 10MB
+      max-request-size: 10MB
 dubbo:
   application:
     name: back-web
