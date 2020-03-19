@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.sch.commoditybase.VO.CommodityVO;
 import com.sch.commoditybase.base.CommodityBaseService;
 import com.sch.commonbasic.VO.Result;
+import com.sch.commonbasic.enums.ResultEnum;
 import com.sch.frontweb.config.RedisUtil;
 import com.sch.orderbase.AO.AddCartAO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,20 +29,22 @@ public class CartController {
     RedisUtil redisUtil;
     @Reference
     CommodityBaseService commodityBaseService;
+    private static final String CART_UID = "CART_UID_";
 
     /**
      * 根据用户id从缓存中查询取出购物车中的商品id
      *
-     * @param id 用户信息
      * @return 购物车数据
      */
     @GetMapping("/list")
-    public Result findCartList(@RequestParam Long id) {
-        String userId = (String) session.getAttribute(session.getId());
-        Set<String> commodityIds = redisUtil.hkeys(userId);
+    public Result findCartList() {
+        String userId = Long.toString((Long) session.getAttribute(session.getId()));
+        Set<String> commodityIds = redisUtil.hkeys(CART_UID + userId);
         List<CommodityVO> commodityVOS = commodityBaseService.findByIds(commodityIds);
-        for (CommodityVO vo : commodityVOS) {
-            vo.setNumber(redisUtil.hget(userId, String.valueOf(vo.getId())));
+        if (commodityVOS != null) {
+            for (CommodityVO vo : commodityVOS) {
+                vo.setNumber(redisUtil.hget(CART_UID + userId, vo.getId().toString()));
+            }
         }
         return Result.success(commodityVOS);
     }
@@ -49,16 +52,31 @@ public class CartController {
     /**
      * 商品添加购物车
      *
-     * @param addCartAO （商品id，添加数量）
+     * @param addCartAO （商品id，增量）
      * @return
      */
     @PostMapping("/item")
     @Transactional
     public Result addCartItem(@RequestBody AddCartAO addCartAO) {
-        String userId = (String) session.getAttribute(session.getId());
+        String userId = Long.toString((Long) session.getAttribute(session.getId()));
         String commodityId = String.valueOf(addCartAO.getCommodityId());
         Long inCrement = Long.valueOf(addCartAO.getNumber());
-        redisUtil.hincrby(userId, commodityId, inCrement);
+        redisUtil.hincrby(CART_UID + userId, commodityId, inCrement);
+        return new Result(ResultEnum.ADD_SUCCESS);
+    }
+
+    /**
+     * 从缓存中删除购物车中指定商品
+     *
+     * @param addCartAO 商品id
+     * @return
+     */
+    @DeleteMapping("/delete")
+    @Transactional
+    public Result deleteCartItem(@ModelAttribute AddCartAO addCartAO) {
+        String userId = Long.toString((Long) session.getAttribute(session.getId()));
+        String commodityId = String.valueOf(addCartAO.getCommodityId());
+        redisUtil.hdel(CART_UID + userId, commodityId);
         return Result.success();
     }
 }
