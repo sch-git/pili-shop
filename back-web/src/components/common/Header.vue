@@ -38,13 +38,14 @@
                         <i class="el-icon-caret-bottom"/>
                     </span>
           <el-dropdown-menu slot="dropdown">
-            <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
+<!--            <a href="https://github.com/lin-xin/vue-manage-system" target="_blank">
               <el-dropdown-item>项目仓库</el-dropdown-item>
             </a>
             <router-link to="/adminInfo">
-            <el-dropdown-item>个人中心</el-dropdown-item>
-            </router-link>
-            <el-dropdown-item divided command="loginout">退出登录</el-dropdown-item>
+              <el-dropdown-item>个人中心</el-dropdown-item>
+            </router-link>-->
+            <!--divided-->
+            <el-dropdown-item  command="loginout">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -60,12 +61,12 @@ export default {
       collapse: false,
       fullscreen: false,
       name: 'linxin',
-      message: 2
+      message: 0
     }
   },
   computed: {
     username () {
-      let username = localStorage.getItem('ms_username')
+      let username = this.$store.state.user.userInfo.username
       return username || this.name
     }
   },

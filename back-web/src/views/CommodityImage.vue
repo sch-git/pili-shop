@@ -19,6 +19,7 @@
           :headers="tokenHeader"
           :on-preview="handlePictureCardPreview"
           :on-remove="handleRemove"
+          :before-remove="handleBeforeRemove"
           :on-success="handleAvatarSuccess"
           :file-list="imageList"
           list-type="picture-card">
@@ -72,6 +73,13 @@ export default {
         createName: this.$store.state.user.userInfo.username
       }
       addCommodityImage(addCommodityImageAO)
+    },
+    // 删除图片之前的钩子
+    handleBeforeRemove (file, imageList) {
+      if (imageList.length <= 1) {
+        this.$message.error('请保留至少一张图片!')
+        return false
+      }
     },
     // 删除图片
     handleRemove (file, imageList) {

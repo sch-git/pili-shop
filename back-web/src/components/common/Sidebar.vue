@@ -65,6 +65,25 @@ export default {
           title: '系统首页'
         },
         {
+          icon: 'el-icon-video-camera-solid',
+          index: '1',
+          title: '统计中心',
+          subs: [
+            {
+              index: '1-1',
+              title: '商品统计'
+            },
+            {
+              index: '1-2',
+              title: '订单统计'
+            },
+            {
+              index: '1-3',
+              title: '用户统计'
+            }
+          ]
+        },
+        {
           icon: 'el-icon-s-goods',
           index: '2',
           title: '商品管理',
@@ -90,36 +109,14 @@ export default {
           ]
         },
         {
-          icon: 'el-icon-video-camera-solid',
-          index: 'tabs',
-          title: '视频管理'
-        },
-        {
-          icon: 'el-icon-notebook-2',
+          icon: 'el-icon-user',
           index: '3',
-          title: '霹雳资料库',
+          title: '用户管理',
           subs: [
             {
-              index: 'form',
-              title: '音乐'
-            },
-            {
-              index: '3-2',
-              title: '图片',
-              subs: [
-                {
-                  index: 'editor',
-                  title: '富文本编辑器'
-                },
-                {
-                  index: 'markdown',
-                  title: 'markdown编辑器'
-                }
-              ]
-            },
-            {
-              index: 'upload',
-              title: '文件上传'
+              icon: 'el-icon-user',
+              index: '/user',
+              title: '用户列表'
             }
           ]
         },
@@ -136,51 +133,48 @@ export default {
           ]
         },
         {
-          icon: 'el-icon-user',
-          index: '6',
-          title: '用户管理',
+          icon: 'el-icon-notebook-2',
+          index: '5',
+          title: '资料管理',
           subs: [
             {
-              icon: 'el-icon-user',
-              index: '/user',
-              title: '用户列表'
+              index: '/form',
+              title: '轮播图管理'
+            },
+            {
+              index: 'editor',
+              title: '人物管理'
+            },
+            {
+              index: '5-2',
+              title: '武器管理'
+            },
+            {
+              index: '5-3',
+              title: '其他信息'
+            }
+          ]
+        },
+        {
+          icon: 'el-icon-lx-warn',
+          index: '6',
+          title: '订单管理',
+          subs: [
+            {
+              index: '404',
+              title: '订单列表'
             }
           ]
         },
         {
           icon: 'el-icon-rank',
           index: '7',
-          title: '公告',
-          subs: [
-            {
-              index: 'drag',
-              title: '拖拽列表'
-            },
-            {
-              index: 'dialog',
-              title: '拖拽弹框'
-            }
-          ]
+          title: '公告'
         },
         {
           icon: 'el-icon-lx-global',
           index: 'i18n',
           title: '用户反馈'
-        },
-        {
-          icon: 'el-icon-lx-warn',
-          index: '8',
-          title: '错误处理',
-          subs: [
-            {
-              index: 'permission',
-              title: '权限测试'
-            },
-            {
-              index: '404',
-              title: '404页面'
-            }
-          ]
         }
       ]
     }
