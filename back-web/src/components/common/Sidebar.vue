@@ -98,11 +98,6 @@ export default {
               title: '添加商品'
             },
             {
-              icon: 'el-icon-s-goods',
-              index: '/commodity/image',
-              title: '商品图片'
-            },
-            {
               index: '/category',
               title: '分类管理'
             }
@@ -138,7 +133,7 @@ export default {
           title: '资料管理',
           subs: [
             {
-              index: '/form',
+              index: '/slideImage',
               title: '轮播图管理'
             },
             {

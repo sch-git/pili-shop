@@ -17,7 +17,11 @@ export const findImageList = commodityId => {
 export const addCommodityImage = params => {
   return axios.post('/commodity/image', params)
 }
-
+/**
+ * @description 删除商品图片
+ * @param id 图片id
+ * @returns
+ */
 export const deleteCommodityImage = id => {
   return axios.delete('/commodity/image', { params: { id } })
 }

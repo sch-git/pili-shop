@@ -48,6 +48,11 @@ export default [
         path: '/adminInfo',
         component: () => import(/* webpackChunkName: "table" */ '@/views/AdminInfo.vue'),
         meta: { title: '个人中心' }
+      },
+      {
+        path: '/slideImage',
+        component: () => import(/* webpackChunkName: "table" */ '@/components/dataManage/SlideImage.vue'),
+        meta: { title: '轮播图管理' }
       }
     ]
   },
