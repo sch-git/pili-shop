@@ -16,11 +16,3 @@ export const findCommodityList = params => {
 export const findCommodityById = commodityId => {
   return axios.get('/commodity/item', { params: { commodityId } })
 }
-/**
- * @description 添加商品到购物车
- * @param params 商品id，商品增量
- * @returns
- */
-export const addCartItem = params => {
-  return axios.post('/cart/item', params)
-}

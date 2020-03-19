@@ -8,7 +8,7 @@
         background-color="#242f42"
         text-color="#fff"
         router>
-        <el-menu-item>pili-shop</el-menu-item>
+        <el-menu-item index="/index">pili-shop</el-menu-item>
         <el-submenu index="2">
           <template slot="title">我的工作台</template>
           <el-menu-item>选项1</el-menu-item>
@@ -23,7 +23,7 @@
           <el-menu-item>个人中心</el-menu-item>
           <el-menu-item>退出</el-menu-item>
         </el-submenu>
-        <el-menu-item class="header-right">购物车<i class="el-icon-shopping-cart-1"/></el-menu-item>
+        <el-menu-item class="header-right" :index="'/cart/'+userInfo.username">购物车<i class="el-icon-shopping-cart-1"/></el-menu-item>
       </el-menu>
     </div>
   </main>

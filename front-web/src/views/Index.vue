@@ -16,7 +16,7 @@
           </el-menu>
         </div>
         <swiper :options="swiperOptions">
-          <swiper-slide class="my-slide-img" :key="item.id" v-for="item in slideList">
+          <swiper-slide class="my-slide-img" :key="index" v-for="(item,index) in slideList">
             <img :src="item.url" alt=""/>
           </swiper-slide>
           <div class="swiper-pagination" slot="pagination"></div>
@@ -68,6 +68,7 @@ import { findCategoryList } from '@/api/commodity/category'
 import { findCommodityList } from '@/api/commodity'
 // eslint-disable-next-line
   import VueLazyload from '@/lib/tools'
+import { findSlideImageList } from '@/api/common'
 
 export default {
   name: 'Index',
@@ -130,24 +131,7 @@ export default {
           clickable: true
         }
       },
-      slideList: [
-        {
-          id: 1,
-          url: 'http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w'
-        },
-        {
-          id: 2,
-          url: 'http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w'
-        },
-        {
-          id: 3,
-          url: 'http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w'
-        },
-        {
-          id: 4,
-          url: 'http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w'
-        }
-      ],
+      slideList: [],
       // 广告位
       adsList: [
         {
@@ -179,6 +163,7 @@ export default {
   methods: {
     // 初始化数据
     handleInit () {
+      this.handlerSlideImageList()
       this.findCategoryList()
       this.findCommodityList()
     },
@@ -186,7 +171,6 @@ export default {
     findCategoryList () {
       findCategoryList(this.categoryAO).then(res => {
         this.categoryList = res.list
-        console.log(this.categoryList)
       })
     },
     // 获取商品
@@ -196,8 +180,14 @@ export default {
       })
     },
     // 获取轮播图
-    handlerSwiperImage () {
-
+    handlerSlideImageList () {
+      findSlideImageList().then(res => {
+        if (res) {
+          res.forEach(item => {
+            this.slideList.push({ url: item })
+          })
+        }
+      })
     },
     // 点击查看商品详情
     handleDetail (commodityId) {
@@ -247,8 +237,8 @@ export default {
     .ads-box {
       display: flex;
       justify-content: space-between;
-      margin-top: 15px;
-      margin-bottom: 25px;
+      margin-top: 25px;
+      margin-bottom: 5px;
 
       a {
         width: 240px;

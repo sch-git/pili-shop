@@ -31,8 +31,8 @@
           <template slot-scope="scope">
             <el-image
               class="table-td-thumb"
-              src="http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w"
-              :preview-src-list="['http://pili-shop.schblog.cn/FkcGx2bLMOP4szHZoCLx6D0fM_1w']"
+              :src="scope.row.url"
+              :preview-src-list="[scope.row.url]"
             ></el-image>
           </template>
         </el-table-column>
@@ -103,6 +103,7 @@
 
 <script>
 import { MessageBoxConfirm } from '@/lib/tools'
+import { addCartItem, deleteCartItem, findCartList } from '@/api/commodity/cart'
 
 export default {
   name: 'Cart',
@@ -120,6 +121,7 @@ export default {
         {
           id: 1,
           name: 'product',
+          describe: 'describe',
           price: 99.00,
           number: 2,
           url: ''
@@ -141,17 +143,22 @@ export default {
   methods: {
     // 初始化数据
     handleInit () {
-
+      this.findUserCart()
     },
     // 查询用户购物车数据
     findUserCart () {
-
+      findCartList().then(res => {
+        console.log('购物车数据', res)
+        this.tableData = res
+      })
     },
     // 商品数量变化
     handleChangeNum (current, old, row) {
-      console.log('当前数量:', current)
-      console.log('原来数量:', old)
-      console.log(row)
+      const addCartAO = {
+        commodityId: row.id,
+        number: current - old
+      }
+      addCartItem(addCartAO)
     },
     // 多选操作
     handleSelectionChange (val) {
@@ -160,9 +167,15 @@ export default {
     },
     // 从购物车中删除商品
     handleDel (index, row) {
-      MessageBoxConfirm('是否确认删除该商品', '警告').then((flag) => {
+      console.log(index)
+      MessageBoxConfirm('是否确认删除该商品', '警告').then(flag => {
         if (flag) {
-          // TODO 从购物车中移除该商品
+          const CartAO = {
+            commodityId: row.id
+          }
+          // 从购物车中移除该商品
+          deleteCartItem(CartAO)
+          this.tableData.splice(index, 1)
         }
       })
     }

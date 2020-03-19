@@ -74,7 +74,8 @@
 import 'swiper/dist/css/swiper.css'
 import { swiper, swiperSlide } from 'vue-awesome-swiper'
 import ShopHeader from '~c/common/ShopHeader'
-import { addCartItem, findCommodityById } from '@/api/commodity'
+import { findCommodityById } from '@/api/commodity'
+import { addCartItem } from '@/api/commodity/cart'
 
 export default {
   name: 'GoodDetail',
