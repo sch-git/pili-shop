@@ -21,7 +21,7 @@
         <el-submenu v-else class="header-right" index="3">
           <template slot="title">{{ userInfo.username }}</template>
           <el-menu-item>个人中心</el-menu-item>
-          <el-menu-item>退出</el-menu-item>
+          <el-menu-item @click="logout">退出</el-menu-item>
         </el-submenu>
         <el-menu-item class="header-right" :index="'/cart/'+userInfo.username">购物车<i class="el-icon-shopping-cart-1"/></el-menu-item>
       </el-menu>
@@ -32,6 +32,7 @@
 <script>
 
 import { mapState } from 'vuex'
+import { logout } from '@/api/user'
 
 export default {
   name: 'Header',
@@ -48,6 +49,12 @@ export default {
   methods: {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
+    },
+    // todo 退出登录
+    logout () {
+      logout(this.userInfo.token).then(res => {
+        this.sessionStorage.clear()
+      })
     }
   }
 }

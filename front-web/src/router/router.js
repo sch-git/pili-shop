@@ -21,25 +21,96 @@ export default [
     children: [
       {
         path: '/index',
-        component: () => import(/* webpackChunkName: "home" */ '@/views/Index'),
+        component: () => import(/* webpackChunkName: "index" */ '@/views/Index'),
         meta: { title: '主页' }
       },
       {
         path: '/goodList',
-        component: () => import(/* webpackChunkName: "home" */ '~c/goods/GoodList'),
+        component: () => import(/* webpackChunkName: "goodList" */ '~c/goods/GoodList'),
         meta: { title: '商品列表' }
       },
       {
         path: '/goodDetail/:commodityId',
-        component: () => import(/* webpackChunkName: "home" */ '~c/goods/GoodDetail'),
+        component: () => import(/* webpackChunkName: "goodDetail" */ '~c/goods/GoodDetail'),
         props: true,
         meta: { title: '商品详情' }
       },
       {
         path: '/cart/:username',
-        component: () => import(/* webpackChunkName: "home" */ '~c/order/Cart'),
+        component: () => import(/* webpackChunkName: "cart" */ '@/views/Cart'),
         props: true,
-        meta: { title: '购物车', login: true }
+        meta: {
+          title: '购物车',
+          login: true
+        }
+      },
+      {
+        path: '/order',
+        component: () => import(/* webpackChunkName: "order" */ '@/views/Order'),
+        meta: {
+          title: '订单',
+          login: true
+        },
+        children: [
+          {
+            path: 'pay',
+            component: () => import(/* webpackChunkName: "pay" */ '~c/order/Pay'),
+            meta: {
+              title: '支付订单',
+              login: true
+            }
+          },
+          {
+            path: 'success',
+            component: () => import(/* webpackChunkName: "success" */ '~c/order/Success'),
+            meta: {
+              title: '支付成功',
+              login: true
+            }
+          }
+        ]
+      },
+      {
+        path: '/user',
+        component: () => import(/* webpackChunkName: "user" */ '@/views/User'),
+        meta: {
+          title: '设置',
+          login: true
+        },
+        children: [
+          {
+            path: 'address',
+            component: () => import(/* webpackChunkName: "address" */ '~c/user/Address'),
+            meta: {
+              title: '地址',
+              login: true
+            }
+          },
+          {
+            path: 'message',
+            component: () => import(/* webpackChunkName: "address" */ '~c/user/Message'),
+            meta: {
+              title: '消息',
+              login: true
+            }
+          },
+          {
+            path: 'orderList',
+            component: () => import(/* webpackChunkName: "address" */ '~c/user/OrderList'),
+            meta: {
+              title: '订单列表',
+              login: true
+            }
+          },
+          {
+            path: 'detail',
+            component: () => import(/* webpackChunkName: "address" */ '~c/user/UserDetail'),
+            meta: {
+              title: '用户信息',
+              login: true
+            }
+          }
+        ]
       }
     ]
   }

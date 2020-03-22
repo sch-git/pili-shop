@@ -14,7 +14,7 @@ export const addCartItem = params => {
  * @returns 商品列表
  */
 export const findCartList = () => {
-  return axios.get('/cart/list')
+  return axios.post('/cart/list')
 }
 
 /**

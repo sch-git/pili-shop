@@ -7,3 +7,11 @@ import axios from '@/api/index'
 export const login = (loginAO) => {
   return axios.post('/login', loginAO)
 }
+/**
+ * todo
+ * @description 用户退出登录
+ * @param params 用户token
+ */
+export const logout = (params) => {
+  return axios.post('/logout')
+}

@@ -193,7 +193,7 @@ export default {
 </script>
 
 <style scoped lang="scss">
-  @import "../../assets/css/base";
+  @import "../assets/css/base";
 
   .my-container {
     .search-nav {

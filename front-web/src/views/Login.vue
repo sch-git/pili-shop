@@ -62,7 +62,6 @@ export default {
           })
         } else {
           this.$message.error('请输入账号和密码')
-          console.log('error submit!!')
           return false
         }
       })
