@@ -30,7 +30,6 @@ import java.util.List;
 @Configuration
 public class JwtFilter extends GenericFilterBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtFilter.class);
-    private static final String GET = "GET";
     @Autowired
     HttpSession session;
 
