@@ -1,5 +1,6 @@
 package com.sch.frontweb;
 
+import com.sch.commonbasic.util.SnowUtil;
 import com.sch.frontweb.config.RedisUtil;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +13,7 @@ class FrontWebApplicationTests {
 
     @Test
     void contextLoads() {
-
+        System.out.println(SnowUtil.nextId());
     }
 
 }
