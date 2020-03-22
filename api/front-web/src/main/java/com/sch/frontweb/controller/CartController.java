@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 import java.util.Set;
@@ -27,6 +28,8 @@ public class CartController {
     HttpSession session;
     @Autowired
     RedisUtil redisUtil;
+    @Autowired
+    HttpServletRequest request;
     @Reference
     CommodityBaseService commodityBaseService;
     private static final String CART_UID = "CART_UID_";
@@ -36,9 +39,9 @@ public class CartController {
      *
      * @return 购物车数据
      */
-    @GetMapping("/list")
+    @PostMapping("/list")
     public Result findCartList() {
-        String userId = Long.toString((Long) session.getAttribute(session.getId()));
+        String userId = Long.toString((Long) session.getAttribute(request.getHeader("Authorization")));
         Set<String> commodityIds = redisUtil.hkeys(CART_UID + userId);
         List<CommodityVO> commodityVOS = commodityBaseService.findByIds(commodityIds);
         if (commodityVOS != null) {
@@ -58,7 +61,7 @@ public class CartController {
     @PostMapping("/item")
     @Transactional
     public Result addCartItem(@RequestBody AddCartAO addCartAO) {
-        String userId = Long.toString((Long) session.getAttribute(session.getId()));
+        String userId = Long.toString((Long) session.getAttribute(request.getHeader("Authorization")));
         String commodityId = String.valueOf(addCartAO.getCommodityId());
         Long inCrement = Long.valueOf(addCartAO.getNumber());
         redisUtil.hincrby(CART_UID + userId, commodityId, inCrement);
@@ -74,7 +77,7 @@ public class CartController {
     @DeleteMapping("/delete")
     @Transactional
     public Result deleteCartItem(@ModelAttribute AddCartAO addCartAO) {
-        String userId = Long.toString((Long) session.getAttribute(session.getId()));
+        String userId = Long.toString((Long) session.getAttribute(request.getHeader("Authorization")));
         String commodityId = String.valueOf(addCartAO.getCommodityId());
         redisUtil.hdel(CART_UID + userId, commodityId);
         return Result.success();

@@ -44,15 +44,15 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
         String jwt = Jwts.builder()
                 .claim("authorities", stringBuffer)
                 .setSubject(authentication.getName())
-                .setExpiration(new Date(System.currentTimeMillis() + 60 * 60 * 1000))
-                .signWith(SignatureAlgorithm.HS512, "jwt-security")
+                .setExpiration(new Date(System.currentTimeMillis() + 12 * 60 * 60 * 1000))
+                .signWith(SignatureAlgorithm.HS512, session.getId() + "jwt-security")
                 .compact();
 
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
         MyUser user = (MyUser) authentication.getPrincipal();
         user.setToken(jwt);
-        session.setAttribute(session.getId(), user.getId());
+        session.setAttribute(jwt, user.getId());
         String str = new ObjectMapper().writeValueAsString(new Result(ResultEnum.LOGIN_SUCCESS, user));
         out.write(str);
         out.flush();

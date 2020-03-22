@@ -46,7 +46,7 @@ public class JwtFilter extends GenericFilterBean {
             return;
         }
         String jwtToken = request.getHeader("Authorization");
-        Jws<Claims> jws = Jwts.parser().setSigningKey("jwt-security")
+        Jws<Claims> jws = Jwts.parser().setSigningKey(session.getId() + "jwt-security")
                 .parseClaimsJws(jwtToken.replace("Bearer", ""));
         Claims claims = jws.getBody();
         String username = claims.getSubject();

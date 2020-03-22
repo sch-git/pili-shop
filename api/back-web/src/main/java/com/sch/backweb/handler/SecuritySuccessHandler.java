@@ -48,7 +48,7 @@ public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
         String jwt = Jwts.builder()
                 .claim("authorities", stringBuffer)
                 .setSubject(authentication.getName())
-                .setExpiration(new Date(System.currentTimeMillis() + 3 * 60 * 60 * 1000))
+                .setExpiration(new Date(System.currentTimeMillis() + 12 * 60 * 60 * 1000))
                 .signWith(SignatureAlgorithm.HS512, "jwt-security")
                 .compact();
 
