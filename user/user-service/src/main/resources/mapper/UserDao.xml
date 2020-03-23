@@ -38,9 +38,29 @@
         set status=#{status},update_time=#{updateTime}
         where id=#{id}
     </update>
+    <!--根据用户名查询用户-->
     <select id="findUserByName" resultMap="BaseResultMap">
         select *
         from t_user
         where name=#{name}
     </select>
+    <!--修改用户信息-->
+    <update id="updateUser" parameterType="com.sch.userservice.dto.UpdateUserDTO">
+        update t_user
+        <set>
+            <if test="sex != null">
+                sex = #{sex},
+            </if>
+            <if test="avatar != null and avatar != ''">
+                avatar = #{avatar},
+            </if>
+            <if test="nickName != null and nickName != ''">
+                nickname = #{nickName},
+            </if>
+            <if test="updateTime != null">
+                update_time = #{updateTime},
+            </if>
+        </set>
+        where id=#{id}
+    </update>
 </mapper>

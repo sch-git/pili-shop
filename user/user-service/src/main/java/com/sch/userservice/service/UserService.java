@@ -1,6 +1,7 @@
 package com.sch.userservice.service;
 
 import com.sch.userbase.AO.SearchUserAO;
+import com.sch.userbase.AO.UpdateUserAO;
 import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.VO.UserVO;
 
@@ -34,4 +35,11 @@ public interface UserService {
      * @return user对象
      */
     UserVO findUserByName(String name);
+
+    /**
+     * 修改用户信息
+     *
+     * @param updateUserAO 新的用户信息
+     */
+    void updateUser(UpdateUserAO updateUserAO);
 }

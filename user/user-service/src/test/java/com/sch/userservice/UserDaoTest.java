@@ -1,7 +1,9 @@
 package com.sch.userservice;
 
+import com.sch.commonbasic.util.DateUtil;
 import com.sch.userbase.AO.SearchUserAO;
 import com.sch.userservice.dao.UserDao;
+import com.sch.userservice.dto.UpdateUserDTO;
 import com.sch.userservice.dto.UpdateUserStatusDTO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -45,5 +47,14 @@ public class UserDaoTest {
     @Test
     void findUserByName() {
         System.out.println(userDao.findUserByName("test123"));
+    }
+
+    @Test
+    void updateUser() {
+        UpdateUserDTO dto = new UpdateUserDTO();
+        dto.setId(1L);
+        dto.setSex(false);
+        dto.setUpdateTime(DateUtil.createTime());
+        userDao.updateUser(dto);
     }
 }

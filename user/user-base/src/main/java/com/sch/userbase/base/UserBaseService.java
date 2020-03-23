@@ -2,6 +2,7 @@ package com.sch.userbase.base;
 
 import com.github.pagehelper.PageInfo;
 import com.sch.userbase.AO.SearchUserAO;
+import com.sch.userbase.AO.UpdateUserAO;
 import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.VO.UserVO;
 
@@ -33,4 +34,11 @@ public interface UserBaseService {
      * @return user对象
      */
     UserVO findUserByName(String name);
+
+    /**
+     * 修改用户信息
+     *
+     * @param updateUserAO 新的用户信息
+     */
+    void updateUser(UpdateUserAO updateUserAO);
 }

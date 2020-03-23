@@ -32,19 +32,20 @@ public class JwtFilter extends GenericFilterBean {
     private static final Logger LOGGER = LoggerFactory.getLogger(JwtFilter.class);
     @Autowired
     HttpSession session;
+    @Autowired
+    HttpServletRequest request;
 
     @Override
     public void doFilter(ServletRequest servletRequest, ServletResponse servletResponse
             , FilterChain filterChain) throws IOException, ServletException {
-        HttpServletRequest request = (HttpServletRequest) servletRequest;
+        String jwtToken = request.getHeader("Authorization");
         // 如果用户未登录就不做token校检
         LOGGER.info("JWT校检登录{}", session.getId());
-        LOGGER.info("JWT校检登录-SESSION{}", session.getAttribute(session.getId()));
-        if (session.getAttribute(session.getId()) == null) {
+        LOGGER.info("JWT校检登录-SESSION{}", session.getAttribute(jwtToken));
+        if (session.getAttribute(jwtToken) == null) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
-        String jwtToken = request.getHeader("Authorization");
         Jws<Claims> jws = Jwts.parser().setSigningKey(session.getId() + "jwt-security")
                 .parseClaimsJws(jwtToken.replace("Bearer", ""));
         Claims claims = jws.getBody();

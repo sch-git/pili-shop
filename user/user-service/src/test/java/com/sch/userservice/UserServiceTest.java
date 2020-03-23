@@ -1,6 +1,7 @@
 package com.sch.userservice;
 
 import com.sch.userbase.AO.SearchUserAO;
+import com.sch.userbase.AO.UpdateUserAO;
 import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.base.UserBaseService;
 import org.junit.jupiter.api.Test;
@@ -39,5 +40,13 @@ public class UserServiceTest {
         updateUserStatusAO.setId(2L);
         updateUserStatusAO.setStatus(false);
         userBaseService.updateUserStatus(updateUserStatusAO);
+    }
+
+    @Test
+    void updateUser() {
+        UpdateUserAO ao = new UpdateUserAO();
+        ao.setId(1L);
+        ao.setSex(true);
+        userBaseService.updateUser(ao);
     }
 }

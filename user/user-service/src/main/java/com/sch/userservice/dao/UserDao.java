@@ -1,6 +1,7 @@
 package com.sch.userservice.dao;
 
 import com.sch.userbase.AO.SearchUserAO;
+import com.sch.userservice.dto.UpdateUserDTO;
 import com.sch.userservice.dto.UpdateUserStatusDTO;
 import com.sch.userservice.entity.User;
 import org.springframework.stereotype.Repository;
@@ -37,4 +38,11 @@ public interface UserDao {
      * @return user对象
      */
     User findUserByName(String name);
+
+    /**
+     * 修改用户信息
+     *
+     * @param updateUserDTO 新用户信息
+     */
+    void updateUser(UpdateUserDTO updateUserDTO);
 }

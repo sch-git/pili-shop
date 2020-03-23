@@ -1,6 +1,7 @@
 package com.sch.userbase.VO;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.sch.commonbasic.util.QiNiuCloudUtil;
 import lombok.Data;
 
 import java.io.Serializable;
@@ -62,4 +63,8 @@ public class UserVO implements Serializable {
      * 修改时间
      */
     private String updateTime;
+
+    public void setAvatar(String avatar) {
+        this.avatar = QiNiuCloudUtil.getDOMAIN() + avatar;
+    }
 }

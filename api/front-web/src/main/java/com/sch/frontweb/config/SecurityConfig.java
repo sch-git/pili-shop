@@ -37,11 +37,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
      */
     @Autowired
     private AuthEntryPointHandler authEntryPointHandler;
-    /**
-     * 自定义JWT-token过滤器
-     */
     @Autowired
-    private JwtFilter jwtFilter;
+    private LogoutHandler logoutHandler;
 
     /**
      * 密码加密
@@ -105,6 +102,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .anyRequest().authenticated()
                 .and()
                 .formLogin()
+                .and()
+                .logout()
+                .logoutSuccessHandler(logoutHandler)
                 .and()
                 .cors()
                 .and()

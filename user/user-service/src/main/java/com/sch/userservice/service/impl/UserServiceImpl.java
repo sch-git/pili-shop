@@ -2,9 +2,11 @@ package com.sch.userservice.service.impl;
 
 import com.sch.commonbasic.util.DateUtil;
 import com.sch.userbase.AO.SearchUserAO;
+import com.sch.userbase.AO.UpdateUserAO;
 import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.VO.UserVO;
 import com.sch.userservice.dao.UserDao;
+import com.sch.userservice.dto.UpdateUserDTO;
 import com.sch.userservice.dto.UpdateUserStatusDTO;
 import com.sch.userservice.entity.User;
 import com.sch.userservice.service.UserService;
@@ -45,6 +47,7 @@ public class UserServiceImpl implements UserService {
         for (User user : users) {
             UserVO userVO = new UserVO();
             BeanUtils.copyProperties(user, userVO);
+            userVO.setAvatar(user.getAvatar());
             userVO.setCreateTime(DateUtil.toString(user.getCreateTime()));
             userVO.setUpdateTime(DateUtil.toString(user.getUpdateTime()));
             userVOS.add(userVO);
@@ -79,8 +82,22 @@ public class UserServiceImpl implements UserService {
         }
         UserVO userVO = new UserVO();
         BeanUtils.copyProperties(user, userVO);
+        userVO.setAvatar(user.getAvatar());
         userVO.setUpdateTime(DateUtil.toString(user.getUpdateTime()));
         userVO.setCreateTime(DateUtil.toString(user.getCreateTime()));
         return userVO;
+    }
+
+    /**
+     * 修改用户信息
+     *
+     * @param updateUserAO 新的用户信息
+     */
+    @Override
+    @Transactional
+    public void updateUser(UpdateUserAO updateUserAO) {
+        UpdateUserDTO dto = new UpdateUserDTO();
+        dto.setAO(updateUserAO);
+        userDao.updateUser(dto);
     }
 }

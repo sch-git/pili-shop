@@ -11,6 +11,7 @@ public enum ResultEnum {
      */
     SUCCESS(200, ""),
     LOGIN_SUCCESS(200, "登陆成功"),
+    LOGOUT_SUCCESS(200, "退出成功"),
     FAILURE(500, "失败"),
     UPLOAD_IMAGE(200, "上传图片成功"),
     ADD_SUCCESS(200, "添加数据成功"),

@@ -5,6 +5,7 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sch.userbase.AO.SearchUserAO;
+import com.sch.userbase.AO.UpdateUserAO;
 import com.sch.userbase.AO.UpdateUserStatusAO;
 import com.sch.userbase.VO.UserVO;
 import com.sch.userbase.base.UserBaseService;
@@ -12,7 +13,6 @@ import com.sch.userservice.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 
 import java.util.List;
 
@@ -26,8 +26,6 @@ public class UserBaseServiceImpl implements UserBaseService {
     @Autowired
     UserService userService;
     private static final Logger LOGGER = LoggerFactory.getLogger(UserBaseServiceImpl.class);
-    @Autowired
-    RedisTemplate redisTemplate;
 
     /**
      * 查询用户列表
@@ -65,5 +63,15 @@ public class UserBaseServiceImpl implements UserBaseService {
     @Override
     public UserVO findUserByName(String name) {
         return userService.findUserByName(name);
+    }
+
+    /**
+     * 修改用户信息
+     *
+     * @param updateUserAO 新的用户信息
+     */
+    @Override
+    public void updateUser(UpdateUserAO updateUserAO) {
+        userService.updateUser(updateUserAO);
     }
 }

@@ -50,7 +50,6 @@ export default {
     handleSelect (key, keyPath) {
       console.log(key, keyPath)
     },
-    // todo 退出登录
     logout () {
       logout(this.userInfo.token).then(res => {
         sessionStorage.clear()
