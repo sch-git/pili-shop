@@ -53,7 +53,8 @@ export default {
     // todo 退出登录
     logout () {
       logout(this.userInfo.token).then(res => {
-        this.sessionStorage.clear()
+        sessionStorage.clear()
+        this.$router.push('/login')
       })
     }
   }
