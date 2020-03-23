@@ -29,12 +29,12 @@ export default {
       collapse: false,
       items: [
         {
-          icon: 'el-icon-s-home',
+          icon: 'el-icon-s-tools',
           index: '/user/detail',
           title: '基础设置'
         },
         {
-          icon: 'el-icon-s-home',
+          icon: 'el-icon-s-order',
           index: '/user/orderList',
           title: '我的订单'
         },
@@ -44,7 +44,7 @@ export default {
           title: '我的地址'
         },
         {
-          icon: 'el-icon-s-home',
+          icon: 'el-icon-s-comment',
           index: '/user/message',
           title: '我的消息'
         }

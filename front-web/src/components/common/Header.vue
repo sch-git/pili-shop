@@ -19,11 +19,11 @@
         </el-submenu>
         <el-menu-item v-if="!userInfo.token" class="header-right" index="/login">登录</el-menu-item>
         <el-submenu v-else class="header-right" index="3">
-          <template slot="title">{{ userInfo.username }}</template>
+          <template slot="title">{{ userInfo.nickName }}</template>
           <el-menu-item>个人中心</el-menu-item>
           <el-menu-item @click="logout">退出</el-menu-item>
         </el-submenu>
-        <el-menu-item class="header-right" :index="'/cart/'+userInfo.username">购物车<i class="el-icon-shopping-cart-1"/></el-menu-item>
+        <el-menu-item class="header-right" :index="'/cart/'+userInfo.nickName">购物车<i class="el-icon-shopping-cart-1"/></el-menu-item>
       </el-menu>
     </div>
   </main>

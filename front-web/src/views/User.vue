@@ -81,12 +81,11 @@ export default {
       margin-top: 25px;
       display: flex;
       .sidebar-main {
-        background-color: #20a0ff;
         width: 140px;
       }
 
       .user-main {
-        width: 60%;
+        width: 70%;
         margin: 0 auto;
       }
     }

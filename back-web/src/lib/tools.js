@@ -2,6 +2,7 @@
 
 // 检测商品价格
 export const checkPrice = (rule, value, callback) => {
+  value = value.trim()
   if (!value) {
     return callback(new Error('商品售价不能为空'))
   }
@@ -19,6 +20,7 @@ export const checkPrice = (rule, value, callback) => {
 }
 // 检测商品名称
 export const checkName = (rule, value, callback) => {
+  value = value.trim()
   if (!value) {
     return callback(new Error('分类名称不能为空'))
   }
@@ -27,6 +29,7 @@ export const checkName = (rule, value, callback) => {
 }
 // 检测商品分类
 export const checkCategory = (rule, value, callback) => {
+  value = value.trim()
   if (!value) {
     return callback(new Error('商品分类不能为空'))
   }
@@ -34,6 +37,7 @@ export const checkCategory = (rule, value, callback) => {
 }
 // 检测商品描述
 export const checkDescribe = (rule, value, callback) => {
+  value = value.trim()
   if (!value) {
     return callback(new Error('商品描述不能为空'))
   }
@@ -41,6 +45,7 @@ export const checkDescribe = (rule, value, callback) => {
 }
 // 检测商品图片url
 export const checkUrl = (rule, value, callback) => {
+  value = value.trim()
   if (!value) {
     return callback(new Error('请上传商品图片'))
   }

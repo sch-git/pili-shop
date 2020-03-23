@@ -15,3 +15,6 @@ export const login = (loginAO) => {
 export const logout = (params) => {
   return axios.post('/logout')
 }
+export const updateUser = (params) => {
+  return axios.put('/user/update', params)
+}

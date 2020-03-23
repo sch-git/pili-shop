@@ -1,5 +1,4 @@
 // 全局路由前置守卫
-// 全局路由前置守卫
 import store from '@/store'
 import { Message } from 'element-ui'
 export default (to, from, next) => {
@@ -8,7 +7,7 @@ export default (to, from, next) => {
     return
   }
   if (to.meta && to.meta.login) {
-    if (store.state.user.userInfo && store.state.user.userInfo.token) {
+    if (store.state.userInfo && store.state.userInfo.token) {
       next()
       return
     }
