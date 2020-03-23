@@ -7,6 +7,7 @@
         @select="handleSelect"
         background-color="#242f42"
         text-color="#fff"
+        active-text-color="#fb9f16"
         router>
         <el-menu-item index="/index">pili-shop</el-menu-item>
         <el-submenu index="2">
@@ -20,10 +21,11 @@
         <el-menu-item v-if="!userInfo.token" class="header-right" index="/login">登录</el-menu-item>
         <el-submenu v-else class="header-right" index="3">
           <template slot="title">{{ userInfo.nickName }}</template>
-          <el-menu-item>个人中心</el-menu-item>
-          <el-menu-item @click="logout">退出</el-menu-item>
+          <el-menu-item class="item" :index="'/user/detail'"><i class="el-icon-setting"/>设置</el-menu-item>
+          <el-menu-item class="item" @click="logout"><i class="el-icon-switch-button"/> 退出</el-menu-item>
         </el-submenu>
-        <el-menu-item class="header-right" :index="'/cart/'+userInfo.nickName">购物车<i class="el-icon-shopping-cart-1"/></el-menu-item>
+        <el-menu-item class="header-right" :index="'/cart/'+userInfo.nickName">购物车<i class="el-icon-shopping-cart-1"/>
+        </el-menu-item>
       </el-menu>
     </div>
   </main>
@@ -70,20 +72,18 @@ export default {
       .header-right {
         float: right;
       }
+      .el-menu-item {
+        .el-icon-shopping-cart-1 {
+          color: #fff;
+        }
+      }
     }
   }
-
-  .el-menu--horizontal > .el-menu-item > .el-icon-shopping-cart-1 .is-active{
-    color: #fb9f16;
-  }
-  .el-menu--horizontal > .el-menu-item.is-active {
-    border-bottom: 2px solid #fb9f16;
-    color: #fb9f16;
-  }
-  .el-menu--horizontal{
-    border-bottom:none;
-  }
 </style>
-<style>
-
+<style scoped lang="scss">
+  .el-menu--horizontal > .el-menu-item.is-active {
+    .el-icon-shopping-cart-1 {
+      color: #fb9f16;
+    }
+  }
 </style>
