@@ -13,6 +13,11 @@ class FrontWebApplicationTests {
 
     @Test
     void contextLoads() {
+        redisUtil.setnx("12", "12");
+        System.out.println(redisUtil.get("12", 0));
+        redisUtil.del("12");
+        redisUtil.setnx("12", "13");
+        System.out.println(redisUtil.get("12", 0));
         System.out.println(SnowUtil.nextId());
     }
 

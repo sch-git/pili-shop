@@ -41,7 +41,7 @@ public class JwtFilter extends GenericFilterBean {
         String jwtToken = request.getHeader("Authorization");
         // 如果用户未登录就不做token校检
         LOGGER.info("JWT校检登录{}", session.getId());
-        LOGGER.info("JWT校检登录-SESSION{}", session.getAttribute(jwtToken));
+        LOGGER.info("JWT校检登录-USER-ID{}", session.getAttribute(jwtToken));
         if (session.getAttribute(jwtToken) == null) {
             filterChain.doFilter(servletRequest, servletResponse);
             return;

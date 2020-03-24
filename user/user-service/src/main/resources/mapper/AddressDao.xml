@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sch.userservice.dao.AddressDao">
+    <resultMap id="BaseResultMap" type="com.sch.userservice.entity.Address">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="receive_name" jdbcType="VARCHAR" property="receiveName"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="detailed_address" jdbcType="VARCHAR" property="detailedAddress"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <insert id="addAddress" parameterType="com.sch.userservice.dto.AddAddressDTO">
+        insert into t_address(
+        `user_id`,`receive_name`,`phone`,`province`,`city`,`district`
+        ,`detailed_address`,`create_time`,`update_time`)
+        values (#{userId},#{receiveName},#{phone},#{province}
+        ,#{city},#{district},#{detailedAddress},#{createTime},#{updateTime})
+  </insert>
+</mapper>
