@@ -20,4 +20,9 @@
         values (#{userId},#{receiveName},#{phone},#{province}
         ,#{city},#{district},#{detailedAddress},#{createTime},#{updateTime})
   </insert>
+    <select id="findAddressList" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select *
+        from t_address
+        where user_id = #{userId}
+    </select>
 </mapper>

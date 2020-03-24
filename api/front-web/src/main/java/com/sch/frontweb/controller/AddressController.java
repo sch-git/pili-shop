@@ -7,10 +7,7 @@ import com.sch.frontweb.config.RedisUtil;
 import com.sch.userbase.AO.AddressAO;
 import com.sch.userbase.base.AddressBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -52,5 +49,27 @@ public class AddressController {
         addressBaseService.addAddress(addressAO);
         redisUtil.setnx(DEFAULT_ADDRESS + userId, addressAO.getDetailedAddress());
         return new Result(ResultEnum.ADD_SUCCESS, redisUtil.get(DEFAULT_ADDRESS + userId, INDEX_DB));
+    }
+
+    /**
+     * 查询用户地址列表
+     *
+     * @return 地址列表
+     */
+    @GetMapping("/list")
+    public Result findAddress() {
+        Long userId = (Long) session.getAttribute(request.getHeader("Authorization"));
+        return Result.success(addressBaseService.findAddressList(userId));
+    }
+
+    /**
+     * 获取用户默认地址
+     *
+     * @return 默认详细地址
+     */
+    @GetMapping("/default")
+    public Result findDefaultAddress() {
+        Long userId = (Long) session.getAttribute(request.getHeader("Authorization"));
+        return Result.success(redisUtil.get(DEFAULT_ADDRESS + userId, INDEX_DB));
     }
 }
