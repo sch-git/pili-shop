@@ -14,7 +14,7 @@
       type="info" :closable="false" show-icon>
     </el-alert>
     <el-main class="cart-box">
-      <div class="banner-top" v-if="!tableData[0] || !tableData[0].id">
+      <div class="banner-top" v-if="!tableData || !tableData[0] || !tableData[0].id">
         <h1>您的购物车空空如也，快去选购吧!</h1>
       </div>
       <el-table
@@ -117,16 +117,7 @@ export default {
     return {
       // 购物车列表
       multipleSelection: [],
-      tableData: [
-        {
-          id: 1,
-          name: 'product',
-          describe: 'describe',
-          price: 99.00,
-          number: 2,
-          url: ''
-        }
-      ],
+      tableData: [],
       min: 1,
       max: 9999,
       old: 1,
@@ -148,7 +139,6 @@ export default {
     // 查询用户购物车数据
     findUserCart () {
       findCartList().then(res => {
-        console.log('购物车数据', res)
         this.tableData = res
       })
     },
@@ -183,6 +173,7 @@ export default {
   computed: {
     totalPrice () {
       let sum = 0
+      if (!this.tableData) { return 0 }
       this.tableData.forEach(item => {
         sum += item.price * item.number
       })

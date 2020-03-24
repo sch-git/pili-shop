@@ -14,11 +14,13 @@
         <div v-if="!defaultAddress">
           <h2>您的地址栏空空如也
             <el-button @click="dialogVisible=true"
-                       type="text">新增地址</el-button>
+                       type="text">新增地址
+            </el-button>
           </h2>
         </div>
-        <el-card v-else class="box-card" :class="value===true?'default-address':''" shadow="never"
-        v-for="address in addressList" :key="address.id">
+        <el-card v-else class="box-card" :class="defaultAddress===address.detailedAddress?'default-address':''"
+                 shadow="never"
+                 v-for="(address,index) in addressList" :key="index">
           <div slot="header">
             <span class="address-name">{{address.receiveName}}</span>
             <span class="address-phone">{{address.phone}}</span>
@@ -31,11 +33,15 @@
           </div>
           <div class="item">
             <el-button class="option-delete" type="text" icon="el-icon-delete"></el-button>
-            <el-button type="text" @click="this.form=address,dialogVisible=true" icon="el-icon-edit-outline"></el-button>
-            <el-button class="option-add" @click="resetForm('form'),dialogVisible=true" type="text" icon="el-icon-circle-plus-outline"></el-button>
+            <el-button type="text" @click="this.form=address,dialogVisible=true"
+                       icon="el-icon-edit-outline"></el-button>
+            <el-button class="option-add" @click="addAddressDialog" type="text"
+                       icon="el-icon-circle-plus-outline"></el-button>
             <el-switch
               class="option-default"
-              v-model="value"
+              :value="defaultAddress===address.detailedAddress"
+              :disabled="defaultAddress===address.detailedAddress"
+              @change="changeDefaultAddress(address)"
               active-color="#13ce66">
             </el-switch>
             <span class="option-default">默认地址</span>
@@ -45,7 +51,7 @@
     </div>
     <!--新增地址-->
     <el-dialog title="收货地址" :visible.sync="dialogVisible" width="45%">
-      <el-form :model="form" :rules="rules" ref="form">
+      <el-form :model="form" :rules="rules" ref='form'>
         <el-form-item label="收货人" :label-width="formLabelWidth" prop="receiveName">
           <el-input v-model="form.receiveName"></el-input>
         </el-form-item>
@@ -98,18 +104,17 @@ import cityObjList from '@/assets/data/city_object'
 import countryList from '@/assets/data/county'
 import countryObjList from '@/assets/data/county_object'
 import { checkDetailedAddress, checkPhone, checkReceiveName } from '@/lib/rule/Address'
-import { addAddress } from '@/api/user/address'
+import { addAddress, findAddressList, findDefaultAddress } from '@/api/user/address'
+
 export default {
   name: 'Address',
   data () {
     return {
-      value: true,
       // 导入省市区数据
       provinceList: provinceList,
       // 地址列表
       addressList: [
         // {
-        // id: '',
         // receiveName: '收货人姓名X',
         // phone: '12374589655',
         // province: 'XX省',
@@ -155,6 +160,7 @@ export default {
     }
   },
   created () {
+    this.handleInit()
   },
   computed: {
     userInfo () {
@@ -170,33 +176,53 @@ export default {
   methods: {
     // 初始化
     handleInit () {
-
+      this.handleFindAddressList()
+      this.handleFindDefaultAddress()
     },
     // 获取用户地址列表
     handleFindAddressList () {
-
+      findAddressList().then(res => {
+        res.forEach(item => {
+          item.province = provinceObjList[item.province].name
+          item.city = cityObjList[item.city].name
+          item.district = countryObjList[item.district].name
+          this.addressList.push(item)
+        })
+      })
     },
     // 获取用户默认地址
     handleFindDefaultAddress () {
-
+      findDefaultAddress().then(res => {
+        this.defaultAddress = res
+      })
     },
     resetForm (formName) {
-      this.$refs[formName].resetField()
+      this.$refs[formName].resetFields()
     },
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          this.form.province = provinceObjList[this.form.province].name
-          this.form.city = cityObjList[this.form.city].name
-          this.form.district = countryObjList[this.form.district].name
           addAddress(this.form).then(res => {
             this.defaultAddress = res
+            this.form.id = this.addressList[this.addressList.length - 1].id + 1
             this.addressList.push(this.form)
           })
         } else {
           this.$message.error('请填写完整信息')
           return false
         }
+      })
+    },
+    // todo 修改默认地址
+    changeDefaultAddress (address) {
+      console.log(address.id, address.detailedAddress)
+      this.defaultAddress = address.detailedAddress
+    },
+    addAddressDialog () {
+      this.dialogVisible = true
+      this.$nextTick(() => {
+        // 打开新增弹窗前先重置表单 避免表单出现上一次新增的校验数据
+        this.$refs.form.resetFields()
       })
     }
   }
@@ -245,7 +271,7 @@ export default {
               color: limegreen;
             }
 
-            .option-default{
+            .option-default {
               float: right;
             }
           }
@@ -253,7 +279,7 @@ export default {
       }
     }
 
-    .form-address{
+    .form-address {
       width: 150px;
       margin-right: 20px;
     }
@@ -262,9 +288,10 @@ export default {
 <style lang="scss">
   .my-address {
     .address-list {
-      .default-address{
+      .default-address {
         border: 2px solid #13ce66 !important;
       }
+
       .el-card {
         background-color: #f0f0f0;
         border: 2px solid #cccccc;
@@ -279,7 +306,7 @@ export default {
           padding: 2px 25px 7px 25px;
         }
 
-        .el-switch{
+        .el-switch {
           height: 30px;
         }
       }

@@ -5,7 +5,14 @@ import axios from '@/api/index'
  * @returns 地址列表
  */
 export const findAddressList = () => {
-  return axios.post('/address/list')
+  return axios.get('/address/list')
+}
+/**
+ * 获取用户默认地址
+ * @returns 默认详细地址
+ */
+export const findDefaultAddress = () => {
+  return axios.get('/address/default')
 }
 /**
  * 添加用户新地址

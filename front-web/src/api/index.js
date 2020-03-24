@@ -9,6 +9,7 @@ axios.interceptors.response.use(res => {
   console.log('response', res)
   if (res.data && res.status === 200 && res.data.code !== 200) {
     Message.error({ message: res.data.message })
+    sessionStorage.clear()
     return null
   }
   if (res.data && res.data.message !== '') {

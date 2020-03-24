@@ -20,7 +20,6 @@ export const findCartList = () => {
 /**
  * 从缓存中删除购物车中指定商品
  * @param params 商品id
- * @returns
  */
 export const deleteCartItem = params => {
   return axios.delete('/cart/delete', { params })
