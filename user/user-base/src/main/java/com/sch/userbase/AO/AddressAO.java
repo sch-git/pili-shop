@@ -6,12 +6,16 @@ import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 
 /**
- * @Description: 用户新增地址
+ * @Description: 用户地址
  * @Author: chenghao.su
  * @Date: 2020/3/24 19:24
  */
 @Data
 public class AddressAO implements Serializable {
+    /**
+     * 修改地址时需要，新增时不用
+     */
+    private Long id;
     /**
      * 用户id
      */

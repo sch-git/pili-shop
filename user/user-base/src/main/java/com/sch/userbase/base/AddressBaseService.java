@@ -15,8 +15,9 @@ public interface AddressBaseService {
      * 用户新增地址
      *
      * @param addressAO 新的地址
+     * @return 新增的地址id
      */
-    void addAddress(AddressAO addressAO);
+    Long addAddress(AddressAO addressAO);
 
     /**
      * 查询用户地址列表
@@ -25,4 +26,26 @@ public interface AddressBaseService {
      * @return 地址列表
      */
     List<AddressVO> findAddressList(Long userId);
+
+    /**
+     * 查询用户地址
+     *
+     * @param id 地址id
+     * @return 地址信息
+     */
+    AddressVO findAddressById(Long id);
+
+    /**
+     * 用户删除地址
+     *
+     * @param id 被删除的地址id
+     */
+    void deleteAddressById(Long id);
+
+    /**
+     * 用户修改地址
+     *
+     * @param addressAO 修改后的地址信息
+     */
+    void updateAddressById(AddressAO addressAO);
 }

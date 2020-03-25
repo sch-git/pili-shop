@@ -13,16 +13,39 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
         <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
     </resultMap>
-    <insert id="addAddress" parameterType="com.sch.userservice.dto.AddAddressDTO">
+    <!--新增地址-->
+    <insert id="addAddress" useGeneratedKeys="true" keyProperty="id"
+            parameterType="com.sch.userservice.dto.AddAddressDTO">
         insert into t_address(
         `user_id`,`receive_name`,`phone`,`province`,`city`,`district`
         ,`detailed_address`,`create_time`,`update_time`)
         values (#{userId},#{receiveName},#{phone},#{province}
         ,#{city},#{district},#{detailedAddress},#{createTime},#{updateTime})
   </insert>
+    <!--查询用户地址列表-->
     <select id="findAddressList" parameterType="java.lang.Long" resultMap="BaseResultMap">
         select *
         from t_address
         where user_id = #{userId}
     </select>
+    <!--查询指定地址-->
+    <select id="findAddressById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select *
+        from t_address
+        where id = #{id}
+    </select>
+    <!--删除指定地址-->
+    <delete id="deleteAddressById" parameterType="java.lang.Long">
+        delete
+        from t_address
+        where id = #{id}
+    </delete>
+    <!--修改指定地址-->
+    <update id="updateAddressById" parameterType="com.sch.userservice.dto.AddAddressDTO">
+        update t_address
+        set receive_name=#{receiveName},phone=#{phone},province=#{province}
+        ,city=#{city},district=#{district},detailed_address=#{detailedAddress}
+        ,update_time=#{updateTime}
+        where id=#{id}
+    </update>
 </mapper>

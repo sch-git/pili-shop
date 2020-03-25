@@ -29,15 +29,17 @@ public class AddressServiceImpl implements AddressService {
      * 用户新增地址
      *
      * @param addressAO 新的地址
+     * @return 新增的地址id
      */
     @Override
     @Transactional
-    public void addAddress(AddressAO addressAO) {
+    public Long addAddress(AddressAO addressAO) {
         AddAddressDTO dto = new AddAddressDTO();
         BeanUtils.copyProperties(addressAO, dto);
         dto.setCreateTime(DateUtil.createTime());
         dto.setUpdateTime(DateUtil.createTime());
         addressDao.addAddress(dto);
+        return dto.getId();
     }
 
     /**
@@ -61,5 +63,48 @@ public class AddressServiceImpl implements AddressService {
             addressVOS.add(addressVO);
         }
         return addressVOS;
+    }
+
+    /**
+     * 查询用户地址
+     *
+     * @param id 地址id
+     * @return 地址信息
+     */
+    @Override
+    public AddressVO findAddressById(Long id) {
+        Address address = addressDao.findAddressById(id);
+        if (address == null) {
+            return null;
+        }
+        AddressVO addressVO = new AddressVO();
+        BeanUtils.copyProperties(address, addressVO);
+        addressVO.setCreateTime(DateUtil.toString(address.getCreateTime()));
+        addressVO.setUpdateTime(DateUtil.toString(address.getUpdateTime()));
+        return addressVO;
+    }
+
+    /**
+     * 用户删除地址
+     *
+     * @param id 被删除的地址id
+     */
+    @Override
+    public void deleteAddressById(Long id) {
+        addressDao.deleteAddressById(id);
+    }
+
+    /**
+     * 用户修改地址
+     *
+     * @param addressAO 修改后的地址信息
+     */
+    @Override
+    @Transactional
+    public void updateAddressById(AddressAO addressAO) {
+        AddAddressDTO dto = new AddAddressDTO();
+        BeanUtils.copyProperties(addressAO, dto);
+        dto.setUpdateTime(DateUtil.createTime());
+        addressDao.updateAddressById(dto);
     }
 }

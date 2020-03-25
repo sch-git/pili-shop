@@ -10,6 +10,10 @@ import lombok.Data;
 @Data
 public class AddAddressDTO {
     /**
+     * id
+     */
+    private Long id;
+    /**
      * 用户id
      */
     private Long userId;

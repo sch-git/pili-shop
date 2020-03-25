@@ -23,10 +23,11 @@ public class AddressBaseServiceImpl implements AddressBaseService {
      * 用户新增地址
      *
      * @param addressAO 新的地址
+     * @return 新增的地址id
      */
     @Override
-    public void addAddress(AddressAO addressAO) {
-        addressService.addAddress(addressAO);
+    public Long addAddress(AddressAO addressAO) {
+        return addressService.addAddress(addressAO);
     }
 
     /**
@@ -39,4 +40,36 @@ public class AddressBaseServiceImpl implements AddressBaseService {
     public List<AddressVO> findAddressList(Long userId) {
         return addressService.findAddressList(userId);
     }
+
+    /**
+     * 查询用户地址
+     *
+     * @param id 地址id
+     * @return 地址信息
+     */
+    @Override
+    public AddressVO findAddressById(Long id) {
+        return addressService.findAddressById(id);
+    }
+
+    /**
+     * 用户删除地址
+     *
+     * @param id 被删除的地址id
+     */
+    @Override
+    public void deleteAddressById(Long id) {
+        addressService.deleteAddressById(id);
+    }
+
+    /**
+     * 用户修改地址
+     *
+     * @param addressAO 修改后的地址信息
+     */
+    @Override
+    public void updateAddressById(AddressAO addressAO) {
+        addressService.updateAddressById(addressAO);
+    }
+
 }
