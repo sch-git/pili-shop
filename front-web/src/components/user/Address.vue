@@ -183,9 +183,6 @@ export default {
     },
     countryList () {
       return countryList[this.form.city]
-    },
-    provinceObjList () {
-      return provinceObjList
     }
   },
   methods: {

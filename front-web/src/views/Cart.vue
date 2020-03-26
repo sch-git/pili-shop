@@ -67,18 +67,22 @@
       <div class="address-box">
         <div class="address-check">
           <div class="address-check-name">
-            <span>{{'12'}}</span>
+            <span v-if="checkAddress!==null">{{checkAddress.receiveName}} {{checkAddress.phone}}</span>
+            <span v-else>{{ '未选择地址' }}</span>
           </div>
-          <div class="address-detail">
-            <p>{{checkAddress.address}}</p>
+          <div class="address-detail" v-if="checkAddress!==null">
+            <p>
+              <span>{{checkAddress.province}}</span>
+              <span>{{checkAddress.city}}</span>
+              <span>{{checkAddress.district}}</span>
+              <span>{{checkAddress.detailedAddress}}</span>
+            </p>
           </div>
         </div>
         <el-collapse v-model="collapseName" accordion>
           <el-collapse-item title="选择地址" name="1">
-            <el-radio-group vertical size="large" v-model="radio">
-              <el-radio :label="3" class="radio-item">备选项</el-radio>
-              <el-radio :label="6" class="radio-item">备选项</el-radio>
-              <el-radio :label="9" class="radio-item">备选项</el-radio>
+            <el-radio-group vertical size="large" v-model="checkAddress">
+              <el-radio v-for="item in addressList" :key="item.id" :label="item" class="radio-item">{{ item.detailedAddress }}</el-radio>
             </el-radio-group>
           </el-collapse-item>
         </el-collapse>
@@ -92,9 +96,9 @@
       <div class="pay-box">
         <p><span>提交订单应付总额：</span> <span class="money">{{totalPrice.toFixed(2)}}</span></p>
         <div class="pay-btn">
-          <router-link to="/pay">
-            <el-button type="danger" size="large">支付订单</el-button>
-          </router-link>
+<!--          <router-link to="/pay">-->
+            <el-button type="danger" size="large" :disabled="!beforeSubmitOrder">支付订单</el-button>
+<!--          </router-link>-->
         </div>
       </div>
     </div>
@@ -104,7 +108,12 @@
 <script>
 import { MessageBoxConfirm } from '@/lib/tools'
 import { addCartItem, deleteCartItem, findCartList } from '@/api/commodity/cart'
-
+import { findAddressList } from '@/api/user/address'
+import provinceObjList from '@/assets/data/province_object'
+import cityList from '@/assets/data/city'
+import cityObjList from '@/assets/data/city_object'
+import countryList from '@/assets/data/county'
+import countryObjList from '@/assets/data/county_object'
 export default {
   name: 'Cart',
   props: {
@@ -121,9 +130,11 @@ export default {
       min: 1,
       max: 9999,
       old: 1,
-      // 选择地址
-      address: [],
-      checkAddress: {},
+      // 地址列表
+      addressList: [],
+      // 保留地址代码的地址列表
+      codeAddressList: [],
+      checkAddress: null,
       collapseName: 1,
       radio: 0
     }
@@ -135,6 +146,25 @@ export default {
     // 初始化数据
     handleInit () {
       this.findUserCart()
+      this.handleFindAddressList()
+    },
+    // 获取用户地址列表
+    handleFindAddressList () {
+      findAddressList().then(res => {
+        res.forEach(item => {
+          const itemTemp = { ...item }
+          this.codeAddressList.push(itemTemp)
+          item = this.codeToName(item)
+          this.addressList.push(item)
+        })
+      })
+    },
+    // 后端省市区代码转为前端可视化名称
+    codeToName (form) {
+      form.province = provinceObjList[form.province].name
+      form.city = cityObjList[form.city].name
+      form.district = countryObjList[form.district].name
+      return form
     },
     // 查询用户购物车数据
     findUserCart () {
@@ -171,13 +201,31 @@ export default {
     }
   },
   computed: {
+    userInfo () {
+      return this.$store.state.userInfo
+    },
     totalPrice () {
       let sum = 0
-      if (!this.tableData) { return 0 }
-      this.tableData.forEach(item => {
+      if (!this.multipleSelection) { return 0 }
+      this.multipleSelection.forEach(item => {
         sum += item.price * item.number
       })
       return sum
+    },
+    cityList () {
+      return cityList[this.form.province]
+    },
+    countryList () {
+      return countryList[this.form.city]
+    },
+    // 支付订单进行校检
+    beforeSubmitOrder () {
+      if (this.multipleSelection.length === 0) {
+        return false
+      } else if (this.checkAddress === null) {
+        return false
+      }
+      return true
     }
   }
 }
@@ -247,7 +295,7 @@ export default {
 
       .address-box {
         margin-top: 5px;
-        padding: 15px;
+        padding: 5px 15px 25px 15px;
         border: 1px #ccc dotted;
 
         .address-check {
@@ -257,13 +305,14 @@ export default {
           align-items: center;
 
           .address-check-name {
-            width: 120px;
+            min-width: 120px;
             justify-content: center;
             align-content: center;
             background-color: #cccccc;
 
             span {
               display: block;
+              padding: 0 15px;
               font-size: 14px;
               line-height: 36px;
               text-align: center;
@@ -274,8 +323,14 @@ export default {
 
           .address-detail {
             padding-left: 15px;
+            margin-left: 5px;
             font-size: 14px;
             color: #999999;
+            p{
+              span{
+                margin-right: 5px;
+              }
+            }
           }
         }
 
@@ -284,12 +339,15 @@ export default {
           padding-left: 25px;
           margin: 15px 0;
         }
+
       }
     }
 
     .invoices-container {
       line-height: 45px;
       margin-top: 10px;
+      float: left;
+      padding-left: 15px;
 
       p {
         font-size: 12px;
@@ -302,6 +360,7 @@ export default {
       line-height: 45px;
       display: flex;
       justify-content: flex-end;
+      padding-right: 15px;
 
       .pay-box {
         font-size: 18px;
@@ -325,9 +384,16 @@ export default {
     }
   }
 </style>
-<style>
-  .el-collapse-item__header {
-    background: #dee7f5;
-    padding-left: 25px;
+<style lang="scss">
+  .address-box{
+    .el-collapse-item__header {
+      background: #dee7f5;
+      padding-left: 25px;
+    }
+
+    .el-collapse-item__content{
+      padding: 10px 0 5px 0;
+    }
   }
+
 </style>
