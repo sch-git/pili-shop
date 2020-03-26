@@ -53,6 +53,12 @@
             <version>${gson.version}</version>
             <scope>compile</scope>
         </dependency>
+        <!--支付宝接口-->
+        <dependency>
+            <groupId>com.alipay.sdk</groupId>
+            <artifactId>alipay-sdk-java</artifactId>
+            <version>${alipay.version}</version>
+        </dependency>
     </dependencies>
 
 
