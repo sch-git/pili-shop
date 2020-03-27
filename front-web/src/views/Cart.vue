@@ -97,11 +97,12 @@
         <p><span>提交订单应付总额：</span> <span class="money">{{totalPrice.toFixed(2)}}</span></p>
         <div class="pay-btn">
 <!--          <router-link to="/pay">-->
-            <el-button type="danger" size="large" :disabled="!beforeSubmitOrder">支付订单</el-button>
+            <el-button type="danger" size="large" @click="submitOrder" :disabled="!beforeSubmitOrder">支付订单</el-button>
 <!--          </router-link>-->
         </div>
       </div>
     </div>
+    <div v-html="formData"></div>
   </main>
 </template>
 
@@ -114,6 +115,8 @@ import cityList from '@/assets/data/city'
 import cityObjList from '@/assets/data/city_object'
 import countryList from '@/assets/data/county'
 import countryObjList from '@/assets/data/county_object'
+import { payOrder } from '@/api/order'
+import { mapMutations } from 'vuex'
 export default {
   name: 'Cart',
   props: {
@@ -124,6 +127,7 @@ export default {
   },
   data () {
     return {
+      flag: false,
       // 购物车列表
       multipleSelection: [],
       tableData: [],
@@ -135,14 +139,21 @@ export default {
       // 保留地址代码的地址列表
       codeAddressList: [],
       checkAddress: null,
-      collapseName: 1,
-      radio: 0
+      collapseName: 1
     }
   },
   created () {
     this.handleInit()
   },
+  beforeRouteLeave () {
+    console.log(this.$store.state.loading)
+    this.SET_LOADING(false)
+  },
   methods: {
+    ...mapMutations([
+      'SET_PAY_FORM',
+      'SET_LOADING'
+    ]),
     // 初始化数据
     handleInit () {
       this.findUserCart()
@@ -198,6 +209,22 @@ export default {
           this.tableData.splice(index, 1)
         }
       })
+    },
+    // 提交订单
+    submitOrder () {
+      const orderAO = {
+        ...this.checkAddress,
+        cartList: this.multipleSelection,
+        total: this.totalPrice,
+        userName: this.userInfo.username
+      }
+      this.SET_LOADING(true)
+      payOrder(orderAO).then(data => {
+        this.SET_PAY_FORM(data)
+        this.$nextTick(() => {
+          document.forms[0].submit()
+        })
+      })
     }
   },
   computed: {
@@ -226,6 +253,10 @@ export default {
         return false
       }
       return true
+    },
+    // 提交订单返回支付宝页面
+    formData () {
+      return this.$store.state.payForm
     }
   }
 }

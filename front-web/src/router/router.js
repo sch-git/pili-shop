@@ -71,6 +71,11 @@ export default [
         ]
       },
       {
+        path: '/feedBack',
+        component: () => import(/* webpackChunkName: "index" */ '@/views/FeedBack'),
+        meta: { title: '意见反馈' }
+      },
+      {
         path: '/user',
         component: () => import(/* webpackChunkName: "user" */ '@/views/User'),
         meta: {

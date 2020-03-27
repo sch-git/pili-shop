@@ -1,10 +1,14 @@
 <template>
-  <main>
+  <el-main
+    v-loading="loading"
+    element-loading-text="拼命提交订单中"
+    element-loading-spinner="el-icon-loading"
+    element-loading-background="rgba(0, 0, 0, 0.8)">
     <Header></Header>
     <router-view/>
     <!-- 部分路由不应该包含这个Footer -->
     <Footer v-if="excludeRoutes.indexOf($route.name) === -1"></Footer>
-  </main>
+  </el-main>
 </template>
 
 <script>
@@ -22,8 +26,15 @@ export default {
     Header,
     Footer
   },
-  created () {
-
+  computed: {
+    loading () {
+      return this.$store.state.loading
+    }
   }
 }
 </script>
+<style scoped lang="scss">
+  .el-main{
+    padding: 0;
+  }
+</style>

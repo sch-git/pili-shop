@@ -10,6 +10,8 @@ const state = {
     createTime: '0000-00-00:00:00:00',
     updateTime: '0000-00-00:00:00:00',
     token: ''
-  }
+  },
+  payForm: '',
+  loading: false
 }
 export default state
