@@ -1,32 +1,22 @@
-package com.sch.orderservice.entity;
+package com.sch.orderbase.AO;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.Date;
+import java.util.List;
 
+/**
+ * @Description: 订单数据
+ * @Author: chenghao.su
+ * @Date: 2020/3/27 15:10
+ */
 @Data
-public class Order {
-    /**
-     * id
-     */
-    private Long id;
-    /**
-     * 订单编号
-     */
-    private String code;
-    /**
-     * 状态
-     */
-    private Byte status;
+public class OrderAO implements Serializable {
     /**
      * 总价
      */
     private BigDecimal total;
-    /**
-     * 用户id
-     */
-    private Long userId;
     /**
      * 用户名
      */
@@ -56,19 +46,7 @@ public class Order {
      */
     private String detailedAddress;
     /**
-     * 创建时间
+     * 订单商品数据
      */
-    private Date createTime;
-    /**
-     * 支付时间
-     */
-    private Date payTime;
-    /**
-     * 完成时间
-     */
-    private Date successTime;
-    /**
-     * 取消时间
-     */
-    private Date cancelTime;
+    private List<Cart> cartList;
 }

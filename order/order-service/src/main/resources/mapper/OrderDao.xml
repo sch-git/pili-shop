@@ -8,7 +8,7 @@
         <result column="total" jdbcType="DECIMAL" property="total"/>
         <result column="user_id" jdbcType="BIGINT" property="userId"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
-        <result column="receiver_name" jdbcType="VARCHAR" property="receiverName"/>
+        <result column="receive_name" jdbcType="VARCHAR" property="receiveName"/>
         <result column="phone" jdbcType="VARCHAR" property="phone"/>
         <result column="province" jdbcType="VARCHAR" property="province"/>
         <result column="city" jdbcType="VARCHAR" property="city"/>
