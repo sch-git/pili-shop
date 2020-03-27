@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sch.orderservice.dao.OrderDao">
+    <resultMap id="BaseResultMap" type="com.sch.orderservice.entity.Order">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="code" jdbcType="VARCHAR" property="code"/>
+        <result column="status" jdbcType="TINYINT" property="status"/>
+        <result column="total" jdbcType="DECIMAL" property="total"/>
+        <result column="user_id" jdbcType="BIGINT" property="userId"/>
+        <result column="user_name" jdbcType="VARCHAR" property="userName"/>
+        <result column="receiver_name" jdbcType="VARCHAR" property="receiverName"/>
+        <result column="phone" jdbcType="VARCHAR" property="phone"/>
+        <result column="province" jdbcType="VARCHAR" property="province"/>
+        <result column="city" jdbcType="VARCHAR" property="city"/>
+        <result column="district" jdbcType="VARCHAR" property="district"/>
+        <result column="detailed_address" jdbcType="VARCHAR" property="detailedAddress"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="pay_time" jdbcType="TIMESTAMP" property="payTime"/>
+        <result column="success_time" jdbcType="TIMESTAMP" property="successTime"/>
+        <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime"/>
+    </resultMap>
+
+</mapper>
