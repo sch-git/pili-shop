@@ -61,6 +61,14 @@ export default [
             }
           },
           {
+            path: 'code',
+            component: () => import(/* webpackChunkName: "code" */ '~c/order/Code'),
+            meta: {
+              title: '支付订单',
+              login: true
+            }
+          },
+          {
             path: 'success',
             component: () => import(/* webpackChunkName: "success" */ '~c/order/Success'),
             meta: {

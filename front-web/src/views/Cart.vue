@@ -102,7 +102,6 @@
         </div>
       </div>
     </div>
-    <div v-html="formData"></div>
   </main>
 </template>
 
@@ -145,9 +144,9 @@ export default {
   created () {
     this.handleInit()
   },
-  beforeRouteLeave () {
-    console.log(this.$store.state.loading)
+  beforeRouteLeave (to, from, next) {
     this.SET_LOADING(false)
+    next()
   },
   methods: {
     ...mapMutations([
@@ -221,9 +220,7 @@ export default {
       this.SET_LOADING(true)
       payOrder(orderAO).then(data => {
         this.SET_PAY_FORM(data)
-        this.$nextTick(() => {
-          document.forms[0].submit()
-        })
+        this.$router.push('/order/pay')
       })
     }
   },
