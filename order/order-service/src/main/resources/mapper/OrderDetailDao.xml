@@ -10,4 +10,12 @@
         <result column="number" jdbcType="INTEGER" property="number"/>
         <result column="url" jdbcType="VARCHAR" property="url"/>
     </resultMap>
+    <insert id="createOrderDetail" parameterType="java.util.List" useGeneratedKeys="false">
+        insert into t_order_detail(
+        `order_id`,`commodity_id`,`commodity_name`,`price`,`number`,`url`
+        )values
+        <foreach collection="list" separator="," item="cart" index="index">
+            (#{cart.orderId},#{cart.id},#{cart.name},#{cart.price},#{cart.number},#{cart.url})
+        </foreach>
+    </insert>
 </mapper>

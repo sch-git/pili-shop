@@ -19,5 +19,14 @@
         <result column="success_time" jdbcType="TIMESTAMP" property="successTime"/>
         <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime"/>
     </resultMap>
-
+    <!--创建订单-->
+    <insert id="createOrder" useGeneratedKeys="true" keyProperty="id" parameterType="com.sch.orderservice.dto.OrderDTO">
+        insert into t_order(
+        `code`,`status`,`total`,`user_id`,`user_name`,`receive_name`,`phone`
+        ,`province`,`city`,`district`,`detailed_address`,`create_time`
+        )values (
+        #{code},#{status},#{total},#{userId},#{userName},#{receiveName},#{phone}
+        ,#{province},#{city},#{district},#{detailedAddress},#{createTime}
+        )
+    </insert>
 </mapper>

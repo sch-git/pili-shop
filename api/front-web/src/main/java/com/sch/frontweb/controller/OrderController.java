@@ -1,11 +1,14 @@
 package com.sch.frontweb.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.sch.commonbasic.VO.Result;
 import com.sch.commonbasic.util.AliPayUtil;
 import com.sch.commonbasic.util.SnowUtil;
 import com.sch.frontweb.config.RedisUtil;
+import com.sch.orderbase.AO.Cart;
 import com.sch.orderbase.AO.OrderAO;
+import com.sch.orderbase.base.OrderBaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,36 +39,53 @@ public class OrderController {
     HttpServletRequest request;
     @Autowired
     HttpServletResponse response;
+    private static final String CART_UID = "CART_UID_";
     private Logger LOGGER = LoggerFactory.getLogger(OrderController.class);
+    private static final String ORDER_ID = "ORDER_ID_";
+    @Reference
+    OrderBaseService orderBaseService;
 
     /**
-     * TODO 提交订单
+     * 提交订单
+     * 1.创建订单
+     * 2.删除购物车中数据
      *
      * @param orderAO 订单信息
      */
     @PostMapping("/pay")
-    public Result payOrder(@RequestBody OrderAO orderAO) {
-        String form = AliPayUtil.ResponseForm(String.valueOf(SnowUtil.nextId()), orderAO.getTotal(), orderAO.getReceiveName());
-        response.setContentType("text/html;charset=utf-8");
-        try {
-            String str = new ObjectMapper().writeValueAsString(Result.success(form));
-            response.getWriter().write(str);
-            response.getWriter().flush();
-            response.getWriter().close();
-        } catch (IOException e) {
-            e.printStackTrace();
+    public void payOrder(@RequestBody OrderAO orderAO) {
+        Long userId = (Long) session.getAttribute(request.getHeader("Authorization"));
+        orderAO.setUserId(userId);
+        orderAO.setCode(String.valueOf(SnowUtil.nextId()));
+        if (redisUtil.setnx(ORDER_ID + orderAO.getCode(), orderAO.getCode()) == 1) {
+            // 1.创建订单
+            orderBaseService.createOrder(orderAO);
+            // 2.删除购物车中商品
+            for (Cart commodity : orderAO.getCartList()) {
+                redisUtil.hdel(CART_UID + userId, commodity.getId().toString());
+            }
+            String form = AliPayUtil.ResponseForm(orderAO.getCode(), orderAO.getTotal(), orderAO.getReceiveName());
+            response.setContentType("text/html;charset=utf-8");
+            try {
+                String str = new ObjectMapper().writeValueAsString(Result.success(form));
+                response.getWriter().write(str);
+                response.getWriter().flush();
+                response.getWriter().close();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
         }
-        return Result.success();
     }
 
     /**
      * 支付宝同步跳转
      *
-     * @return vue支付成功页面
+     * @Description: vue支付成功页面
      */
     @GetMapping("/success")
     public void returnUrl() throws IOException {
         LOGGER.info("支付宝同步跳转");
+        System.out.println(request.getRequestURI());
         response.sendRedirect("http://localhost:10090/#/feedBack");
     }
 
@@ -74,7 +94,7 @@ public class OrderController {
      *
      * @return vue支付成功页面
      */
-    @PostMapping("/success")
+    @RequestMapping("/notify")
     public void notifyUrl() throws IOException {
         LOGGER.info("支付宝异步跳转");
         response.sendRedirect("http://localhost:10090/#/feedBack");
