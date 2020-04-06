@@ -12,7 +12,7 @@
           <img src="../../assets/img/pay-demo.png" alt="">
         </div>
         <div class="pay-qr-scan">
-          <iframe :src="formData" class="qr-iframe" allowtransparency="true"></iframe>
+          <iframe id="iframe" :src="formData" class="qr-iframe" allowtransparency="true"></iframe>
           <div class="pay-tips">
             <p>扫码完成支付</p>
           </div>

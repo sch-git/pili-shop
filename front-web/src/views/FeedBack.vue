@@ -12,7 +12,7 @@
             </div>
             <div class="freeback-content">
               <div class="freeback-form">
-                <el-form :model="formItem" :label-width="80">
+                <el-form :model="formItem">
                   <el-form-item label="标题">
                     <el-input v-model="formItem.title" placeholder="请输入标题"></el-input>
                   </el-form-item>
@@ -42,6 +42,9 @@ export default {
         content: ''
       }
     }
+  },
+  created () {
+    window.parent.location = location
   }
 }
 </script>
