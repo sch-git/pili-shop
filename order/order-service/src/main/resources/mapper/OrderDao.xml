@@ -20,7 +20,7 @@
         <result column="cancel_time" jdbcType="TIMESTAMP" property="cancelTime"/>
     </resultMap>
     <!--创建订单-->
-    <insert id="createOrder" useGeneratedKeys="true" keyProperty="id" parameterType="com.sch.orderservice.dto.OrderDTO">
+    <insert id="createOrder" useGeneratedKeys="true" keyProperty="id" parameterType="com.sch.orderbase.VO.OrderDTO">
         insert into t_order(
         `code`,`status`,`total`,`user_id`,`user_name`,`receive_name`,`phone`
         ,`province`,`city`,`district`,`detailed_address`,`create_time`
@@ -29,4 +29,23 @@
         ,#{province},#{city},#{district},#{detailedAddress},#{createTime}
         )
     </insert>
+    <!--查询订单-->
+    <select id="findAll" parameterType="com.sch.orderbase.AO.SearchOrderAO" resultType="com.sch.orderbase.VO.OrderDTO">
+        select *
+        from t_order
+        <where>
+            <if test="status!=null">
+                and status=#{status}
+            </if>
+            <if test="province!=null and province != ''">
+                and province=#{province}
+            </if>
+        </where>
+    </select>
+    <!--订单发货-->
+    <update id="updateStatus" parameterType="com.sch.orderbase.AO.OrderStatusAO">
+        update t_order
+        set status=#{status}
+        where id=#{id}
+    </update>
 </mapper>

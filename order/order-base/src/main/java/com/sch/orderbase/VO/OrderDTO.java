@@ -1,7 +1,8 @@
-package com.sch.orderservice.dto;
+package com.sch.orderbase.VO;
 
 import lombok.Data;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
@@ -10,7 +11,7 @@ import java.math.BigDecimal;
  * @Date: 2020/3/29 17:51
  */
 @Data
-public class OrderDTO {
+public class OrderDTO implements Serializable {
     /**
      * id
      */

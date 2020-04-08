@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 /**
@@ -26,6 +27,8 @@ public class CategoryController {
 
     @Autowired
     HttpSession session;
+    @Autowired
+    HttpServletRequest request;
     /**
      * 分类服务
      */
@@ -52,7 +55,7 @@ public class CategoryController {
      */
     @PutMapping("/item")
     public Result updateCategory(@RequestBody @Validated UpdateCategoryAO updateCategoryAO) {
-        updateCategoryAO.setUpdateId((Long) session.getAttribute(session.getId()));
+        updateCategoryAO.setUpdateId((Long) session.getAttribute(request.getHeader("Authorization")));
         categoryBaseService.updateCategory(updateCategoryAO);
         return new Result(ResultEnum.UPDATE_SUCCESS);
     }
@@ -65,7 +68,7 @@ public class CategoryController {
      */
     @PostMapping("")
     public Result addCategory(@RequestBody @Validated AddCategoryAO addCategoryAO) {
-        addCategoryAO.setCreateId((Long) session.getAttribute(session.getId()));
+        addCategoryAO.setCreateId((Long) session.getAttribute(request.getHeader("Authorization")));
         categoryBaseService.addCategory(addCategoryAO);
         return new Result(ResultEnum.ADD_SUCCESS);
     }

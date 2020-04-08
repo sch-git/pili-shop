@@ -56,7 +56,7 @@ public class SecuritySuccessHandler implements AuthenticationSuccessHandler {
         PrintWriter out = response.getWriter();
         User user = (User) authentication.getPrincipal();
         user.setToken(jwt);
-        session.setAttribute(session.getId(), user.getId());
+        session.setAttribute(jwt, user.getId());
         String str = new ObjectMapper().writeValueAsString(new Result(ResultEnum.LOGIN_SUCCESS, user));
         out.write(str);
         out.flush();

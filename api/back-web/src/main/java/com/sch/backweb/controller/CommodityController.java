@@ -13,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.util.List;
 
@@ -30,6 +31,8 @@ public class CommodityController {
     CommodityImageBaseService commodityImageBaseService;
     @Autowired
     HttpSession session;
+    @Autowired
+    HttpServletRequest request;
 
     /**
      * 添加商品
@@ -39,7 +42,7 @@ public class CommodityController {
      */
     @PostMapping("")
     public Result addCommodity(@RequestBody @Validated AddCommodityAO addCommodityAO) {
-        addCommodityAO.setCreateId((Long) session.getAttribute(session.getId()));
+        addCommodityAO.setCreateId((Long) session.getAttribute(request.getHeader("Authorization")));
         commodityBaseService.addCommodity(addCommodityAO);
         return new Result(ResultEnum.ADD_SUCCESS);
     }
@@ -64,7 +67,7 @@ public class CommodityController {
      */
     @PutMapping("/status")
     public Result updateCommodityStatus(@RequestBody @Validated UpdateCommodityStatusAO updateCommodityStatusAO) {
-        updateCommodityStatusAO.setUpdateId((Long) session.getAttribute(session.getId()));
+        updateCommodityStatusAO.setUpdateId((Long) session.getAttribute(request.getHeader("Authorization")));
         commodityBaseService.updateCommodityStatus(updateCommodityStatusAO);
         return new Result(ResultEnum.UPDATE_SUCCESS);
     }
@@ -77,7 +80,7 @@ public class CommodityController {
      */
     @PutMapping("/item")
     public Result updateCommodity(@RequestBody @Validated UpdateCommodityAO updateCommodityAO) {
-        updateCommodityAO.setUpdateId((Long) session.getAttribute(session.getId()));
+        updateCommodityAO.setUpdateId((Long) session.getAttribute(request.getHeader("Authorization")));
         commodityBaseService.updateCommodity(updateCommodityAO);
         return new Result(ResultEnum.UPDATE_SUCCESS);
     }
@@ -102,7 +105,7 @@ public class CommodityController {
      */
     @PostMapping("/image")
     public Result addCommodityImage(@RequestBody AddCommodityImageAO addCommodityImageAO) {
-        addCommodityImageAO.setCreateId((Long) session.getAttribute(session.getId()));
+        addCommodityImageAO.setCreateId((Long) session.getAttribute(request.getHeader("Authorization")));
         commodityImageBaseService.addCommodityImage(addCommodityImageAO);
         return Result.success();
     }

@@ -1,6 +1,5 @@
 package com.sch.userbase.VO;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.sch.commonbasic.util.QiNiuCloudUtil;
 import lombok.Data;
 
@@ -16,7 +15,6 @@ public class UserVO implements Serializable {
     /**
      * 用户id
      */
-    @JsonIgnore
     private Long id;
 
     /**
