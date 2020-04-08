@@ -45,6 +45,11 @@ export default [
         meta: { title: '分类管理' }
       },
       {
+        path: '/order',
+        component: () => import(/* webpackChunkName: "order" */ '@/views/Order.vue'),
+        meta: { title: '订单列表' }
+      },
+      {
         path: '/adminInfo',
         component: () => import(/* webpackChunkName: "table" */ '@/views/AdminInfo.vue'),
         meta: { title: '个人中心' }

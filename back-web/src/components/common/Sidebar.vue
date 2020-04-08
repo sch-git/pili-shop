@@ -151,12 +151,12 @@ export default {
           ]
         },
         {
-          icon: 'el-icon-lx-warn',
+          icon: 'el-icon-s-order',
           index: '6',
           title: '订单管理',
           subs: [
             {
-              index: '404',
+              index: '/order',
               title: '订单列表'
             }
           ]
@@ -168,7 +168,7 @@ export default {
         },
         {
           icon: 'el-icon-lx-global',
-          index: 'i18n',
+          index: '8',
           title: '用户反馈'
         }
       ]
