@@ -9,7 +9,7 @@ export const findOrderList = params => {
   return axios.get('/order/list', { params })
 }
 /**
- *  @description 修改用户状态
+ *  @description 修改订单状态
  * @param params 新状态
  */
 export const updateOrderStatus = params => {
