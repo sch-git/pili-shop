@@ -19,7 +19,7 @@ dubbo:
     name: dubbo
     port: 20883
   registry:
-    address: zookeeper://127.0.0.1:2181
+    address: zookeeper://47.101.37.181:2181
 spring:
   session:
     store-type: redis

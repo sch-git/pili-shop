@@ -40,12 +40,22 @@
             <if test="province!=null and province != ''">
                 and province=#{province}
             </if>
+            <if test="userId!=null">
+                and user_id=#{userId}
+            </if>
         </where>
     </select>
     <!--订单发货-->
     <update id="updateStatus" parameterType="com.sch.orderbase.AO.OrderStatusAO">
         update t_order
         set status=#{status}
-        where id=#{id}
+        <where>
+            <if test="id!=null">
+                and id=#{id}
+            </if>
+            <if test="code!=null">
+                and code=#{code}
+            </if>
+        </where>
     </update>
 </mapper>

@@ -2,26 +2,28 @@ package com.sch.frontweb.controller;
 
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.github.pagehelper.PageInfo;
 import com.sch.commonbasic.VO.Result;
+import com.sch.commonbasic.enums.ResultEnum;
 import com.sch.commonbasic.util.AliPayUtil;
 import com.sch.commonbasic.util.SnowUtil;
 import com.sch.frontweb.config.RedisUtil;
-import com.sch.orderbase.AO.Cart;
-import com.sch.orderbase.AO.OrderAO;
+import com.sch.orderbase.AO.*;
+import com.sch.orderbase.VO.OrderDTO;
+import com.sch.orderbase.VO.OrderDetailVO;
 import com.sch.orderbase.base.OrderBaseService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.List;
 
 /**
  * @Description: 订单
@@ -52,8 +54,8 @@ public class OrderController {
      *
      * @param orderAO 订单信息
      */
-    @PostMapping("/pay")
-    public void payOrder(@RequestBody OrderAO orderAO) {
+    @PostMapping("/create")
+    public void payOrder(@RequestBody @Validated OrderAO orderAO) {
         Long userId = (Long) session.getAttribute(request.getHeader("Authorization"));
         orderAO.setUserId(userId);
         orderAO.setCode(String.valueOf(SnowUtil.nextId()));
@@ -78,6 +80,25 @@ public class OrderController {
     }
 
     /**
+     * 用户支付订单
+     *
+     * @param payOrderAO 订单信息
+     */
+    @PostMapping("/pay")
+    public void payOrder(@RequestBody @Validated PayOrderAO payOrderAO) {
+        String form = AliPayUtil.ResponseForm(payOrderAO.getCode(), payOrderAO.getTotal(), payOrderAO.getReceiveName());
+        response.setContentType("text/html;charset=utf-8");
+        try {
+            String str = new ObjectMapper().writeValueAsString(Result.success(form));
+            response.getWriter().write(str);
+            response.getWriter().flush();
+            response.getWriter().close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
      * 支付宝同步跳转
      *
      * @Description: vue支付成功页面
@@ -85,7 +106,13 @@ public class OrderController {
     @GetMapping("/success")
     public void returnUrl() throws IOException {
         LOGGER.info("支付宝同步跳转");
-        System.out.println(request.getRequestURI());
+        String order_no = request.getParameter("out_trade_no");
+
+        LOGGER.info("用户支付的订单编号code：{}", order_no);
+        OrderStatusAO ao = new OrderStatusAO();
+        ao.setCode(order_no);
+        ao.setStatus((byte) 1);
+        orderBaseService.updateStatus(ao);
         response.sendRedirect("http://localhost:10090/#/feedBack");
     }
 
@@ -98,5 +125,44 @@ public class OrderController {
     public void notifyUrl() throws IOException {
         LOGGER.info("支付宝异步跳转");
         response.sendRedirect("http://localhost:10090/#/feedBack");
+    }
+
+    /**
+     * 查询用户订单
+     *
+     * @param searchOrderAO 查询条件
+     * @return 用户订单列表
+     */
+    @ResponseBody
+    @GetMapping("/list")
+    public Result findUserOrder(@ModelAttribute @Validated SearchOrderAO searchOrderAO) {
+        searchOrderAO.setUserId((Long) session.getAttribute(request.getHeader("Authorization")));
+        PageInfo<OrderDTO> orderList = orderBaseService.findAll(searchOrderAO);
+        return Result.success(orderList);
+    }
+
+    /**
+     * 修改订单状态
+     *
+     * @param orderStatusAO 新状态
+     */
+    @ResponseBody
+    @PutMapping("/status")
+    public Result updateStatus(@RequestBody @Validated OrderStatusAO orderStatusAO) {
+        orderBaseService.updateStatus(orderStatusAO);
+        return new Result(ResultEnum.UPDATE_SUCCESS);
+    }
+
+    /**
+     * 根据订单id查询订单项
+     *
+     * @param id 订单id
+     * @return 订单项集合
+     */
+    @ResponseBody
+    @GetMapping("/detail")
+    public Result findOrderDetail(@RequestParam Long id) {
+        List<OrderDetailVO> vos = orderBaseService.findOrderDetailById(id);
+        return Result.success(vos);
     }
 }

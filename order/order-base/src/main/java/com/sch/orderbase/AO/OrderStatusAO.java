@@ -18,6 +18,10 @@ public class OrderStatusAO implements Serializable {
     @NotNull
     private Long id;
     /**
+     * 订单编号
+     */
+    private String code;
+    /**
      * 订单状态
      */
     @NotNull

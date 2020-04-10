@@ -38,7 +38,7 @@ public class OrderController {
     }
 
     /**
-     * 修改用户状态
+     * 修改订单状态
      *
      * @param orderStatusAO 新状态
      */

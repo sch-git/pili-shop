@@ -21,6 +21,10 @@ public class SearchOrderAO implements Serializable {
      */
     private String province;
     /**
+     * 用户id
+     */
+    private Long userId;
+    /**
      * 当前页
      */
     @NotNull
