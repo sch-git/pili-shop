@@ -114,7 +114,7 @@ import cityList from '@/assets/data/city'
 import cityObjList from '@/assets/data/city_object'
 import countryList from '@/assets/data/county'
 import countryObjList from '@/assets/data/county_object'
-import { payOrder } from '@/api/order'
+import { createOrder } from '@/api/order'
 import { mapMutations } from 'vuex'
 export default {
   name: 'Cart',
@@ -218,7 +218,7 @@ export default {
         userName: this.userInfo.username
       }
       this.SET_LOADING(true)
-      payOrder(orderAO).then(data => {
+      createOrder(orderAO).then(data => {
         this.SET_PAY_FORM(data)
         this.$router.push('/order/pay')
       })
@@ -250,10 +250,6 @@ export default {
         return false
       }
       return true
-    },
-    // 提交订单返回支付宝页面
-    formData () {
-      return this.$store.state.payForm
     }
   }
 }
