@@ -2,7 +2,6 @@
 
 // 检测商品价格
 export const checkPrice = (rule, value, callback) => {
-  value = value.trim()
   if (!value) {
     return callback(new Error('商品售价不能为空'))
   }
