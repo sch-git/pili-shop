@@ -1,5 +1,7 @@
 package com.sch.adminservice;
 
+import com.sch.adminbase.AO.PageAO;
+import com.sch.adminbase.base.AdminBaseService;
 import com.sch.adminservice.service.AdminService;
 import org.junit.jupiter.api.Test;
 import org.slf4j.Logger;
@@ -16,6 +18,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class AdminServiceTest {
     @Autowired
     private AdminService adminService;
+    @Autowired
+    private AdminBaseService adminBaseService;
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminServiceTest.class);
 
     /**
@@ -36,5 +40,24 @@ public class AdminServiceTest {
         LOGGER.info("info");
         LOGGER.warn("warn");
         LOGGER.error("error");
+    }
+
+    /**
+     * 查询所有管理员
+     */
+    @Test
+    public void findAll() {
+        PageAO pageAO = new PageAO();
+        pageAO.setPageNum(2);
+        pageAO.setPageSize(1);
+        System.out.println(adminBaseService.findAll(pageAO));
+    }
+
+    /**
+     * 删除管理员
+     */
+    @Test
+    public void deleteAdmin() {
+
     }
 }

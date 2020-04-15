@@ -27,4 +27,4 @@ dubbo:
   application:
     name: back-web
   registry:
-    address: zookeeper://127.0.0.1:2181
+    address: zookeeper://47.101.37.181:2181

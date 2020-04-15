@@ -17,4 +17,17 @@
     from t_admin
     where username=#{username}
   </select>
+    <!--查询所有管理员-->
+    <select id="findAll" resultMap="BaseResultMap">
+        select *
+        from t_admin
+    </select>
+    <delete id="deleteAdmin" parameterType="java.lang.Long">
+        delete *
+        from t_admin
+        where id=#{id};
+        delete *
+        from t_admin_role
+        where admin_id=#{id};
+    </delete>
 </mapper>

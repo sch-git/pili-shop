@@ -1,7 +1,10 @@
 package com.sch.adminservice.dao;
 
+import com.sch.adminbase.VO.AdminVO;
 import com.sch.adminservice.entity.Admin;
 import org.springframework.stereotype.Repository;
+
+import java.util.List;
 
 /**
  * @Description: 管理员
@@ -19,4 +22,18 @@ public interface AdminDao {
      * @return Admin
      */
     Admin findByName(String username);
+
+    /**
+     * 查询所有管理员
+     *
+     * @return 管理员列表
+     */
+    List<AdminVO> findAll();
+
+    /**
+     * 删除管理员
+     *
+     * @param id 管理员id
+     */
+    void deleteAdmin(long id);
 }

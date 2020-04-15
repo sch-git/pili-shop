@@ -1,5 +1,7 @@
 package com.sch.adminbase.base;
 
+import com.github.pagehelper.PageInfo;
+import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.VO.AdminVO;
 
 /**
@@ -15,4 +17,18 @@ public interface AdminBaseService {
      * @return Admin
      */
     AdminVO findByName(String name);
+
+    /**
+     * 查询所有管理员
+     *
+     * @return 管理员列表
+     */
+    PageInfo<AdminVO> findAll(PageAO pageAO);
+
+    /**
+     * 删除管理员
+     *
+     * @param id 管理员id
+     */
+    void deleteAdmin(long id);
 }

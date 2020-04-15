@@ -12,6 +12,7 @@
     <packaging>pom</packaging>
     <modules>
         <module>back-web</module>
+        <module>front-web</module>
     </modules>
 
 </project>
