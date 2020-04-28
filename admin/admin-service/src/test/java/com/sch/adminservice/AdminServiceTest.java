@@ -1,5 +1,6 @@
 package com.sch.adminservice;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.base.AdminBaseService;
 import com.sch.adminservice.service.AdminService;
@@ -18,7 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class AdminServiceTest {
     @Autowired
     private AdminService adminService;
-    @Autowired
+    @Reference
     private AdminBaseService adminBaseService;
     private static final Logger LOGGER = LoggerFactory.getLogger(AdminServiceTest.class);
 

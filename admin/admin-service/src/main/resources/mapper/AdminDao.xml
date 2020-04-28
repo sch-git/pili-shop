@@ -22,6 +22,7 @@
         select *
         from t_admin
     </select>
+    <!--删除管理员-->
     <delete id="deleteAdmin" parameterType="java.lang.Long">
         delete *
         from t_admin
