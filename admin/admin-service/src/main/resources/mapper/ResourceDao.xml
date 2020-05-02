@@ -18,4 +18,8 @@
         values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
         #{pid,jdbcType=BIGINT}, #{level,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, )
       </insert>-->
+    <select id="findAll" resultMap="BaseResultMap">
+        select *
+        from t_resource
+    </select>
 </mapper>

@@ -1,5 +1,6 @@
 package com.sch.backweb.controller;
 
+import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.VO.AdminVO;
@@ -7,7 +8,6 @@ import com.sch.adminbase.base.AdminBaseService;
 import com.sch.commonbasic.VO.Result;
 import com.sch.commonbasic.enums.ResultEnum;
 import com.sch.commonbasic.util.QiNiuCloudUtil;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -20,7 +20,7 @@ import org.springframework.web.multipart.MultipartFile;
 @RestController
 @RequestMapping("/admin")
 public class AdminController {
-    @Autowired
+    @Reference
     private AdminBaseService adminService;
 
     /**
