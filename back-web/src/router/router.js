@@ -58,6 +58,21 @@ export default [
         path: '/slideImage',
         component: () => import(/* webpackChunkName: "table" */ '@/components/dataManage/SlideImage.vue'),
         meta: { title: '轮播图管理' }
+      },
+      {
+        path: '/admins',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/Admins.vue'),
+        meta: { title: '管理员列表' }
+      },
+      {
+        path: '/roles',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/Roles.vue'),
+        meta: { title: '角色列表' }
+      },
+      {
+        path: '/admins',
+        component: () => import(/* webpackChunkName: "table" */ '@/views/Rights.vue'),
+        meta: { title: '权限列表' }
       }
     ]
   },

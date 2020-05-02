@@ -19,7 +19,7 @@
           </el-option>
         </el-select>
         <el-button type="primary" icon="el-icon-search" @click="handleSearch">搜索</el-button>
-        <el-button type="primary" icon="el-icon-search" @click="handleAdd()">添加分类</el-button>
+        <el-button type="primary" icon="el-icon-search" @click="handleAdd">添加分类</el-button>
       </div>
       <el-table
         v-loading="loading_table"

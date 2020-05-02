@@ -122,6 +122,16 @@ export default {
           subs: [
             {
               icon: 'el-icon-user',
+              index: '/admins',
+              title: '管理员列表'
+            },
+            {
+              icon: 'el-icon-user',
+              index: '/roles',
+              title: '角色列表'
+            },
+            {
+              icon: 'el-icon-user',
               index: '/rights',
               title: '权限列表'
             }
