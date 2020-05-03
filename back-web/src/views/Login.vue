@@ -5,7 +5,9 @@
       <el-form :model="param" :rules="rules" ref="login" label-width="0px" class="ms-content">
         <el-form-item prop="username">
           <el-input v-model="param.username" placeholder="username">
-            <el-button slot="prepend" icon="el-icon-lx-people"/>
+            <template slot="prepend">
+              <el-button icon="el-icon-user" class="icon-login"></el-button>
+            </template>
           </el-input>
         </el-form-item>
         <el-form-item prop="password">
@@ -15,7 +17,9 @@
             v-model="param.password"
             @keyup.enter.native="submitForm()"
           >
-            <el-button slot="prepend" icon="el-icon-lx-lock"/>
+            <template slot="prepend">
+              <el-button icon="el-icon-lock" class="icon-login"></el-button>
+            </template>
           </el-input>
         </el-form-item>
         <div class="login-btn">
@@ -30,6 +34,7 @@
 <script>
 import { login } from '@/api/admin/admin'
 import { mapMutations } from 'vuex'
+
 export default {
   data: function () {
     return {
@@ -123,5 +128,11 @@ export default {
     font-size: 12px;
     line-height: 30px;
     color: #fff;
+  }
+
+  .icon-login {
+    font-size: 18px;
+    padding: 2px 10px;
+    margin: -10px -20px;
   }
 </style>

@@ -14,6 +14,7 @@
       </div>
       <!--表格-->
       <el-table
+        v-loading="loading_table"
         :data="tableData"
         border
         class="table"
@@ -80,6 +81,7 @@ export default {
     }
   },
   created () {
+    this.handleSearch()
   },
   methods: {
     // 添加权限
@@ -91,6 +93,7 @@ export default {
       let searchAO = {
         ...this.pageInfo
       }
+      console.log(searchAO)
       findResourceList(searchAO).then(res => {
         this.tableData = res.list
         this.pageInfo.total = res.total
@@ -120,11 +123,13 @@ export default {
   .handle-box {
     margin-bottom: 20px;
   }
+
   .table {
     width: 100%;
     font-size: 14px;
   }
-  .el-button--text{
+
+  .el-button--text {
     color: red;
   }
 </style>

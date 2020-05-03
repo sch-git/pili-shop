@@ -6,5 +6,5 @@ import axios from '@/api/index'
  * @returns 权限列表
  */
 export const findResourceList = params => {
-  return axios.get('/resource/list', params)
+  return axios.get('/resource/list', { params })
 }
