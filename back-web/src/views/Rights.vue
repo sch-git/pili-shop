@@ -51,15 +51,52 @@
         ></el-pagination>
       </div>
     </div>
+    <!-- 添加权限弹出框 -->
+    <el-dialog title="添加分类" :visible.sync="dialog" width="30%">
+      <el-form ref="form" :model="form" :rules="rules" label-width="70px">
+        <el-form-item label="权限名" prop="name">
+          <el-input v-model="form.name"></el-input>
+        </el-form-item>
+        <el-form-item label="路径" prop="url">
+          <el-input v-model="form.url"></el-input>
+        </el-form-item>
+        <el-form-item label="权限代码" prop="code">
+          <el-input v-model="form.code"></el-input>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+                <el-button @click="resetForm('form')">取 消</el-button>
+                <el-button type="primary" @click="submitForm('form')">确 定</el-button>
+            </span>
+    </el-dialog>
   </main>
 </template>
 
 <script>
-import { findResourceList } from '../api/admin/resource'
+import { addResource, deleteResource, findResourceList } from '../api/admin/resource'
 
 export default {
   name: 'Rights',
   data () {
+    let checkName = (rule, value, callback) => {
+      if (!value || value.trim() < 1) {
+        return callback(new Error('分权限称不能为空'))
+      }
+      // TODO 判断分类名称是否已存在
+      callback()
+    }
+    let checkUrl = (rule, value, callback) => {
+      if (!value || value.trim() < 1) {
+        return callback(new Error('路径不能为空'))
+      }
+      callback()
+    }
+    let checkCode = (rule, value, callback) => {
+      if (!value || value.trim() < 1) {
+        return callback(new Error('代码不能为空'))
+      }
+      callback()
+    }
     return {
       loading_table: true,
       multipleSelection: [],
@@ -75,8 +112,27 @@ export default {
       // 分页数据
       pageInfo: {
         pageNum: 1,
-        pageSize: 3,
+        pageSize: 1,
         total: 0
+      },
+      // 添加权限弹窗
+      dialog: false,
+      form: {
+        name: '',
+        url: '',
+        code: ''
+      },
+      // 校检规则
+      rules: {
+        name: [
+          { validator: checkName, trigger: 'blur' }
+        ],
+        url: [
+          { validator: checkUrl, trigger: 'blur' }
+        ],
+        code: [
+          { validator: checkCode, trigger: 'blur' }
+        ]
       }
     }
   },
@@ -84,16 +140,11 @@ export default {
     this.handleSearch()
   },
   methods: {
-    // 添加权限
-    handleAdd () {
-
-    },
     // 触发搜索按钮
     handleSearch () {
       let searchAO = {
         ...this.pageInfo
       }
-      console.log(searchAO)
       findResourceList(searchAO).then(res => {
         this.tableData = res.list
         this.pageInfo.total = res.total
@@ -102,8 +153,6 @@ export default {
     },
     // 分页导航
     handlePageChange (val) {
-      console.log('pageNum', this.pageInfo.pageNum)
-      console.log('pageSize', this.pageInfo.pageSize)
       this.pageInfo.pageNum = val
       this.handleSearch()
     },
@@ -113,7 +162,34 @@ export default {
     },
     // 删除权限
     handleDel (index, row) {
-
+      deleteResource(row.id)
+      this.pageInfo.pageNum = 1
+      this.handleSearch()
+    },
+    // 添加权限
+    handleAdd () {
+      this.dialog = true
+    },
+    // 重置表单
+    resetForm (formName) {
+      this.$refs[formName].resetFields()
+      this.dialog = false
+    },
+    // 提交表单
+    submitForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          console.log(this.form)
+          addResource(this.form).then(res => {
+            this.handleSearch()
+            this.resetForm(formName)
+            this.dialog = false
+          })
+        } else {
+          this.$message.error('请填写完整!')
+          return false
+        }
+      })
     }
   }
 }
