@@ -13,4 +13,11 @@ public interface ResourceDao {
      * @return 权限列表
      */
     List<Resource> findAll();
+
+    /**
+     * 删除权限
+     *
+     * @param id 权限id
+     */
+    void deleteById(long id);
 }

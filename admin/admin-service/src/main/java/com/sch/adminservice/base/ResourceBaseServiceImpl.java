@@ -29,7 +29,6 @@ public class ResourceBaseServiceImpl implements ResourceBaseService {
      */
     @Override
     public PageInfo<ResourceVO> findAll(PageAO pageAO) {
-
         Page page = PageHelper.startPage(pageAO.getPageNum(), pageAO.getPageSize());
         List<ResourceVO> resources = service.findAll();
         PageInfo<ResourceVO> pageInfo = new PageInfo<>(resources);

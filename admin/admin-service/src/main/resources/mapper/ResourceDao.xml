@@ -18,8 +18,20 @@
         values (#{name,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, #{code,jdbcType=VARCHAR},
         #{pid,jdbcType=BIGINT}, #{level,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, )
       </insert>-->
+    <!--查询权限-->
     <select id="findAll" resultMap="BaseResultMap">
         select *
         from t_resource
     </select>
+    <!--删除权限-->
+    <delete id="deleteById" parameterType="java.lang.Long">
+        delete *
+        from t_resource
+        where id=#{id};
+        delete *
+        from t_role_resource
+        where resource_id=#{id};
+    </delete>
+    <!--添加权限-->
+    <!--    <insert id="addResource" parameterType=""-->
 </mapper>

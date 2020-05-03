@@ -6,6 +6,7 @@ import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.VO.ResourceVO;
 import com.sch.adminbase.base.ResourceBaseService;
 import com.sch.commonbasic.VO.Result;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -27,6 +28,7 @@ public class ResourceController {
      * @param pageAO 查询条件
      * @return 权限列表
      */
+    @GetMapping("/list")
     public Result findResourceList(@ModelAttribute PageAO pageAO) {
         PageInfo<ResourceVO> pageInfo = service.findAll(pageAO);
         return Result.success(pageInfo);
