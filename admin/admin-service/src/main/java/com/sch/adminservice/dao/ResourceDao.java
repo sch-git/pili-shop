@@ -1,5 +1,6 @@
 package com.sch.adminservice.dao;
 
+import com.sch.adminbase.AO.ResourceAO;
 import com.sch.adminservice.entity.Resource;
 import org.springframework.stereotype.Repository;
 
@@ -20,4 +21,11 @@ public interface ResourceDao {
      * @param id 权限id
      */
     void deleteById(long id);
+
+    /**
+     * 添加权限
+     *
+     * @param ao 权限信息
+     */
+    void addResource(ResourceAO ao);
 }

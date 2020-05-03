@@ -25,13 +25,12 @@
     </select>
     <!--删除权限-->
     <delete id="deleteById" parameterType="java.lang.Long">
-        delete *
-        from t_resource
-        where id=#{id};
-        delete *
-        from t_role_resource
-        where resource_id=#{id};
+        delete from t_resource where id=#{id};
+        delete from t_role_resource where resource_id=#{id};
     </delete>
     <!--添加权限-->
-    <!--    <insert id="addResource" parameterType=""-->
+    <insert id="addResource" parameterType="com.sch.adminbase.AO.ResourceAO">
+        insert into t_resource(`name`, url, code, create_time, update_time)
+        values(#{name},#{url},#{code},#{createTime},#{updateTime})
+    </insert>
 </mapper>

@@ -2,6 +2,7 @@ package com.sch.adminbase.base;
 
 import com.github.pagehelper.PageInfo;
 import com.sch.adminbase.AO.PageAO;
+import com.sch.adminbase.AO.ResourceAO;
 import com.sch.adminbase.VO.ResourceVO;
 
 /**
@@ -16,4 +17,18 @@ public interface ResourceBaseService {
      * @return 权限列表
      */
     PageInfo<ResourceVO> findAll(PageAO pageAO);
+
+    /**
+     * 添加权限
+     *
+     * @param ao 权限信息
+     */
+    void addResource(ResourceAO ao);
+
+    /**
+     * 删除权限
+     *
+     * @param id 权限id
+     */
+    void deleteById(long id);
 }
