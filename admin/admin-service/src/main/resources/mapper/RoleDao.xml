@@ -40,4 +40,8 @@
         delete from t_role_resource
         where role_id=#{id}
     </delete>
+    <!--查询角色-->
+    <select id="findAll" resultType="com.sch.adminbase.VO.RoleVO">
+        select * from t_role
+    </select>
 </mapper>

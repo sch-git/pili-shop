@@ -1,5 +1,7 @@
 package com.sch.adminbase.base;
 
+import com.github.pagehelper.PageInfo;
+import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.VO.RoleVO;
 
 import java.util.List;
@@ -25,4 +27,12 @@ public interface RoleBaseService {
      * @return List<RoleVO>
      */
     List<RoleVO> findRolesByUrl(String url);
+
+    /**
+     * 查询角色
+     *
+     * @param pageAO 查询条件
+     * @return 角色列表
+     */
+    PageInfo<RoleVO> findAll(PageAO pageAO);
 }

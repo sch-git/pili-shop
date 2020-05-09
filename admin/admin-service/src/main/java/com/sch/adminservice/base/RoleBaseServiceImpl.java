@@ -1,9 +1,14 @@
 package com.sch.adminservice.base;
 
 import com.alibaba.dubbo.config.annotation.Service;
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.VO.RoleVO;
 import com.sch.adminbase.base.RoleBaseService;
 import com.sch.adminbase.exception.AdminException;
+import com.sch.adminservice.dao.RoleDao;
 import com.sch.adminservice.service.RoleService;
 import com.sch.commonbasic.enums.AdminEnum;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +28,8 @@ public class RoleBaseServiceImpl implements RoleBaseService {
      */
     @Autowired
     private RoleService roleService;
+    @Autowired
+    private RoleDao roleDao;
 
     /**
      * 查询角色
@@ -53,5 +60,21 @@ public class RoleBaseServiceImpl implements RoleBaseService {
         }
         List<RoleVO> roleVOS = roleService.findRolesByUrl(url);
         return roleVOS;
+    }
+
+    /**
+     * 查询角色
+     *
+     * @param pageAO 查询条件
+     * @return 角色列表
+     */
+    @Override
+    public PageInfo<RoleVO> findAll(PageAO pageAO) {
+        Page page = PageHelper.startPage(pageAO.getPageNum(), pageAO.getPageSize());
+        List<RoleVO> roleVOS = roleDao.findAll();
+        PageInfo<RoleVO> pageInfo = new PageInfo<>(roleVOS);
+        pageInfo.setPages(page.getPages());
+        pageInfo.setTotal(page.getTotal());
+        return pageInfo;
     }
 }

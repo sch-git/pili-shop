@@ -3,7 +3,6 @@ package com.sch.adminbase.VO;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @Description: RoleVO
@@ -30,10 +29,10 @@ public class RoleVO implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 修改时间
      */
-    private Date updateTime;
+    private String updateTime;
 }

@@ -1,6 +1,7 @@
 package com.sch.adminservice.dao;
 
 import com.sch.adminbase.AO.RoleAO;
+import com.sch.adminbase.VO.RoleVO;
 import com.sch.adminservice.entity.Role;
 import org.springframework.stereotype.Repository;
 
@@ -43,4 +44,11 @@ public interface RoleDao {
      * @param ao 角色数据
      */
     void addRole(RoleAO ao);
+
+    /**
+     * 查询角色
+     *
+     * @return 角色列表
+     */
+    List<RoleVO> findAll();
 }
