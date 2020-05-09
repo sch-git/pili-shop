@@ -20,7 +20,7 @@
                     <el-input v-model="formItem.content" type="textarea" :autosize="{minRows: 8,maxRows: 10}" placeholder="请输入反馈信息"></el-input>
                   </el-form-item>
                   <el-form-item>
-                    <el-button type="primary">提交</el-button>
+                    <el-button type="primary" @click="send">提交</el-button>
                     <el-button type="info">清空信息</el-button>
                   </el-form-item>
                 </el-form>
@@ -33,6 +33,8 @@
 </template>
 
 <script>
+import { sendMessage } from '../api/user'
+
 export default {
   name: 'FeedBack',
   data () {
@@ -45,6 +47,18 @@ export default {
   },
   created () {
     window.parent.location = location
+  },
+  methods: {
+    send () {
+      const ao = {
+        ...this.formItem,
+        name: this.$store.state.userInfo.username,
+        url: this.$store.state.userInfo.avatar
+      }
+      sendMessage(ao).then(res => {
+
+      })
+    }
   }
 }
 </script>

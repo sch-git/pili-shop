@@ -14,6 +14,18 @@ export const login = (loginAO) => {
 export const logout = (params) => {
   return axios.post('/logout')
 }
+/**
+ * 修改用户信息
+ * @param params 用户信息
+ */
 export const updateUser = (params) => {
   return axios.put('/user/update', params)
+}
+
+/**
+ * 用户发送反馈信息
+ * @param params 反馈信息
+ */
+export const sendMessage = (params) => {
+  return axios.post('/user/send', params)
 }
