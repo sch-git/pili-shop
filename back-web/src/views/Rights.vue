@@ -142,10 +142,7 @@ export default {
   methods: {
     // 触发搜索按钮
     handleSearch () {
-      let searchAO = {
-        ...this.pageInfo
-      }
-      findResourceList(searchAO).then(res => {
+      findResourceList(this.pageInfo).then(res => {
         this.tableData = res.list
         this.pageInfo.total = res.total
         this.loading_table = false
