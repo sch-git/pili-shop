@@ -56,7 +56,7 @@ export default {
         url: this.$store.state.userInfo.avatar
       }
       sendMessage(ao).then(res => {
-
+        this.$router.replace('/')
       })
     }
   }
@@ -79,6 +79,7 @@ export default {
       justify-content: center;
       img{
         width: 100%;
+        height: 100%;
       }
     }
     .freeback-box-border {

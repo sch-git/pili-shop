@@ -234,7 +234,7 @@ export default {
       const payOrderAO = {
         code: row.code,
         total: row.total,
-        receiveName: row.receivedAlert
+        receiveName: row.receiveName
       }
       this.SET_LOADING(true)
       payOrder(payOrderAO).then(data => {
