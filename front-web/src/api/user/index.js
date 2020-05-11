@@ -29,3 +29,10 @@ export const updateUser = (params) => {
 export const sendMessage = (params) => {
   return axios.post('/user/send', params)
 }
+/**
+ * 查询用户反馈信息
+ * @returns 反馈列表
+ */
+export const findMessageList = () => {
+  return axios.get('/user/message')
+}

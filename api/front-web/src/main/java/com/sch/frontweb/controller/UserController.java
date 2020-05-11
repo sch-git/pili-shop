@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 /**
  * @Description: 用户
@@ -79,7 +80,7 @@ public class UserController {
     @GetMapping("/message")
     public Result findMessage() {
         Long userId = (Long) session.getAttribute(request.getHeader("Authorization"));
-        service.findAll(userId);
-        return Result.success();
+        List<FeedBack> list = service.findAll(userId);
+        return Result.success(list);
     }
 }
