@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sch.feedbackservice.dao.FeedBackDao">
+    <resultMap id="BaseResultMap" type="com.sch.feedbackbase.entity.FeedBack">
+        <result column="id" jdbcType="BIGINT" property="id"/>
+        <result column="rid" jdbcType="BIGINT" property="rid"/>
+        <result column="sid" jdbcType="BIGINT" property="sid"/>
+        <result column="name" jdbcType="VARCHAR" property="name"/>
+        <result column="url" jdbcType="VARCHAR" property="url"/>
+        <result column="title" jdbcType="VARCHAR" property="title"/>
+        <result column="content" jdbcType="VARCHAR" property="content"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <!--用户发送反馈信息-->
+    <insert id="send" parameterType="com.sch.feedbackbase.entity.FeedBack">
+        insert into t_feedback (rid, sid, `name`, url, title, content, create_time)
+        values (#{rid,jdbcType=BIGINT}, #{sid,jdbcType=BIGINT}, #{name,jdbcType=VARCHAR},
+        #{url,jdbcType=VARCHAR}, #{title,jdbcType=VARCHAR}, #{content,jdbcType=VARCHAR},
+        #{createTime,jdbcType=TIMESTAMP})
+    </insert>
+    <!--查询反馈信息-->
+    <select id="findAll" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select * from t_feedback
+        <where>
+            <if test="sid!=null">
+                and sid=#{sid}
+            </if>
+        </where>
+    </select>
+</mapper>

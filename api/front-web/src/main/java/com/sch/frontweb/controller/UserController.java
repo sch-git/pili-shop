@@ -4,8 +4,8 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.sch.commonbasic.VO.Result;
 import com.sch.commonbasic.enums.ResultEnum;
 import com.sch.commonbasic.util.QiNiuCloudUtil;
-import com.sch.feedback.entity.FeedBack;
-import com.sch.feedback.service.FeedBackService;
+import com.sch.feedbackbase.entity.FeedBack;
+import com.sch.feedbackbase.service.FeedBackService;
 import com.sch.userbase.AO.UpdateUserAO;
 import com.sch.userbase.base.UserBaseService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,7 +65,21 @@ public class UserController {
      */
     @PostMapping("/send")
     public Result sendMessage(@RequestBody FeedBack feedBack) {
+        Long userId = (Long) session.getAttribute(request.getHeader("Authorization"));
+        feedBack.setSid(userId);
         service.send(feedBack);
+        return Result.success();
+    }
+
+    /**
+     * 查询我的反馈
+     *
+     * @return 反馈信息
+     */
+    @GetMapping("/message")
+    public Result findMessage() {
+        Long userId = (Long) session.getAttribute(request.getHeader("Authorization"));
+        service.findAll(userId);
         return Result.success();
     }
 }

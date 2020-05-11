@@ -1,10 +1,10 @@
-package com.sch.pilishop;
+package com.sch.feedbackbase;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class PiliShopApplicationTests {
+class FeedbackApplicationTests {
 
     @Test
     void contextLoads() {

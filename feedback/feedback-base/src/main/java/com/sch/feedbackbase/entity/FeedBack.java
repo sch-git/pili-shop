@@ -1,4 +1,4 @@
-package com.sch.feedback.entity;
+package com.sch.feedbackbase.entity;
 
 import lombok.Data;
 

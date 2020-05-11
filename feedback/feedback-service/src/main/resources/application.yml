@@ -17,7 +17,7 @@ dubbo:
     name: feedback
   protocol:
     name: dubbo
-    port: 20882
+    port: 20885
   registry:
     address: zookeeper://47.101.37.181:2181
 spring:
