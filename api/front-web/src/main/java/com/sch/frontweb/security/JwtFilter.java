@@ -1,5 +1,8 @@
 package com.sch.frontweb.security;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.sch.commonbasic.VO.Result;
+import com.sch.commonbasic.enums.ResultEnum;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jws;
 import io.jsonwebtoken.Jwts;
@@ -20,6 +23,7 @@ import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.List;
 
 /**
@@ -43,7 +47,12 @@ public class JwtFilter extends GenericFilterBean {
         LOGGER.info("JWT校检登录{}", session.getId());
         LOGGER.info("JWT校检登录-USER-ID{}", session.getAttribute(jwtToken));
         if (session.getAttribute(jwtToken) == null) {
-            filterChain.doFilter(servletRequest, servletResponse);
+            servletResponse.setContentType("application/json;charset=utf-8");
+            PrintWriter out = servletResponse.getWriter();
+            Result result = new Result(ResultEnum.NOT_LOGIN_FAILURE);
+            out.write(new ObjectMapper().writeValueAsString(result));
+            out.flush();
+            out.close();
             return;
         }
         Jws<Claims> jws = Jwts.parser().setSigningKey(session.getId() + "jwt-security")

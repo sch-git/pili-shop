@@ -28,7 +28,6 @@ export const checkName = (rule, value, callback) => {
 }
 // 检测商品分类
 export const checkCategory = (rule, value, callback) => {
-  value = value.trim()
   if (!value) {
     return callback(new Error('商品分类不能为空'))
   }

@@ -114,7 +114,7 @@ export default {
           { validator: checkDescribe, trigger: 'blur' }
         ],
         url: [
-          { validator: checkUrl, trigger: 'blur' }
+          { validator: checkUrl, trigger: 'blur', required: true }
         ]
       }
     }
@@ -132,6 +132,7 @@ export default {
     // 提交表单
     submitForm (formName) {
       this.$refs[formName].validate((valid) => {
+        console.log(valid)
         if (valid) {
           addCommodity(this.form).then(res => {
             this.$refs[formName].resetFields()

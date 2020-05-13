@@ -64,7 +64,7 @@
     <!-- 添加分类弹出框 -->
     <el-dialog title="添加分类" :visible.sync="dialog" width="30%">
       <el-form ref="form" :model="form" :rules="rules" label-width="70px">
-        <el-form-item label="分类名">
+        <el-form-item label="分类名" prop="name">
           <el-input v-model="form.name"></el-input>
         </el-form-item>
         <el-form-item label="是否启用">
@@ -94,6 +94,7 @@ export default {
   name: 'Category',
   data () {
     let checkName = (rule, value, callback) => {
+      value = value.trim()
       if (!value) {
         return callback(new Error('分类名称不能为空'))
       }
