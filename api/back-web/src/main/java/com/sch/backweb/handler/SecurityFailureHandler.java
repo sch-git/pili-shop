@@ -29,7 +29,9 @@ public class SecurityFailureHandler implements AuthenticationFailureHandler {
         LOGGER.info("SecurityFailureHandler");
         resp.setContentType("application/json;charset=utf-8");
         PrintWriter out = resp.getWriter();
-        String str = new ObjectMapper().writeValueAsString(new Result(ResultEnum.LOGIN_FAILURE));
+        String str = new ObjectMapper().writeValueAsString(new Result(
+                "用户名不存在".equals(e.getMessage()) ? ResultEnum.LOGIN_NOT_NAME : ResultEnum.LOGIN_FAILURE)
+        );
         out.write(str);
         out.flush();
         out.close();

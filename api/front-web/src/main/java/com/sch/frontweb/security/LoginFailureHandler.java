@@ -24,7 +24,10 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
     public void onAuthenticationFailure(HttpServletRequest request, HttpServletResponse response, AuthenticationException e) throws IOException, ServletException {
         response.setContentType("application/json;charset=utf-8");
         PrintWriter out = response.getWriter();
-        String str = new ObjectMapper().writeValueAsString(new Result(ResultEnum.LOGIN_FAILURE));
+        System.out.println("用户名不存在".equals(e.getMessage()));
+        System.out.println(e.getMessage());
+        String str = new ObjectMapper().writeValueAsString(new Result(
+                "用户名不存在".equals(e.getMessage()) ? ResultEnum.LOGIN_NOT_NAME : ResultEnum.LOGIN_FAILURE));
         out.write(str);
         out.flush();
         out.close();

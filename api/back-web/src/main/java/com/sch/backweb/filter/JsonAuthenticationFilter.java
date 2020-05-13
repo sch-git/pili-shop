@@ -19,11 +19,15 @@ import java.util.Map;
  * @Date: 2020/1/20 20:32
  */
 public class JsonAuthenticationFilter extends UsernamePasswordAuthenticationFilter {
+
+    private static final String JSON_VALUE = "application/json;charset=utf-8";    // firefox浏览器
+
     @Override
     public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse resp)
             throws AuthenticationException {
-        if (request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE) ||
-                request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE)) {
+        if (request.getContentType().equals(MediaType.APPLICATION_JSON_VALUE) ||
+                request.getContentType().equals(MediaType.APPLICATION_JSON_UTF8_VALUE) ||
+                request.getContentType().equals(JSON_VALUE)) {
             ObjectMapper mapper = new ObjectMapper();
             UsernamePasswordAuthenticationToken authRequest = null;
             try (InputStream is = request.getInputStream()) {

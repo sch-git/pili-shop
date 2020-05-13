@@ -7,10 +7,10 @@ import com.sch.adminbase.base.AdminBaseService;
 import com.sch.adminbase.base.RoleBaseService;
 import com.sch.backweb.entity.User;
 import org.springframework.beans.BeanUtils;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -36,10 +36,10 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     private RoleBaseService roleBaseService;
 
     @Override
-    public UserDetails loadUserByUsername(String name) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String name) throws BadCredentialsException {
         AdminVO adminVO = adminBaseService.findByName(name);
         if (adminVO == null) {
-            throw new UsernameNotFoundException("用户名或密码错误!");
+            throw new BadCredentialsException("用户名不存在");
         }
         User user = new User();
         BeanUtils.copyProperties(adminVO, user);

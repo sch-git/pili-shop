@@ -60,6 +60,7 @@ export default {
             username: this.param.username,
             password: this.param.password
           }
+          console.log(loginAO)
           login(loginAO).then(res => {
             if (res) {
               this.getUserInfo(res)

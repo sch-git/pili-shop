@@ -21,6 +21,7 @@ public enum ResultEnum {
      * 用户失败信息
      */
     LOGIN_FAILURE(100, "用户名或密码错误!"),
+    LOGIN_NOT_NAME(100, "用户名不存在"),
     JWT_LOGIN_FAILURE(100, "JWT用户名或密码错误!"),
     NOT_LOGIN_FAILURE(500, "用户尚未登录，请前往登录！"),
     /**

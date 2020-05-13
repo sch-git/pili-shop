@@ -32,6 +32,11 @@
             <artifactId>order-base</artifactId>
             <version>0.0.1-SNAPSHOT</version>
         </dependency>
+        <dependency>
+            <groupId>com.sch</groupId>
+            <artifactId>feedback-base</artifactId>
+            <version>0.0.1-SNAPSHOT</version>
+        </dependency>
         <!--security-->
         <dependency>
             <groupId>org.springframework.boot</groupId>

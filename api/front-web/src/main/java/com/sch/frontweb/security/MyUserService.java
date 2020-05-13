@@ -6,10 +6,10 @@ import com.sch.userbase.VO.UserVO;
 import com.sch.userbase.base.UserBaseService;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,10 +28,10 @@ public class MyUserService implements UserDetailsService {
     private UserBaseService userBaseService;
 
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws BadCredentialsException {
         UserVO userVO = userBaseService.findUserByName(username);
         if (userVO == null) {
-            throw new UsernameNotFoundException("用户名或密码错误");
+            throw new BadCredentialsException("用户名不存在");
         }
         MyUser user = new MyUser();
         BeanUtils.copyProperties(userVO, user);
