@@ -2,13 +2,15 @@ package com.sch.adminbase.AO;
 
 import lombok.Data;
 
+import java.io.Serializable;
+
 /**
  * @Description: 角色
  * @Author: chenghao.su
  * @Date: 2020/1/23 15:28
  */
 @Data
-public class RoleAO {
+public class RoleAO implements Serializable {
     /**
      * id
      */

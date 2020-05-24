@@ -5,13 +5,16 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sch.adminbase.AO.PageAO;
+import com.sch.adminbase.AO.RoleAO;
 import com.sch.adminbase.VO.RoleVO;
 import com.sch.adminbase.base.RoleBaseService;
 import com.sch.adminbase.exception.AdminException;
 import com.sch.adminservice.dao.RoleDao;
 import com.sch.adminservice.service.RoleService;
 import com.sch.commonbasic.enums.AdminEnum;
+import com.sch.commonbasic.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -76,5 +79,17 @@ public class RoleBaseServiceImpl implements RoleBaseService {
         pageInfo.setPages(page.getPages());
         pageInfo.setTotal(page.getTotal());
         return pageInfo;
+    }
+
+    /**
+     * 添加角色
+     *
+     * @param ao 角色信息
+     */
+    @Override
+    @Transactional
+    public void addRole(RoleAO ao) {
+        ao.setCreateTime(DateUtil.createTime());
+        roleDao.addRole(ao);
     }
 }

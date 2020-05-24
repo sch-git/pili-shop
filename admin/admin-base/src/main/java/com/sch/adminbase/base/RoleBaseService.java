@@ -2,6 +2,7 @@ package com.sch.adminbase.base;
 
 import com.github.pagehelper.PageInfo;
 import com.sch.adminbase.AO.PageAO;
+import com.sch.adminbase.AO.RoleAO;
 import com.sch.adminbase.VO.RoleVO;
 
 import java.util.List;
@@ -35,4 +36,11 @@ public interface RoleBaseService {
      * @return 角色列表
      */
     PageInfo<RoleVO> findAll(PageAO pageAO);
+
+    /**
+     * 添加角色
+     *
+     * @param ao 角色信息
+     */
+    void addRole(RoleAO ao);
 }
