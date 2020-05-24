@@ -15,3 +15,11 @@ export const findRoleList = params => {
 export const addRole = params => {
   return axios.post('/role/add', params)
 }
+
+/**
+ * 删除角色
+ * @param roleId 角色id
+ */
+export const deleteRole = roleId => {
+  return axios.get('/role/delete', { params: { roleId } })
+}
