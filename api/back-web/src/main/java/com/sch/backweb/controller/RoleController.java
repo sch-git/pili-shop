@@ -51,6 +51,7 @@ public class RoleController {
      */
     @GetMapping("/delete")
     public Result deleteRole(@RequestParam Long roleId) {
+        roleService.deleteRole(roleId);
         return new Result(ResultEnum.DELETE_SUCCESS);
     }
 }

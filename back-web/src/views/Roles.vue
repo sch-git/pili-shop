@@ -75,7 +75,7 @@
 </template>
 
 <script>
-import { findRoleList } from '../api/admin/role'
+import { deleteRole, findRoleList } from '../api/admin/role'
 import { addRole } from '@/api/admin/role'
 
 export default {
@@ -152,7 +152,10 @@ export default {
     },
     // 删除角色
     handleDel (index, row) {
-
+      deleteRole(row.id).then(res => {
+        this.loading_table = true
+        this.handleFind()
+      })
     },
     // 编辑权限
     handleUpdate (index, row) {
@@ -161,7 +164,7 @@ export default {
     // 分页导航
     handlePageChange (val) {
       this.pageInfo.pageNum = val
-      this.handleSearch()
+      this.handleFind()
     },
     // 重置表单
     resetForm (formName) {

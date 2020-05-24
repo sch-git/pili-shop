@@ -33,12 +33,9 @@
     </insert>
     <!--删除角色-->
     <delete id="deleteRole" parameterType="java.lang.Long">
-        delete from t_role
-        where id=#{id};
-        delete from t_admin_role
-        where role_id=#{id};
-        delete from t_role_resource
-        where role_id=#{id}
+        delete from t_role where id=#{id};
+        delete from t_admin_role where role_id=#{id};
+        delete from t_role_resource where role_id=#{id};
     </delete>
     <!--查询角色-->
     <select id="findAll" resultType="com.sch.adminbase.VO.RoleVO">

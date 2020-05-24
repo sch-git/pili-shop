@@ -43,4 +43,11 @@ public interface RoleBaseService {
      * @param ao 角色信息
      */
     void addRole(RoleAO ao);
+
+    /**
+     * 删除角色
+     *
+     * @param roleId 角色id
+     */
+    void deleteRole(long roleId);
 }

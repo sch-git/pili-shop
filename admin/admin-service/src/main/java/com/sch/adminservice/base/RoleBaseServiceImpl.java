@@ -92,4 +92,15 @@ public class RoleBaseServiceImpl implements RoleBaseService {
         ao.setCreateTime(DateUtil.createTime());
         roleDao.addRole(ao);
     }
+
+    /**
+     * 删除角色
+     *
+     * @param roleId 角色id
+     */
+    @Override
+    @Transactional
+    public void deleteRole(long roleId) {
+        roleDao.deleteRole(roleId);
+    }
 }
