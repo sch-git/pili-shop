@@ -15,4 +15,12 @@ public interface ResourceService {
      * @return 权限列表
      */
     List<ResourceVO> findAll();
+
+    /**
+     * 根据角色id查询权限
+     *
+     * @param id 角色id
+     * @return 权限列表
+     */
+    List<ResourceVO> findResourceByRoleId(long id);
 }

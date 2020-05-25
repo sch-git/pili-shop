@@ -71,12 +71,28 @@
                     <el-button type="primary" @click="submitForm('form')">确 定</el-button>
                 </span>
     </el-dialog>
+    <!-- 编辑权限弹出框 -->
+    <el-dialog title="编辑权限" :visible.sync="right_dialog" width="30%">
+      <el-form ref="right_form" label-width="70px">
+        <el-form-item label="权限">
+          <el-checkbox-group v-model="selectedRight" @change="handleCheckedRightsChange">
+            <el-checkbox v-for="right in rights"
+                         :key="right.id" :label="right.name" :checked="right in selectedRight"></el-checkbox>
+          </el-checkbox-group>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+                    <el-button @click="resetForm('right_form')">取 消</el-button>
+                    <el-button type="primary" @click="submitRightForm('right_form')">确 定</el-button>
+                </span>
+    </el-dialog>
   </main>
 </template>
 
 <script>
 import { deleteRole, findRoleList } from '../api/admin/role'
 import { addRole } from '@/api/admin/role'
+import { findResourceByRoleId, findResourceList, updateRole } from '@/api/admin/resource'
 
 export default {
   name: 'Roles',
@@ -97,6 +113,7 @@ export default {
     return {
       loading_table: true,
       dialog: false,
+      right_dialog: false,
       // 分页数据
       pageInfo: {
         pageNum: 1,
@@ -124,6 +141,27 @@ export default {
         code: [
           { validator: checkCode, trigger: 'blur' }
         ]
+      },
+      // 所有权限
+      rights: [
+        {
+          id: '1',
+          name: '查询管理员',
+          url: '/admin/list',
+          code: 'admin-001'
+        }
+      ],
+      selectedRight: [
+        {
+          id: '1',
+          name: '查询管理员',
+          url: '/admin/list',
+          code: 'admin-001'
+        }
+      ],
+      roleRight: {
+        roleId: '1',
+        resourceAOS: []
       }
     }
   },
@@ -159,7 +197,8 @@ export default {
     },
     // 编辑权限
     handleUpdate (index, row) {
-
+      this.findAllRight(row)
+      this.right_dialog = true
     },
     // 分页导航
     handlePageChange (val) {
@@ -170,6 +209,7 @@ export default {
     resetForm (formName) {
       this.$refs[formName].resetFields()
       this.dialog = false
+      this.right_dialog = false
     },
     // 提交表单
     submitForm (formName) {
@@ -185,6 +225,43 @@ export default {
           return false
         }
       })
+    },
+    // 提交修改权限表单
+    submitRightForm (formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          this.roleRight.resourceAOS = this.selectedRight
+          updateRole(this.roleRight).then(res => {
+            this.resetForm(formName)
+            this.right_dialog = false
+          })
+        } else {
+          this.$message.error('请填写完整信息!')
+          return false
+        }
+      })
+    },
+    // 查询所有权限
+    findAllRight (row) {
+      let pageInfo = {
+        pageNum: 1,
+        pageSize: 0
+      }
+      findResourceList(pageInfo).then(res => {
+        this.rights = res.list
+        this.findHaveRight(row)
+      })
+    },
+    // 查询当前角色所拥有权限
+    findHaveRight (row) {
+      findResourceByRoleId(row.id).then(res => {
+        this.selectedRight = res.list
+        this.roleRight.roleId = row.id
+      })
+    },
+    // 权限变化
+    handleCheckedRightsChange (value) {
+
     }
   }
 }

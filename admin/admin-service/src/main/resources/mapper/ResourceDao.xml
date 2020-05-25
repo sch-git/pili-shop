@@ -33,4 +33,13 @@
         insert into t_resource(`name`, url, code, create_time, update_time)
         values(#{name},#{url},#{code},#{createTime},#{updateTime})
     </insert>
+    <!--根据角色id查询权限-->
+    <select id="findResourceByRoleId" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select resource_id as id from t_role_resource
+        where role_id=#{id}
+    </select>
+    <!--删除角色权限-->
+    <delete id="deleteByRoleId" parameterType="java.lang.Long">
+        delete from t_role_resource where role_id=#{id};
+    </delete>
 </mapper>

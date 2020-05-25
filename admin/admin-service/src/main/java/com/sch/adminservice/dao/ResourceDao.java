@@ -16,6 +16,14 @@ public interface ResourceDao {
     List<Resource> findAll();
 
     /**
+     * 根据角色id查询权限
+     *
+     * @param id 角色id
+     * @return 权限列表
+     */
+    List<Resource> findResourceByRoleId(long id);
+
+    /**
      * 删除权限
      *
      * @param id 权限id
@@ -28,4 +36,11 @@ public interface ResourceDao {
      * @param ao 权限信息
      */
     void addResource(ResourceAO ao);
+
+    /**
+     * 删除角色权限
+     *
+     * @param id 角色id
+     */
+    void deleteByRoleId(long id);
 }

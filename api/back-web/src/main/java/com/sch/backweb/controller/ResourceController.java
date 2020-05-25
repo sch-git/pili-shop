@@ -4,6 +4,7 @@ import com.alibaba.dubbo.config.annotation.Reference;
 import com.github.pagehelper.PageInfo;
 import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.AO.ResourceAO;
+import com.sch.adminbase.AO.RoleResourceAO;
 import com.sch.adminbase.VO.ResourceVO;
 import com.sch.adminbase.base.ResourceBaseService;
 import com.sch.commonbasic.VO.Result;
@@ -54,5 +55,28 @@ public class ResourceController {
     public Result deleteResource(@RequestParam Long id) {
         service.deleteById(id);
         return new Result(ResultEnum.DELETE_SUCCESS);
+    }
+
+    /**
+     * 根据角色id查询权限
+     *
+     * @param id 角色id
+     * @return 权限列表
+     */
+    @GetMapping("/roleId")
+    public Result findResourceByRoleId(@RequestParam Long id) {
+        PageInfo<ResourceVO> list = service.findResourceByRoleId(id);
+        return Result.success(list);
+    }
+
+    /**
+     * 修改角色权限
+     *
+     * @param ao 角色权限
+     */
+    @PostMapping("/change")
+    public Result updateRoleResource(@RequestBody RoleResourceAO ao) {
+        service.deleteByRoleId(ao.getRoleId());
+        return Result.success();
     }
 }

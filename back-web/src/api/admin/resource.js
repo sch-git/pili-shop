@@ -20,5 +20,19 @@ export const addResource = params => {
  * @param id 权限id
  */
 export const deleteResource = id => {
-  return axios.delete('/resource/delete', { params: { id } })
+  return axios.delete('/resource/delete', {params: {id}})
+}
+/**
+ * 根据角色id查询权限
+ * @param id 角色id
+ */
+export const findResourceByRoleId = id => {
+  return axios.get('/resource/roleId', {params: {id}})
+}
+/**
+ * 修改角色权限
+ * @param params 角色权限信息
+ */
+export const updateRole = params => {
+  return axios.post('/resource/change', params)
 }

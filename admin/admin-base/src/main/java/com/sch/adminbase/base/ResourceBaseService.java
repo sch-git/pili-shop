@@ -19,6 +19,14 @@ public interface ResourceBaseService {
     PageInfo<ResourceVO> findAll(PageAO pageAO);
 
     /**
+     * 根据角色id查询权限
+     *
+     * @param roleId 角色id
+     * @return 权限列表
+     */
+    PageInfo<ResourceVO> findResourceByRoleId(long roleId);
+
+    /**
      * 添加权限
      *
      * @param ao 权限信息
@@ -31,4 +39,11 @@ public interface ResourceBaseService {
      * @param id 权限id
      */
     void deleteById(long id);
+
+    /**
+     * 删除角色权限
+     *
+     * @param id 角色id
+     */
+    void deleteByRoleId(long id);
 }

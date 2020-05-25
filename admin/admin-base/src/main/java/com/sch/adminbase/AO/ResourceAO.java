@@ -12,6 +12,10 @@ import java.io.Serializable;
  */
 @Data
 public class ResourceAO implements Serializable {
+    /**
+     * id
+     */
+    private Long id;
 
     /**
      * 权限名

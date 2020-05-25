@@ -1,5 +1,8 @@
 package com.sch.adminservice;
 
+import com.alibaba.dubbo.config.annotation.Reference;
+import com.sch.adminbase.AO.PageAO;
+import com.sch.adminbase.base.ResourceBaseService;
 import com.sch.adminservice.service.RoleService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,6 +17,8 @@ import org.springframework.boot.test.context.SpringBootTest;
 public class RoleServiceTest {
     @Autowired
     private RoleService roleService;
+    @Reference
+    private ResourceBaseService resourceBaseService;
 
     /**
      * 查询角色
@@ -29,5 +34,13 @@ public class RoleServiceTest {
     @Test
     public void findRolesByUrl() {
         System.out.println(roleService.findRolesByUrl("/admin"));
+    }
+
+    @Test
+    public void findAll() {
+        PageAO ao = new PageAO();
+        ao.setPageNum(1);
+        ao.setPageSize(0);
+        System.out.println(resourceBaseService.findAll(ao));
     }
 }

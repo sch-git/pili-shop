@@ -43,6 +43,22 @@ public class ResourceBaseServiceImpl implements ResourceBaseService {
     }
 
     /**
+     * 根据角色id查询权限
+     *
+     * @param roleId 角色id
+     * @return 权限列表
+     */
+    @Override
+    public PageInfo<ResourceVO> findResourceByRoleId(long roleId) {
+        Page page = PageHelper.startPage(1, 0);
+        List<ResourceVO> resources = service.findResourceByRoleId(roleId);
+        PageInfo<ResourceVO> pageInfo = new PageInfo<>(resources);
+        pageInfo.setPages(page.getPages());
+        pageInfo.setTotal(page.getTotal());
+        return pageInfo;
+    }
+
+    /**
      * 添加权限
      *
      * @param ao 权限信息
@@ -62,5 +78,15 @@ public class ResourceBaseServiceImpl implements ResourceBaseService {
     @Override
     public void deleteById(long id) {
         dao.deleteById(id);
+    }
+
+    /**
+     * 删除角色权限
+     *
+     * @param id 角色id
+     */
+    @Override
+    public void deleteByRoleId(long id) {
+        dao.deleteByRoleId(id);
     }
 }

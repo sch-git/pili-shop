@@ -39,4 +39,24 @@ public class ResourceServiceImpl implements ResourceService {
         }
         return vos;
     }
+
+    /**
+     * 根据角色id查询权限
+     *
+     * @param id 角色id
+     * @return 权限列表
+     */
+    @Override
+    public List<ResourceVO> findResourceByRoleId(long id) {
+        List<Resource> resources = resourceDao.findResourceByRoleId(id);
+        List<ResourceVO> vos = new ArrayList<>(resources.size());
+        for (Resource resource : resources) {
+            ResourceVO vo = new ResourceVO();
+            BeanUtils.copyProperties(resource, vo);
+            vo.setCreateTime(DateUtil.toString(resource.getCreateTime()));
+            vo.setUpdateTime(DateUtil.toString(resource.getUpdateTime()));
+            vos.add(vo);
+        }
+        return vos;
+    }
 }
