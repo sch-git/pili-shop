@@ -78,6 +78,7 @@ public class RoleController {
      */
     @PostMapping("/change")
     public Result changeRole(@RequestBody @Validated AdminRoleAO adminRoleAO) {
-        return Result.success(ResultEnum.UPDATE_SUCCESS);
+        roleService.changeRole(adminRoleAO);
+        return new Result(ResultEnum.UPDATE_SUCCESS);
     }
 }

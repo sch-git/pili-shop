@@ -59,7 +59,7 @@
         `admin_id`,`role_id`,`username`,`name`,`create_time`,`update_time`
         )values
         <foreach collection="roleIds" separator="," item="item" index="index">
-            (#{roleId},#{item.id},,#{username},#{name},#{createTime},#{createTime})
+            (#{adminId},#{item},#{username},#{name},#{createTime},#{createTime})
         </foreach>
     </insert>
 </mapper>
