@@ -1,9 +1,9 @@
 package com.sch.adminbase.VO;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 import java.io.Serializable;
-import java.util.Date;
 
 /**
  * @Description: AdminVO
@@ -25,6 +25,7 @@ public class AdminVO implements Serializable {
     /**
      * 密码
      */
+    @JsonIgnore
     private String password;
 
     /**
@@ -35,6 +36,7 @@ public class AdminVO implements Serializable {
     /**
      * 手机号
      */
+    @JsonIgnore
     private String phone;
 
     /**
@@ -45,10 +47,10 @@ public class AdminVO implements Serializable {
     /**
      * 创建时间
      */
-    private Date createTime;
+    private String createTime;
 
     /**
      * 修改时间
      */
-    private Date updateTime;
+    private String updateTime;
 }

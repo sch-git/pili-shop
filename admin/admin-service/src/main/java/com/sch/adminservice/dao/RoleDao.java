@@ -51,4 +51,13 @@ public interface RoleDao {
      * @return 角色列表
      */
     List<RoleVO> findAll();
+
+
+    /**
+     * 根据管理员id查询角色
+     *
+     * @param id 管理员id
+     * @return 角色列表
+     */
+    List<RoleVO> findAdminRole(long id);
 }

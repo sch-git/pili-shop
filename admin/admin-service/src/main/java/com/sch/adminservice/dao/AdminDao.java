@@ -1,6 +1,5 @@
 package com.sch.adminservice.dao;
 
-import com.sch.adminbase.VO.AdminVO;
 import com.sch.adminservice.entity.Admin;
 import org.springframework.stereotype.Repository;
 
@@ -28,7 +27,7 @@ public interface AdminDao {
      *
      * @return 管理员列表
      */
-    List<AdminVO> findAll();
+    List<Admin> findAll();
 
     /**
      * 删除管理员

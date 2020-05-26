@@ -4,6 +4,7 @@ import com.sch.adminbase.VO.RoleVO;
 import com.sch.adminservice.dao.RoleDao;
 import com.sch.adminservice.entity.Role;
 import com.sch.adminservice.service.RoleService;
+import com.sch.commonbasic.util.DateUtil;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,6 +36,8 @@ public class RoleServiceImpl implements RoleService {
             for (Role role : roles) {
                 RoleVO roleVO = new RoleVO();
                 BeanUtils.copyProperties(role, roleVO);
+                roleVO.setCreateTime(DateUtil.toString(role.getCreateTime()));
+                roleVO.setUpdateTime(DateUtil.toString(role.getUpdateTime()));
                 roleVOS.add(roleVO);
             }
             return roleVOS;

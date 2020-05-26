@@ -78,6 +78,6 @@ public class ResourceController {
     public Result updateRoleResource(@RequestBody RoleResourceAO ao) {
         service.deleteByRoleId(ao.getRoleId());
         service.addRoleResource(ao);
-        return Result.success();
+        return Result.success(ResultEnum.UPDATE_SUCCESS);
     }
 }

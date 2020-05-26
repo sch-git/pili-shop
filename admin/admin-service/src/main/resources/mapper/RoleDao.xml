@@ -41,4 +41,12 @@
     <select id="findAll" resultType="com.sch.adminbase.VO.RoleVO">
         select * from t_role
     </select>
+    <!--根据管理员id查询角色-->
+    <select id="findAdminRole" parameterType="java.lang.Long" resultType="com.sch.adminbase.VO.RoleVO">
+        select r.*
+        from t_role r
+        left join t_admin_role ar
+        on ar.role_id=r.id
+        where ar.admin_id=#{id}
+    </select>
 </mapper>
