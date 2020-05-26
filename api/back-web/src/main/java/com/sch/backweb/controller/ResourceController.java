@@ -77,6 +77,7 @@ public class ResourceController {
     @PostMapping("/change")
     public Result updateRoleResource(@RequestBody RoleResourceAO ao) {
         service.deleteByRoleId(ao.getRoleId());
+        service.addRoleResource(ao);
         return Result.success();
     }
 }

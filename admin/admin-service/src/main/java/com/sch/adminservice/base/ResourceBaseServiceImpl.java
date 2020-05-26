@@ -6,6 +6,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.AO.ResourceAO;
+import com.sch.adminbase.AO.RoleResourceAO;
 import com.sch.adminbase.VO.ResourceVO;
 import com.sch.adminbase.base.ResourceBaseService;
 import com.sch.adminservice.dao.ResourceDao;
@@ -88,5 +89,18 @@ public class ResourceBaseServiceImpl implements ResourceBaseService {
     @Override
     public void deleteByRoleId(long id) {
         dao.deleteByRoleId(id);
+    }
+
+    /**
+     * 添加角色权限
+     *
+     * @param resourceAO 角色权限
+     */
+    @Override
+    public void addRoleResource(RoleResourceAO resourceAO) {
+        for (ResourceAO ao : resourceAO.getResourceAOS()) {
+            ao.setCreateTime(DateUtil.createTime());
+        }
+        dao.addRoleResource(resourceAO);
     }
 }

@@ -76,8 +76,9 @@
       <el-form ref="right_form" label-width="70px">
         <el-form-item label="权限">
           <el-checkbox-group v-model="selectedRight" @change="handleCheckedRightsChange">
-            <el-checkbox v-for="right in rights"
-                         :key="right.id" :label="right.name" :checked="right in selectedRight"></el-checkbox>
+            <el-checkbox v-for="right in rights" :key="right.id" :label="right" :checked="right in selectedRight">
+              {{ right.name }}
+            </el-checkbox>
           </el-checkbox-group>
         </el-form-item>
       </el-form>
@@ -161,7 +162,14 @@ export default {
       ],
       roleRight: {
         roleId: '1',
-        resourceAOS: []
+        resourceAOS: [
+          {
+            id: '1',
+            name: '查询管理员',
+            url: '/admin/list',
+            code: 'admin-001'
+          }
+        ]
       }
     }
   },
@@ -228,18 +236,17 @@ export default {
     },
     // 提交修改权限表单
     submitRightForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          this.roleRight.resourceAOS = this.selectedRight
-          updateRole(this.roleRight).then(res => {
-            this.resetForm(formName)
-            this.right_dialog = false
-          })
-        } else {
-          this.$message.error('请填写完整信息!')
-          return false
-        }
-      })
+      if (this.selectedRight.length > 0) {
+        this.roleRight.resourceAOS = this.selectedRight
+        console.log('resourceAOS', this.roleRight.resourceAOS)
+        updateRole(this.roleRight).then(res => {
+          this.resetForm(formName)
+          this.right_dialog = false
+        })
+      } else {
+        this.$message.error('请填写完整信息!')
+        return false
+      }
     },
     // 查询所有权限
     findAllRight (row) {

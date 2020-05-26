@@ -42,4 +42,13 @@
     <delete id="deleteByRoleId" parameterType="java.lang.Long">
         delete from t_role_resource where role_id=#{id};
     </delete>
+    <!--添加角色权限-->
+    <insert id="addRoleResource" parameterType="com.sch.adminbase.AO.RoleResourceAO">
+        insert into t_role_resource(
+        `role_id`,`resource_id`,`create_time`
+        )values
+        <foreach collection="resourceAOS" separator="," item="item" index="index">
+            (#{roleId},#{item.id},#{item.createTime})
+        </foreach>
+    </insert>
 </mapper>

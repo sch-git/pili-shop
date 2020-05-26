@@ -1,6 +1,7 @@
 package com.sch.adminservice.dao;
 
 import com.sch.adminbase.AO.ResourceAO;
+import com.sch.adminbase.AO.RoleResourceAO;
 import com.sch.adminservice.entity.Resource;
 import org.springframework.stereotype.Repository;
 
@@ -43,4 +44,11 @@ public interface ResourceDao {
      * @param id 角色id
      */
     void deleteByRoleId(long id);
+
+    /**
+     * 添加角色权限
+     *
+     * @param resourceAO 角色权限
+     */
+    void addRoleResource(RoleResourceAO resourceAO);
 }

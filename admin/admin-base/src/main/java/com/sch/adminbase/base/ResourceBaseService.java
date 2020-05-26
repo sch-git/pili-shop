@@ -3,6 +3,7 @@ package com.sch.adminbase.base;
 import com.github.pagehelper.PageInfo;
 import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.AO.ResourceAO;
+import com.sch.adminbase.AO.RoleResourceAO;
 import com.sch.adminbase.VO.ResourceVO;
 
 /**
@@ -46,4 +47,11 @@ public interface ResourceBaseService {
      * @param id 角色id
      */
     void deleteByRoleId(long id);
+
+    /**
+     * 添加角色权限
+     *
+     * @param resourceAO 角色权限
+     */
+    void addRoleResource(RoleResourceAO resourceAO);
 }
