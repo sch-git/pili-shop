@@ -6,7 +6,7 @@ import axios from '@/api/index'
  * @returns 角色列表
  */
 export const findRoleList = params => {
-  return axios.get('/role/list', {params})
+  return axios.get('/role/list', { params })
 }
 /**
  * 根据管理员id查询角色
@@ -14,7 +14,7 @@ export const findRoleList = params => {
  * @returns 角色列表
  */
 export const findAdminRole = id => {
-  return axios.get('/role/adminId', {params: {id}})
+  return axios.get('/role/adminId', { params: { id } })
 }
 /**
  * 添加角色
@@ -29,12 +29,12 @@ export const addRole = params => {
  * @param roleId 角色id
  */
 export const deleteRole = roleId => {
-  return axios.get('/role/delete', {params: {roleId}})
+  return axios.get('/role/delete', { params: { roleId } })
 }
 /**
  * 修改管理员角色
  * @param params
  */
 export const updateAdminRole = params => {
-  return axios.post('/role/change', {params})
+  return axios.post('/role/change', params)
 }

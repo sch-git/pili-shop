@@ -61,7 +61,7 @@
       <el-form ref="form" label-width="70px">
         <el-form-item label="角色">
           <el-checkbox-group v-model="selectedRole">
-            <el-checkbox v-for="role in roles" :key="role.id" :label="role" :checked="role in selectedRole">
+            <el-checkbox v-for="role in roles" :key="role.id" :label="role.id" :checked="role.id in selectedRole">
               {{ role.name }}
             </el-checkbox>
           </el-checkbox-group>
@@ -76,7 +76,7 @@
 </template>
 
 <script>
-import { findAdminRole, findRoleList } from '@/api/admin/role'
+import { findAdminRole, findRoleList, updateAdminRole } from '@/api/admin/role'
 import { findAdminList } from '@/api/admin/admin'
 
 export default {
@@ -108,19 +108,12 @@ export default {
         // }
       ],
       selectedRole: [
-        {
-          id: '1',
-          name: '查询管理员'
-        }
       ],
       adminRole: {
-        roleId: '1',
-        resourceAOS: [
+        adminId: '1',
+        roleIds: [
           {
-            id: '1',
-            name: '查询管理员',
-            url: '/admin/list',
-            code: 'admin-001'
+            id: '1'
           }
         ]
       }
@@ -170,8 +163,15 @@ export default {
     },
     // 提交表单
     submitForm (formName) {
+      console.log('selectedRole', this.selectedRole)
       if (this.selectedRole.length > 0) {
+        this.adminRole.roleIds = this.selectedRole
 
+        console.log('adminRole', this.adminRole)
+        updateAdminRole(this.adminRole).then(res => {
+          this.resetForm(formName)
+          this.dialog = false
+        })
       } else {
         this.$message.error('请填写完整信息!')
         return false
@@ -185,13 +185,17 @@ export default {
       }
       findRoleList(params).then(res => {
         this.roles = res.list
+        this.selectedRole = []
         this.findSelectedRole(row)
       })
     },
     // 查询所拥有角色
     findSelectedRole (row) {
       findAdminRole(row.id).then(res => {
-        this.selectedRole = res
+        res.forEach(item => {
+          this.selectedRole.push(item.id)
+        })
+        this.adminRole.adminId = row.id
       })
     }
   }

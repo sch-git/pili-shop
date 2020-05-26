@@ -238,7 +238,6 @@ export default {
     submitRightForm (formName) {
       if (this.selectedRight.length > 0) {
         this.roleRight.resourceAOS = this.selectedRight
-        console.log('resourceAOS', this.roleRight.resourceAOS)
         updateRole(this.roleRight).then(res => {
           this.resetForm(formName)
           this.right_dialog = false
