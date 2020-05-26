@@ -19,10 +19,22 @@ public class AdminRoleAO implements Serializable {
      */
     @NotNull
     List<Long> roleIds;
+
     /**
      * 创建时间
      */
     String createTime;
+
+    /**
+     * 账号
+     */
+    String username;
+
+    /**
+     * 名称
+     */
+    String name;
+
     /**
      * 管理员id
      */

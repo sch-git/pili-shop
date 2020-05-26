@@ -35,4 +35,12 @@ public interface AdminDao {
      * @param id 管理员id
      */
     void deleteAdmin(long id);
+
+    /**
+     * 查询管理员
+     *
+     * @param id 管理员id
+     * @return Admin
+     */
+    Admin findById(long id);
 }

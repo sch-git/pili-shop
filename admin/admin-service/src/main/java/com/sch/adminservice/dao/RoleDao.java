@@ -1,5 +1,6 @@
 package com.sch.adminservice.dao;
 
+import com.sch.adminbase.AO.AdminRoleAO;
 import com.sch.adminbase.AO.RoleAO;
 import com.sch.adminbase.VO.RoleVO;
 import com.sch.adminservice.entity.Role;
@@ -60,4 +61,18 @@ public interface RoleDao {
      * @return 角色列表
      */
     List<RoleVO> findAdminRole(long id);
+
+    /**
+     * 根据管理员id删除角色
+     *
+     * @param id 管理员id
+     */
+    void deleteRoleByAdminId(long id);
+
+    /**
+     * 添加管理员角色
+     *
+     * @param adminRoleAO 管理员角色
+     */
+    void addAdminRole(AdminRoleAO adminRoleAO);
 }

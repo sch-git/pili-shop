@@ -49,4 +49,17 @@
         on ar.role_id=r.id
         where ar.admin_id=#{id}
     </select>
+    <!--根据管理员id删除角色-->
+    <delete id="deleteRoleByAdminId" parameterType="java.lang.Long">
+        delete from t_admin_role where admin_id=#{id}
+    </delete>
+    <!--添加管理员角色-->
+    <insert id="addAdminRole" parameterType="com.sch.adminbase.AO.AdminRoleAO">
+        insert into t_admin_role(
+        `admin_id`,`role_id`,`username`,`name`,`create_time`,`update_time`
+        )values
+        <foreach collection="roleIds" separator="," item="item" index="index">
+            (#{roleId},#{item.id},,#{username},#{name},#{createTime},#{createTime})
+        </foreach>
+    </insert>
 </mapper>

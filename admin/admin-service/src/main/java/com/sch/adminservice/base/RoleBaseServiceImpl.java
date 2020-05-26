@@ -4,12 +4,15 @@ import com.alibaba.dubbo.config.annotation.Service;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
+import com.sch.adminbase.AO.AdminRoleAO;
 import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.AO.RoleAO;
 import com.sch.adminbase.VO.RoleVO;
 import com.sch.adminbase.base.RoleBaseService;
 import com.sch.adminbase.exception.AdminException;
+import com.sch.adminservice.dao.AdminDao;
 import com.sch.adminservice.dao.RoleDao;
+import com.sch.adminservice.entity.Admin;
 import com.sch.adminservice.service.RoleService;
 import com.sch.commonbasic.enums.AdminEnum;
 import com.sch.commonbasic.util.DateUtil;
@@ -33,6 +36,8 @@ public class RoleBaseServiceImpl implements RoleBaseService {
     private RoleService roleService;
     @Autowired
     private RoleDao roleDao;
+    @Autowired
+    private AdminDao adminDao;
 
     /**
      * 查询角色
@@ -103,4 +108,21 @@ public class RoleBaseServiceImpl implements RoleBaseService {
     public void deleteRole(long roleId) {
         roleDao.deleteRole(roleId);
     }
+
+    /**
+     * 修改管理员角色
+     *
+     * @param adminRoleAO 管理员角色
+     */
+    @Override
+    @Transactional
+    public void changeRole(AdminRoleAO adminRoleAO) {
+        roleDao.deleteRoleByAdminId(adminRoleAO.getAdminId());
+        Admin admin = adminDao.findById(adminRoleAO.getAdminId());
+        adminRoleAO.setUsername(admin.getUsername());
+        adminRoleAO.setName(admin.getNickname());
+        adminRoleAO.setCreateTime(DateUtil.createTime());
+        roleDao.addAdminRole(adminRoleAO);
+    }
+
 }

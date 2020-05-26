@@ -1,6 +1,7 @@
 package com.sch.adminbase.base;
 
 import com.github.pagehelper.PageInfo;
+import com.sch.adminbase.AO.AdminRoleAO;
 import com.sch.adminbase.AO.PageAO;
 import com.sch.adminbase.AO.RoleAO;
 import com.sch.adminbase.VO.RoleVO;
@@ -50,4 +51,11 @@ public interface RoleBaseService {
      * @param roleId 角色id
      */
     void deleteRole(long roleId);
+
+    /**
+     * 修改管理员角色
+     *
+     * @param adminRoleAO 管理员角色
+     */
+    void changeRole(AdminRoleAO adminRoleAO);
 }

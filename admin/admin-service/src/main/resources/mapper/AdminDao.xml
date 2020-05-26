@@ -17,6 +17,12 @@
     from t_admin
     where username=#{username}
   </select>
+    <!--根据用户名查询-->
+    <select id="findById" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select *
+    from t_admin
+    where id=#{id}
+  </select>
     <!--查询所有管理员-->
     <select id="findAll" resultMap="BaseResultMap">
         select *
