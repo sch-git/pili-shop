@@ -51,7 +51,7 @@
                 <i class="el-icon-lx-people grid-con-icon"/>
                 <div class="grid-cont-right">
                   <div class="grid-num">1234</div>
-                  <div>用户访问量</div>
+                  <div>用户数量</div>
                 </div>
               </div>
             </el-card>
@@ -62,7 +62,7 @@
                 <i class="el-icon-lx-notice grid-con-icon"/>
                 <div class="grid-cont-right">
                   <div class="grid-num">321</div>
-                  <div>系统消息</div>
+                  <div>商品数量</div>
                 </div>
               </div>
             </el-card>
@@ -73,7 +73,7 @@
                 <i class="el-icon-lx-goods grid-con-icon"/>
                 <div class="grid-cont-right">
                   <div class="grid-num">5000</div>
-                  <div>数量</div>
+                  <div>订单成交量</div>
                 </div>
               </div>
             </el-card>
